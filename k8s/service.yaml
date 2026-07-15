@@ -1,0 +1,19 @@
+# Service interno (ClusterIP), consumido pelo Ingress (k8s/ingress.yaml).
+# Use este arquivo se você já tiver um Ingress Controller (ex: ingress-nginx)
+# instalado no cluster OKE. Caso contrário, aplique k8s/service-loadbalancer.yaml
+# em vez deste para expor o site diretamente via LoadBalancer da OCI.
+apiVersion: v1
+kind: Service
+metadata:
+  name: devops-portfolio
+  namespace: devops-portfolio
+  labels:
+    app: devops-portfolio
+spec:
+  type: ClusterIP
+  selector:
+    app: devops-portfolio
+  ports:
+    - name: http
+      port: 80
+      targetPort: http

@@ -1,0 +1,24 @@
+# Alternativa "sem Ingress Controller": expõe o site diretamente através de um
+# OCI Load Balancer provisionado automaticamente pelo Cloud Controller Manager do OKE.
+# Use OU este arquivo OU o par service.yaml + ingress.yaml — não os dois ao mesmo tempo.
+apiVersion: v1
+kind: Service
+metadata:
+  name: devops-portfolio-lb
+  namespace: devops-portfolio
+  labels:
+    app: devops-portfolio
+  annotations:
+    # Load Balancer flexível (custo sob demanda por Mbps, min/max configuráveis)
+    oci.oraclecloud.com/load-balancer-type: "lb"
+    service.beta.kubernetes.io/oci-load-balancer-shape: "flexible"
+    service.beta.kubernetes.io/oci-load-balancer-shape-flex-min: "10"
+    service.beta.kubernetes.io/oci-load-balancer-shape-flex-max: "100"
+spec:
+  type: LoadBalancer
+  selector:
+    app: devops-portfolio
+  ports:
+    - name: http
+      port: 80
+      targetPort: http

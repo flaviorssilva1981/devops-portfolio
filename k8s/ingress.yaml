@@ -1,0 +1,28 @@
+# Mesmo padrão usado nas demais apps do cluster (ex.: aiops.dublinconsulting.com.br):
+# ingress-nginx + cert-manager (ClusterIssuer "letsencrypt") + external-dns/Cloudflare.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: devops-portfolio
+  namespace: devops-portfolio
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    external-dns.alpha.kubernetes.io/hostname: devops-portfolio.dublinconsulting.com.br
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: devops-portfolio.dublinconsulting.com.br
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: devops-portfolio
+                port:
+                  name: http
+  tls:
+    - hosts:
+        - devops-portfolio.dublinconsulting.com.br
+      secretName: devops-portfolio-tls
