@@ -12,7 +12,8 @@ RUN mkdir -p /tmp/client_temp /tmp/proxy_temp /tmp/fastcgi_temp /tmp/uwsgi_temp 
     chown -R nginx:nginx /usr/share/nginx/html /etc/nginx /tmp/client_temp /tmp/proxy_temp \
       /tmp/fastcgi_temp /tmp/uwsgi_temp /tmp/scgi_temp /var/cache/nginx
 
-USER nginx
+# UID numérico exigido pelo Kubernetes quando runAsNonRoot=true
+USER 101:101
 EXPOSE 8080
 
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s \

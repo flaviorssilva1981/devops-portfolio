@@ -45,6 +45,8 @@ spec:
               memory: 96Mi
           securityContext:
             runAsNonRoot: true
+            runAsUser: 101
+            runAsGroup: 101
             allowPrivilegeEscalation: false
             capabilities:
               drop: ["ALL"]
