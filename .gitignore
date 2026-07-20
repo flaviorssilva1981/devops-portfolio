@@ -1,0 +1,4 @@
+﻿.secrets/
+*.b64
+.env
+_git_tmp/

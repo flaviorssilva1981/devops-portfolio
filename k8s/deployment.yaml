@@ -21,7 +21,6 @@ spec:
       labels:
         app: devops-portfolio
     spec:
-      # Distribui os pods entre nodes/zonas disponíveis no OKE
       topologySpreadConstraints:
         - maxSkew: 1
           topologyKey: kubernetes.io/hostname
@@ -31,10 +30,9 @@ spec:
               app: devops-portfolio
       containers:
         - name: devops-portfolio
-          # A pipeline de CI/CD (.github/workflows/ci-cd.yml) sobrescreve esta tag
-          # via `kubectl set image` a cada push, usando o SHA curto do commit.
+          # A pipeline (.github/workflows/ci-cd.yml) atualiza a tag via kubectl set image.
           image: docker.io/flaviorssilva/devops-portfolio:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - name: http
               containerPort: 8080
@@ -62,5 +60,3 @@ spec:
               port: http
             initialDelaySeconds: 5
             periodSeconds: 20
-      # imagePullSecrets:
-      #   - name: dockerhub-secret   # necessário apenas se o repositório do Docker Hub não for público
