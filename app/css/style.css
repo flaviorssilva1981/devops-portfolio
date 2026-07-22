@@ -171,7 +171,8 @@ ul { margin: 0; padding: 0; list-style: none; }
   inset: 0;
   background:
     linear-gradient(180deg, rgba(10,14,20,0.55) 0%, rgba(10,14,20,0.72) 45%, rgba(10,14,20,0.95) 100%),
-    radial-gradient(ellipse 70% 55% at 50% 20%, rgba(99,102,241,0.28), transparent 65%);
+    radial-gradient(ellipse 70% 55% at 50% 25%, rgba(34,211,238,0.22), transparent 65%),
+    radial-gradient(ellipse 50% 40% at 80% 30%, rgba(236,72,153,0.18), transparent 60%);
 }
 .hero-inner {
   position: relative;
