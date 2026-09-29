@@ -11,11 +11,15 @@ window.addEventListener("scroll", () => {
 });
 
 navToggle.addEventListener("click", () => {
-  navLinks.classList.toggle("open");
+  const open = navLinks.classList.toggle("open");
+  navToggle.setAttribute("aria-expanded", String(open));
 });
 
 navLinks.querySelectorAll("a").forEach((link) => {
-  link.addEventListener("click", () => navLinks.classList.remove("open"));
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("open");
+    navToggle.setAttribute("aria-expanded", "false");
+  });
 });
 
 // Reveal animations on scroll
@@ -32,35 +36,6 @@ const revealObserver = new IntersectionObserver(
   { threshold: 0.15 }
 );
 animatedEls.forEach((el) => revealObserver.observe(el));
-
-// Contador animado das estatísticas do hero
-const counters = document.querySelectorAll(".stat-num");
-const countObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      const el = entry.target;
-      const target = parseInt(el.getAttribute("data-count"), 10) || 0;
-      const duration = 1200;
-      const start = performance.now();
-
-      function tick(now) {
-        const progress = Math.min((now - start) / duration, 1);
-        const value = Math.floor(progress * target);
-        el.textContent = value + (target >= 90 ? "" : "");
-        if (progress < 1) {
-          requestAnimationFrame(tick);
-        } else {
-          el.textContent = target;
-        }
-      }
-      requestAnimationFrame(tick);
-      countObserver.unobserve(el);
-    });
-  },
-  { threshold: 0.4 }
-);
-counters.forEach((el) => countObserver.observe(el));
 
 // Formulário de contato: site estático, sem backend. Abre o cliente de e-mail
 // do visitante com a mensagem pré-preenchida (sem enviar dados a terceiros).

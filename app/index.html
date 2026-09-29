@@ -11,70 +11,66 @@
 <meta name="description" content="Portf&oacute;lio de servi&ccedil;os de desenvolvimento DevOps: CI/CD, IaC, Kubernetes, Multi-Cloud (AWS, Azure, GCP, OCI) e DevSecOps." />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚙️</text></svg>" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-
-<div class="bg-grid"></div>
-<div class="bg-glow"></div>
+<a class="skip-link" href="#main">Ir para o conte&uacute;do</a>
 
 <header class="navbar" id="navbar">
   <div class="container navbar-inner">
-    <a href="#top" class="brand">
-      <span class="brand-icon">&#9881;</span>
-      <span class="brand-text">Flavio - <strong>Devops</strong></span>
+    <a href="#top" class="brand" aria-label="Flavio Silva - DevOps, in&iacute;cio">
+      <span class="brand-mark" aria-hidden="true">FS</span>
+      <span class="brand-text">Flavio <strong>DevOps</strong></span>
     </a>
-    <nav class="nav-links" id="navLinks">
+    <nav class="nav-links" id="navLinks" aria-label="Principal">
       <a href="#services">Servi&ccedil;os</a>
       <a href="#stack">Stack</a>
       <a href="#projects">Projetos</a>
       <a href="#process">Processo</a>
       <a href="#contact" class="nav-cta">Fale comigo</a>
     </nav>
-    <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-controls="navLinks" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
 </header>
 
-<main id="top">
+<main id="main">
 
   <!-- HERO -->
-  <section class="hero">
+  <section class="hero" id="top">
     <div class="container hero-inner">
-      <p class="eyebrow" data-animate>&#128994; Dispon&iacute;vel para novos projetos</p>
-      <h1 data-animate>
-        Infraestrutura confi&aacute;vel.<br />
-        Deploys <span class="highlight">sem drama</span>.<br />
-        DevOps de ponta a ponta.
-      </h1>
-      <p class="hero-sub" data-animate>
-        Ajudo empresas a automatizar infraestrutura, construir pipelines de CI/CD robustos
-        e operar Kubernetes em produ&ccedil;&atilde;o &mdash; na AWS, Azure, GCP ou OCI &mdash; com seguran&ccedil;a,
-        observabilidade e o m&iacute;nimo de downtime poss&iacute;vel.
-      </p>
-      <div class="hero-actions" data-animate>
-        <a href="#contact" class="btn btn-primary">Solicitar or&ccedil;amento</a>
-        <a href="#projects" class="btn btn-ghost">Ver projetos &rarr;</a>
+      <div class="hero-copy">
+        <p class="eyebrow" data-animate>DevOps &bull; Cloud &bull; Automa&ccedil;&atilde;o</p>
+        <h1 data-animate>Infraestrutura confi&aacute;vel.<br />Deploys <span class="highlight">sem drama</span>.</h1>
+        <p class="hero-sub" data-animate>
+          Automatizo infraestrutura, construo pipelines de CI/CD robustos e opero Kubernetes em produ&ccedil;&atilde;o
+          na AWS, Azure, GCP ou OCI &mdash; com seguran&ccedil;a, observabilidade e m&iacute;nimo de downtime.
+        </p>
+        <div class="hero-actions" data-animate>
+          <a href="#contact" class="btn btn-primary">Solicitar or&ccedil;amento <span aria-hidden="true">&rarr;</span></a>
+          <a href="#projects" class="link-arrow">Ver projetos <span aria-hidden="true">&rarr;</span></a>
+        </div>
       </div>
-      <div class="hero-stats" data-animate>
-        <div class="stat"><span class="stat-num" data-count="8">0</span><span class="stat-label">anos de experi&ecirc;ncia</span></div>
-        <div class="stat"><span class="stat-num" data-count="60">0</span><span class="stat-label">pipelines entregues</span></div>
-        <div class="stat"><span class="stat-num" data-count="99">0</span><span class="stat-label">% uptime m&eacute;dio</span></div>
-        <div class="stat"><span class="stat-num" data-count="4">0</span><span class="stat-label">clouds dominadas</span></div>
-      </div>
+      <aside class="hero-panel" aria-label="Destaques" data-animate>
+        <ul>
+          <li><span class="panel-num">4</span><span>clouds: AWS, Azure, GCP e OCI</span></li>
+          <li><span class="panel-num">4</span><span>certifica&ccedil;&otilde;es de cloud</span></li>
+          <li><span class="panel-num">7+</span><span>anos em DevOps e cloud</span></li>
+        </ul>
+      </aside>
     </div>
   </section>
 
-  <!-- LOGOS / CLOUDS -->
-  <section class="clouds">
-    <div class="container">
-      <p class="section-kicker center">Multi-cloud, sem vendor lock-in</p>
-      <div class="cloud-row">
-        <span>AWS</span><span>Azure</span><span>Google Cloud</span><span>OCI</span>
-        <span>Kubernetes</span><span>Terraform</span><span>Ansible</span><span>Docker</span>
-      </div>
+  <!-- FOCUS STRIP -->
+  <section class="focus" aria-label="Frentes de atua&ccedil;&atilde;o">
+    <div class="container focus-row">
+      <a href="#services" class="focus-item"><strong>CI/CD</strong><span>Pipelines seguros</span></a>
+      <a href="#services" class="focus-item"><strong>Kubernetes</strong><span>EKS, AKS, GKE, OKE</span></a>
+      <a href="#services" class="focus-item"><strong>IaC</strong><span>Terraform e Ansible</span></a>
+      <a href="#services" class="focus-item"><strong>DevSecOps</strong><span>Menor privil&eacute;gio</span></a>
     </div>
   </section>
 
@@ -83,52 +79,38 @@
     <div class="container">
       <p class="section-kicker">O que eu fa&ccedil;o</p>
       <h2 class="section-title">Servi&ccedil;os de DevOps &amp; Cloud</h2>
-      <p class="section-desc">
-        Do primeiro commit ao ambiente de produ&ccedil;&atilde;o: automatizo, padronizo e blindo cada etapa
-        da sua entrega de software.
-      </p>
+      <p class="section-desc">Do primeiro commit ao ambiente de produ&ccedil;&atilde;o: automatizo, padronizo e blindo cada etapa da entrega de software.</p>
 
       <div class="grid services-grid">
         <article class="card" data-animate>
-          <div class="card-icon">&#9881;</div>
           <h3>CI/CD Pipelines</h3>
-          <p>Jenkins, GitHub Actions, Bitbucket Pipelines, Azure DevOps e Argo CD &mdash; pipelines
-          r&aacute;pidos, seguros e com deploy progressivo.</p>
+          <p>Jenkins, GitHub Actions, Bitbucket Pipelines, Azure DevOps e Argo CD &mdash; pipelines r&aacute;pidos, seguros e com deploy progressivo.</p>
+          <a class="link-arrow" href="#contact">Saiba mais <span aria-hidden="true">&rarr;</span></a>
         </article>
-
         <article class="card" data-animate>
-          <div class="card-icon">&#9723;</div>
           <h3>Kubernetes &amp; Containers</h3>
-          <p>Design e opera&ccedil;&atilde;o de clusters EKS, AKS, GKE e OKE, com Helm charts reutiliz&aacute;veis
-          e estrat&eacute;gias de rollout seguras.</p>
+          <p>Design e opera&ccedil;&atilde;o de clusters EKS, AKS, GKE e OKE, com Helm charts reutiliz&aacute;veis e rollouts seguros.</p>
+          <a class="link-arrow" href="#contact">Saiba mais <span aria-hidden="true">&rarr;</span></a>
         </article>
-
         <article class="card" data-animate>
-          <div class="card-icon">&#128196;</div>
           <h3>Infraestrutura como C&oacute;digo</h3>
-          <p>Terraform e Ansible com plan-before-apply, m&oacute;dulos versionados e ambientes
-          reprodut&iacute;veis (dev, uat, prod).</p>
+          <p>Terraform e Ansible com plan-before-apply, m&oacute;dulos versionados e ambientes reprodut&iacute;veis (dev, uat, prod).</p>
+          <a class="link-arrow" href="#contact">Saiba mais <span aria-hidden="true">&rarr;</span></a>
         </article>
-
         <article class="card" data-animate>
-          <div class="card-icon">&#128274;</div>
           <h3>DevSecOps</h3>
-          <p>Gest&atilde;o de segredos, RBAC/IAM com privil&eacute;gio m&iacute;nimo, scanning de vulnerabilidades
-          e zero credenciais em reposit&oacute;rio.</p>
+          <p>Gest&atilde;o de segredos, RBAC/IAM com privil&eacute;gio m&iacute;nimo, scanning de vulnerabilidades e zero credenciais em reposit&oacute;rio.</p>
+          <a class="link-arrow" href="#contact">Saiba mais <span aria-hidden="true">&rarr;</span></a>
         </article>
-
         <article class="card" data-animate>
-          <div class="card-icon">&#128200;</div>
           <h3>Observabilidade</h3>
-          <p>Prometheus, Grafana e Zabbix configurados para dar visibilidade real de sa&uacute;de,
-          performance e custo da infraestrutura.</p>
+          <p>Prometheus, Grafana e Zabbix para dar visibilidade real de sa&uacute;de, performance e custo da infraestrutura.</p>
+          <a class="link-arrow" href="#contact">Saiba mais <span aria-hidden="true">&rarr;</span></a>
         </article>
-
         <article class="card" data-animate>
-          <div class="card-icon">&#127760;</div>
           <h3>Deploy de CMS</h3>
-          <p>Drupal, WordPress, Pantheon e Acquia com pipelines via Composer/Drush e deploy
-          seguro por SSH.</p>
+          <p>Drupal, WordPress, Pantheon e Acquia com pipelines via Composer/Drush e deploy seguro por SSH.</p>
+          <a class="link-arrow" href="#contact">Saiba mais <span aria-hidden="true">&rarr;</span></a>
         </article>
       </div>
     </div>
@@ -139,34 +121,22 @@
     <div class="container">
       <p class="section-kicker">Ferramentas do dia a dia</p>
       <h2 class="section-title">Stack t&eacute;cnica</h2>
-
       <div class="stack-columns">
         <div class="stack-col" data-animate>
-          <h4>Cloud &amp; Infra</h4>
-          <ul class="tag-list">
-            <li>AWS (SAA)</li><li>Azure (AZ-900)</li><li>GCP (CDL)</li><li>OCI Architect</li>
-            <li>Terraform</li><li>Ansible</li>
-          </ul>
+          <h3>Cloud &amp; Infra</h3>
+          <ul class="tag-list"><li>AWS (SAA)</li><li>Azure (AZ-900)</li><li>GCP (CDL)</li><li>OCI Architect</li><li>Terraform</li><li>Ansible</li></ul>
         </div>
         <div class="stack-col" data-animate>
-          <h4>Containers &amp; Orquestra&ccedil;&atilde;o</h4>
-          <ul class="tag-list">
-            <li>Docker</li><li>Kubernetes</li><li>EKS</li><li>AKS</li><li>GKE</li><li>OKE</li><li>Helm</li>
-          </ul>
+          <h3>Containers &amp; Orquestra&ccedil;&atilde;o</h3>
+          <ul class="tag-list"><li>Docker</li><li>Kubernetes</li><li>EKS</li><li>AKS</li><li>GKE</li><li>OKE</li><li>Helm</li></ul>
         </div>
         <div class="stack-col" data-animate>
-          <h4>CI/CD</h4>
-          <ul class="tag-list">
-            <li>Jenkins</li><li>GitHub Actions</li><li>Bitbucket Pipelines</li>
-            <li>Argo CD</li><li>Azure DevOps</li><li>CodePipeline</li>
-          </ul>
+          <h3>CI/CD</h3>
+          <ul class="tag-list"><li>Jenkins</li><li>GitHub Actions</li><li>Bitbucket Pipelines</li><li>Argo CD</li><li>Azure DevOps</li><li>CodePipeline</li></ul>
         </div>
         <div class="stack-col" data-animate>
-          <h4>Scripting &amp; Observabilidade</h4>
-          <ul class="tag-list">
-            <li>Bash</li><li>Python</li><li>PowerShell</li>
-            <li>Prometheus</li><li>Grafana</li><li>Zabbix</li>
-          </ul>
+          <h3>Scripting &amp; Observabilidade</h3>
+          <ul class="tag-list"><li>Bash</li><li>Python</li><li>PowerShell</li><li>Prometheus</li><li>Grafana</li><li>Zabbix</li></ul>
         </div>
       </div>
     </div>
@@ -177,34 +147,26 @@
     <div class="container">
       <p class="section-kicker">Casos de uso</p>
       <h2 class="section-title">Projetos &amp; entregas</h2>
-
       <div class="grid projects-grid">
         <article class="project-card" data-animate>
           <span class="project-tag">OKE / Kubernetes</span>
           <h3>Migra&ccedil;&atilde;o de workloads para Oracle Kubernetes Engine</h3>
-          <p>Provisionamento via Terraform, Helm charts customizados e pipeline de deploy
-          progressivo &mdash; redu&ccedil;&atilde;o de custo de infraestrutura em 30%.</p>
+          <p>Provisionamento via Terraform, Helm charts customizados e pipeline de deploy progressivo.</p>
         </article>
-
         <article class="project-card" data-animate>
           <span class="project-tag">CI/CD</span>
           <h3>Padroniza&ccedil;&atilde;o de pipelines multi-time</h3>
-          <p>Templates reutiliz&aacute;veis no Bitbucket Pipelines e GitHub Actions, com deploy
-          apenas de pipeline (sem c&oacute;digo de app misturado) e revis&atilde;o obrigat&oacute;ria.</p>
+          <p>Templates reutiliz&aacute;veis no Bitbucket Pipelines e GitHub Actions, com PRs somente de pipeline e revis&atilde;o obrigat&oacute;ria.</p>
         </article>
-
         <article class="project-card" data-animate>
           <span class="project-tag">Observabilidade</span>
           <h3>Stack de monitoramento unificado</h3>
-          <p>Prometheus + Grafana + Zabbix integrados, alertas com SLO/SLA claros e
-          dashboards executivos de disponibilidade.</p>
+          <p>Prometheus + Grafana + Zabbix integrados, alertas com SLO/SLA claros e dashboards de disponibilidade.</p>
         </article>
-
         <article class="project-card" data-animate>
           <span class="project-tag">DevSecOps</span>
           <h3>Hardening de secrets e RBAC</h3>
-          <p>Elimina&ccedil;&atilde;o de credenciais em reposit&oacute;rios, ado&ccedil;&atilde;o de vault de segredos e
-          pol&iacute;ticas de privil&eacute;gio m&iacute;nimo em todos os ambientes.</p>
+          <p>Elimina&ccedil;&atilde;o de credenciais em reposit&oacute;rios, vault de segredos e privil&eacute;gio m&iacute;nimo em todos os ambientes.</p>
         </article>
       </div>
     </div>
@@ -215,41 +177,12 @@
     <div class="container">
       <p class="section-kicker">Como eu trabalho</p>
       <h2 class="section-title">Processo, sem surpresas</h2>
-
-      <div class="process-list">
-        <div class="process-step" data-animate>
-          <span class="process-num">01</span>
-          <div>
-            <h4>Ler antes de mudar</h4>
-            <p>Levanto o estado atual via CLI, exports de Jenkins, YAML de pipelines e
-            runbooks existentes antes de propor qualquer altera&ccedil;&atilde;o.</p>
-          </div>
-        </div>
-        <div class="process-step" data-animate>
-          <span class="process-num">02</span>
-          <div>
-            <h4>Raio de impacto m&iacute;nimo</h4>
-            <p>PRs focados &mdash; pipeline separado de c&oacute;digo de aplica&ccedil;&atilde;o, sem misturar
-            responsabilidades.</p>
-          </div>
-        </div>
-        <div class="process-step" data-animate>
-          <span class="process-num">03</span>
-          <div>
-            <h4>Plano revers&iacute;vel</h4>
-            <p>Mostro o impacto de cada mudan&ccedil;a e busco aprova&ccedil;&atilde;o antes de qualquer escrita
-            em produ&ccedil;&atilde;o.</p>
-          </div>
-        </div>
-        <div class="process-step" data-animate>
-          <span class="process-num">04</span>
-          <div>
-            <h4>Documenta&ccedil;&atilde;o como padr&atilde;o</h4>
-            <p>Mapeamento de ambientes, vari&aacute;veis e runbooks documentados &mdash; sem
-            conhecimento tribal.</p>
-          </div>
-        </div>
-      </div>
+      <ol class="process-list">
+        <li class="process-step" data-animate><span class="process-num">01</span><div><h3>Ler antes de mudar</h3><p>Levanto o estado atual via CLI, exports de Jenkins, YAML de pipelines e runbooks antes de propor qualquer altera&ccedil;&atilde;o.</p></div></li>
+        <li class="process-step" data-animate><span class="process-num">02</span><div><h3>Raio de impacto m&iacute;nimo</h3><p>PRs focados &mdash; pipeline separado de c&oacute;digo de aplica&ccedil;&atilde;o, sem misturar responsabilidades.</p></div></li>
+        <li class="process-step" data-animate><span class="process-num">03</span><div><h3>Plano revers&iacute;vel</h3><p>Mostro o impacto de cada mudan&ccedil;a e busco aprova&ccedil;&atilde;o antes de qualquer escrita em produ&ccedil;&atilde;o.</p></div></li>
+        <li class="process-step" data-animate><span class="process-num">04</span><div><h3>Documenta&ccedil;&atilde;o como padr&atilde;o</h3><p>Ambientes, vari&aacute;veis e runbooks documentados &mdash; sem conhecimento tribal.</p></div></li>
+      </ol>
     </div>
   </section>
 
@@ -258,40 +191,46 @@
     <div class="container contact-inner">
       <p class="section-kicker center">Vamos conversar</p>
       <h2 class="section-title center">Pronto para automatizar sua infraestrutura?</h2>
-      <p class="section-desc center">
-        Conte um pouco sobre seu projeto &mdash; stack atual, cloud utilizada e principal dor &mdash;
-        e eu retorno com uma proposta objetiva.
-      </p>
+      <p class="section-desc center">Conte um pouco sobre seu projeto &mdash; stack atual, cloud utilizada e principal dor &mdash; e eu retorno com uma proposta objetiva.</p>
 
       <form class="contact-form" id="contactForm">
         <div class="form-row">
-          <input type="text" name="name" placeholder="Seu nome" required />
-          <input type="email" name="email" placeholder="Seu e-mail" required />
+          <label class="sr-only" for="f-name">Seu nome</label>
+          <input id="f-name" type="text" name="name" placeholder="Seu nome" required />
+          <label class="sr-only" for="f-email">Seu e-mail</label>
+          <input id="f-email" type="email" name="email" placeholder="Seu e-mail" required />
         </div>
-        <input type="text" name="company" placeholder="Empresa (opcional)" />
-        <textarea name="message" rows="5" placeholder="Conte sobre seu projeto..." required></textarea>
+        <label class="sr-only" for="f-company">Empresa</label>
+        <input id="f-company" type="text" name="company" placeholder="Empresa (opcional)" />
+        <label class="sr-only" for="f-message">Mensagem</label>
+        <textarea id="f-message" name="message" rows="5" placeholder="Conte sobre seu projeto..." required></textarea>
         <button type="submit" class="btn btn-primary btn-block">Enviar mensagem</button>
-        <p class="form-note" id="formNote"></p>
+        <p class="form-note" id="formNote" role="status"></p>
       </form>
-
-      <div class="contact-alt">
-        <a href="mailto:flavio.rssilva@gmail.com">flavio.rssilva@gmail.com</a>
-        <span class="dot">&bull;</span>
-        <a href="https://wa.me/5511950783983" target="_blank" rel="noopener">WhatsApp +55 11 95078-3983</a>
-        <span class="dot">&bull;</span>
-        <a href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
-        <span class="dot">&bull;</span>
-        <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
-      </div>
     </div>
   </section>
-
 </main>
 
 <footer class="footer">
-  <div class="container footer-inner">
+  <div class="container footer-grid">
+    <div>
+      <span class="brand-text">Flavio <strong>DevOps</strong></span>
+      <p class="footer-desc">Infraestrutura, pipelines e Kubernetes com seguran&ccedil;a e previsibilidade.</p>
+    </div>
+    <div>
+      <h3>Navega&ccedil;&atilde;o</h3>
+      <a href="#services">Servi&ccedil;os</a><a href="#stack">Stack</a><a href="#projects">Projetos</a><a href="#process">Processo</a>
+    </div>
+    <div>
+      <h3>Contato</h3>
+      <a href="mailto:flavio.rssilva@gmail.com">flavio.rssilva@gmail.com</a>
+      <a href="https://wa.me/5511950783983" target="_blank" rel="noopener">WhatsApp +55 11 95078-3983</a>
+      <a href="https://www.linkedin.com/in/flavio-santos-5628b05b/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
     <span>&copy; <span id="year"></span> Flavio Silva &mdash; DevOps Engineer</span>
-    <span class="footer-sep">Servido via Nginx no Oracle Kubernetes Engine (OKE)</span>
+    <span>Servido via Nginx no Oracle Kubernetes Engine (OKE)</span>
   </div>
 </footer>
 
