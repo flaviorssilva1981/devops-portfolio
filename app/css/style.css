@@ -264,6 +264,14 @@ input:user-invalid, select:user-invalid, textarea:user-invalid { border-color: #
 /* Responsive */
 @media (max-width: 1024px) {
   .split, .contact-grid { grid-template-columns: 1fr; }
+  /* Uma coluna: o formulário sobe para logo após a introdução, para o #contato mostrar o form */
+  .contact-grid { gap: 24px; }
+  .contact-grid > div { display: contents; }
+  .contact-grid .title { order: 1; }
+  .contact-grid .desc { order: 2; }
+  .contact-grid .contact-form { order: 3; }
+  .contact-grid .cimg { order: 4; margin-top: 8px; }
+  .contact-grid .contact-list { order: 5; margin-top: 8px; }
   .split-head { position: static; }
   .tech-groups { grid-template-columns: repeat(3, 1fr); }
   .steps { grid-template-columns: repeat(3, 1fr); row-gap: 40px; }
