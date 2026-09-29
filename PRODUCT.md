@@ -50,3 +50,7 @@ Name: Dublin Consulting. Third-party vendor logos were removed at the owner's re
 ## Accessibility & Inclusion
 
 Keyboard-navigable with a skip link (already present); pt-BR readers on both desktop and mobile. No formal standard was specified; treat WCAG AA as the working floor.
+
+## Imagery note (2026-09-29)
+
+The site uses owner-provided AI-generated imagery, including images of people in the "Cultura e valores" section, at the owner's request. Never caption them as the real team or as clients. The "mais de 7 anos" and "4 clouds / 4 Kubernetes" claims were removed from the home statement because they were unverified.
