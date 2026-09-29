@@ -287,7 +287,7 @@ input:user-invalid, select:user-invalid, textarea:user-invalid { border-color: #
   .nav-links.open { opacity: 1; transform: none; visibility: visible; }
   .nav-links > a, .menu-trigger { padding: 16px 0; border-bottom: 1px solid var(--line); display: block; }
   .menu-trigger::after { display: none; }
-  .mega { position: static; width: auto; opacity: 1; visibility: visible; transform: none; border: 0; box-shadow: none; background: transparent; padding: 0 0 8px 8px; }
+  .mega { position: static; width: auto; opacity: 1; visibility: inherit; transform: none; border: 0; box-shadow: none; background: transparent; padding: 0 0 8px 8px; }
   .nav-cta { margin-top: 16px; text-align: center; }
   .page-hero-grid { grid-template-columns: 1fr; }
 }
