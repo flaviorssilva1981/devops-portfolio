@@ -3,239 +3,135 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="theme-color" content="#101b31" />
-<title>Dublin Consulting | Cloud e DevOps do diagn&oacute;stico &agrave; primeira entrega</title>
+<meta name="theme-color" content="#030409" />
+<title>Dublin Consulting | Cloud, DevOps e Kubernetes</title>
+<meta name="description" content="Dublin Consulting: consultoria em Cloud, DevOps e Kubernetes. Do diagnóstico à primeira entrega em produção, em AWS, Azure, GCP e OCI." />
 <meta name="robots" content="index,follow" />
-<meta name="description" content="Dublin Consulting: consultoria em Cloud, DevOps e Kubernetes. Do diagn&oacute;stico &agrave; primeira entrega em produ&ccedil;&atilde;o: AWS, Azure, GCP e OCI, CI/CD, IaC e DevSecOps." />
-<meta property="og:title" content="Dublin Consulting | Cloud e DevOps" />
+<link rel="canonical" href="https://devops-portfolio.dublinconsulting.com.br/" />
+<meta property="og:title" content="Dublin Consulting | Cloud, DevOps e Kubernetes" />
+<meta property="og:description" content="Dublin Consulting: consultoria em Cloud, DevOps e Kubernetes. Do diagnóstico à primeira entrega em produção, em AWS, Azure, GCP e OCI." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://devops-portfolio.dublinconsulting.com.br/" />
-<meta property="og:image" content="https://devops-portfolio.dublinconsulting.com.br/img/logo.svg" />
-<link rel="icon" type="image/svg+xml" href="img/favicon.svg" />
+<meta property="og:image" content="https://devops-portfolio.dublinconsulting.com.br/img/logo-light.svg" />
+<link rel="icon" type="image/svg+xml" href="/img/favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="css/style.css" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
-<a class="skip-link" href="#main">Ir para o conte&uacute;do</a>
-<svg class="svg-defs" width="0" height="0" aria-hidden="true" focusable="false">
-  <defs>
-    <linearGradient id="ga" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#19e3ea"/><stop offset="1" stop-color="#0a6cff"/></linearGradient>
-    <linearGradient id="gb" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#0a6cff" stop-opacity=".2"/><stop offset="1" stop-color="#19e3ea" stop-opacity=".9"/></linearGradient>
-
-    <symbol id="art-cloud" viewBox="0 0 560 400">
-      <g class="grid-lines"><path d="M0 300 H560 M0 340 H560 M0 380 H560 M80 260 L20 400 M200 260 L170 400 M320 260 L320 400 M440 260 L470 400 M540 260 L600 400"/></g>
-      <g class="floaty"><path d="M150 210 a50 50 0 0 1 20-96 a70 70 0 0 1 134-14 a60 60 0 0 1 96 50 a45 45 0 0 1-6 60 Z" fill="url(#gb)" stroke="#19e3ea" stroke-width="2"/></g>
-      <g class="nodes"><circle cx="110" cy="290" r="14"/><circle cx="280" cy="270" r="14"/><circle cx="450" cy="290" r="14"/></g>
-      <g class="links"><path d="M110 290 L200 200 M280 270 L280 200 M450 290 L360 200"/></g>
-      <g class="tag-lbl"><text x="110" y="326">AWS</text><text x="280" y="306">Azure</text><text x="450" y="326">GCP</text></g>
-    </symbol>
-
-    <symbol id="art-k8s" viewBox="0 0 560 400">
-      <g class="links"><path d="M280 200 L150 110 M280 200 L410 110 M280 200 L130 260 M280 200 L430 260 M280 200 L280 350 M150 110 L410 110 M130 260 L280 350 M430 260 L280 350"/></g>
-      <circle class="core" cx="280" cy="200" r="42"/>
-      <text x="280" y="205" class="lbl-s">cluster</text>
-      <g class="nodes big"><circle cx="150" cy="110" r="26"/><circle cx="410" cy="110" r="26"/><circle cx="130" cy="260" r="26"/><circle cx="430" cy="260" r="26"/><circle cx="280" cy="350" r="26"/></g>
-    </symbol>
-
-    <symbol id="art-ci" viewBox="0 0 560 400">
-      <path class="flow" d="M110 200 H450"/>
-      <g class="floaty"><rect x="30" y="160" width="120" height="80" rx="16" class="tile"/><text x="90" y="206" class="lbl">Commit</text></g>
-      <g class="floaty d1"><rect x="160" y="70" width="120" height="80" rx="16" class="tile"/><text x="220" y="116" class="lbl">Build</text></g>
-      <g class="floaty d2"><rect x="290" y="250" width="120" height="80" rx="16" class="tile"/><text x="350" y="296" class="lbl">Test</text></g>
-      <g class="floaty d3"><rect x="420" y="130" width="120" height="80" rx="16" class="tile hot"/><text x="480" y="176" class="lbl">Deploy</text></g>
-    </symbol>
-
-    <symbol id="art-sec" viewBox="0 0 560 400">
-      <circle class="ring" cx="280" cy="200" r="80"/><circle class="ring r2" cx="280" cy="200" r="80"/>
-      <path d="M280 100 L370 134 V210 C370 265 325 297 280 320 C235 297 190 265 190 210 V134 Z" fill="rgba(25,227,234,.12)" stroke="#19e3ea" stroke-width="2"/>
-      <path class="check" d="M240 205 L270 235 L325 170"/>
-    </symbol>
-
-    <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7 18a4.5 4.5 0 0 1-.6-8.96A6 6 0 0 1 18 8.5a4.75 4.75 0 0 1-.5 9.5Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
-    <symbol id="i-flow" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2.2"/><circle cx="5" cy="18" r="2.2"/><circle cx="19" cy="12" r="2.2"/><path d="M7 6h4a4 4 0 0 1 4 4v0M7 18h4a4 4 0 0 0 4-4v0"/></g></symbol>
-    <symbol id="i-shield" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6Z"/><path d="m9 12 2.2 2.2L15.5 10"/></g></symbol>
-    <symbol id="i-chart" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V4M4 20h16"/><path d="m8 15 3-4 3 2 5-6"/></g></symbol>
-    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-    <symbol id="i-wa" viewBox="0 0 32 32"><path fill="currentColor" d="M16 3a13 13 0 1 0 6.5 24.2L29 29l-1.8-6.3A13 13 0 0 0 16 3Z"/><path fill="#fff" d="M11 10c0 6 5 11 11 11l1.5-2.5-3-1.6-1.4 1.2a7 7 0 0 1-3.6-3.6l1.2-1.4-1.6-3Z"/></symbol>
-  </defs>
-</svg>
-
+<a class="skip-link" href="#main">Ir para o conteúdo</a>
+<canvas id="fx" aria-hidden="true"></canvas>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 <header class="navbar" id="navbar">
   <div class="container navbar-inner">
-    <a href="#top" class="brand" aria-label="Dublin Consulting - in&iacute;cio"><img class="logo" src="img/logo.svg" alt="Dublin Consulting" width="200" height="43" /></a>
+    <a href="/" class="brand" aria-label="Dublin Consulting - início"><img class="logo" src="/img/logo-light.svg" alt="Dublin Consulting" width="200" height="43" /></a>
     <nav class="nav-links" id="navLinks" aria-label="Principal">
-      <a href="#solucoes">Solu&ccedil;&otilde;es</a>
-      <a href="#projetos">Projetos</a>
-      <a href="#plataformas">Plataformas</a>
-      <a href="#metodo">M&eacute;todo</a>
-      <a href="#contato" class="nav-cta">Solicitar diagn&oacute;stico</a>
+      <div class="has-menu">
+        <a href="/#solucoes" class="menu-trigger" aria-haspopup="true">Soluções <span aria-hidden="true">&#9662;</span></a>
+        <div class="mega" role="menu"><a href="/solucoes/cloud.html" role="menuitem"><svg class="ico " aria-hidden="true"><use href="/img/sprite.svg#i-cloud"/></svg><span><strong>Cloud &amp; Multi-cloud</strong></span></a><a href="/solucoes/kubernetes.html" role="menuitem"><svg class="ico " aria-hidden="true"><use href="/img/sprite.svg#i-box"/></svg><span><strong>Kubernetes &amp; Containers</strong></span></a><a href="/solucoes/cicd.html" role="menuitem"><svg class="ico " aria-hidden="true"><use href="/img/sprite.svg#i-flow"/></svg><span><strong>CI/CD &amp; Automação</strong></span></a><a href="/solucoes/iac.html" role="menuitem"><svg class="ico " aria-hidden="true"><use href="/img/sprite.svg#i-layers"/></svg><span><strong>Infraestrutura como Código</strong></span></a><a href="/solucoes/devsecops.html" role="menuitem"><svg class="ico " aria-hidden="true"><use href="/img/sprite.svg#i-shield"/></svg><span><strong>DevSecOps</strong></span></a><a href="/solucoes/observabilidade.html" role="menuitem"><svg class="ico " aria-hidden="true"><use href="/img/sprite.svg#i-chart"/></svg><span><strong>Observabilidade</strong></span></a></div>
+      </div>
+      <a href="/#projetos">Projetos</a>
+      <a href="/#tecnologias">Tecnologias</a>
+      <a href="/#metodo">Método</a>
+      <a href="/#contato" class="nav-cta">Solicitar diagnóstico</a>
     </nav>
     <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-controls="navLinks" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </header>
 
 <main id="main">
-
-  <!-- HERO -->
   <section class="hero" id="top">
     <div class="container hero-inner">
       <div class="hero-copy">
-        <p class="pill">Consultoria em Cloud &amp; DevOps</p>
-        <h1>Sua infraestrutura na nuvem, do diagn&oacute;stico &agrave; <span class="grad">primeira entrega em produ&ccedil;&atilde;o</span></h1>
-        <p class="lead">Arquitetura, automa&ccedil;&atilde;o e opera&ccedil;&atilde;o em AWS, Azure, GCP e OCI &mdash; com seguran&ccedil;a, custo sob controle e mudan&ccedil;as revers&iacute;veis.</p>
-        <div class="cta-row">
-          <a href="#contato" class="btn btn-primary">Solicitar um diagn&oacute;stico <span aria-hidden="true">&rarr;</span></a>
-          <a href="#solucoes" class="btn btn-ghost">Conhe&ccedil;a a Dublin Consulting</a>
-        </div>
+        <p class="pill"><i></i> Consultoria em Cloud &amp; DevOps</p>
+        <h1>Infraestrutura do <span class="grad">futuro</span>, entregue hoje.</h1>
+        <p class="lead">Arquitetura, automação e operação em AWS, Azure, GCP e OCI, com segurança, custo sob controle e mudanças reversíveis.</p>
+        <div class="cta-row"><a href="#contato" class="btn btn-primary">Solicitar um diagnóstico <svg class="ico " aria-hidden="true"><use href="/img/sprite.svg#i-arrow"/></svg></a><a href="#solucoes" class="btn btn-ghost">Ver soluções</a></div>
+        <ul class="hero-tags"><li>AWS</li><li>Azure</li><li>GCP</li><li>OCI</li><li>Kubernetes</li></ul>
       </div>
-      <svg class="hero-art" role="img" aria-label="Ilustra&ccedil;&atilde;o de infraestrutura em nuvem"><use href="#art-cloud"/></svg>
+      <div class="orbit" aria-hidden="true">
+        <div class="orbit-core"><img src="/img/favicon.svg" alt="" width="84" height="84" /></div>
+        <ul class="ring r-out"><li class="slot"><span class="otile"><img src="/img/vendors/aws.svg" alt="AWS" loading="lazy" decoding="async" /></span></li><li class="slot"><span class="otile"><img src="/img/vendors/microsoft-azure.svg" alt="Azure" loading="lazy" decoding="async" /></span></li><li class="slot"><span class="otile"><img src="/img/vendors/google-cloud.svg" alt="Google Cloud" loading="lazy" decoding="async" /></span></li><li class="slot"><span class="otile"><img src="/img/vendors/oracle.svg" alt="Oracle OCI" loading="lazy" decoding="async" /></span></li><li class="slot"><span class="otile"><img src="/img/vendors/kubernetes.svg" alt="Kubernetes" loading="lazy" decoding="async" /></span></li><li class="slot"><span class="otile"><img src="/img/vendors/terraform-icon.svg" alt="Terraform" loading="lazy" decoding="async" /></span></li><li class="slot"><span class="otile"><img src="/img/vendors/github-icon.svg" alt="GitHub" loading="lazy" decoding="async" /></span></li><li class="slot"><span class="otile"><img src="/img/vendors/docker-icon.svg" alt="Docker" loading="lazy" decoding="async" /></span></li></ul>
+        <ul class="ring r-in"><li class="slot"><span class="otile"><img src="/img/vendors/helm.svg" alt="Helm" loading="lazy" decoding="async" /></span></li><li class="slot"><span class="otile"><img src="/img/vendors/argo.svg" alt="Argo CD" loading="lazy" decoding="async" /></span></li><li class="slot"><span class="otile"><img src="/img/vendors/prometheus.svg" alt="Prometheus" loading="lazy" decoding="async" /></span></li><li class="slot"><span class="otile"><img src="/img/vendors/grafana.svg" alt="Grafana" loading="lazy" decoding="async" /></span></li></ul>
+      </div>
     </div>
-    <div class="container">
-      <ul class="benefits">
-        <li><svg aria-hidden="true"><use href="#i-cloud"/></svg><div><strong>Multi-cloud</strong><span>AWS, Azure, GCP e OCI</span></div></li>
-        <li><svg aria-hidden="true"><use href="#i-flow"/></svg><div><strong>CI/CD e IaC</strong><span>Entrega automatizada</span></div></li>
-        <li><svg aria-hidden="true"><use href="#i-shield"/></svg><div><strong>DevSecOps</strong><span>Menor privil&eacute;gio, sem segredos no git</span></div></li>
-        <li><svg aria-hidden="true"><use href="#i-chart"/></svg><div><strong>Observabilidade</strong><span>Sa&uacute;de, performance e custo</span></div></li>
+  </section>
+
+  <div class="marquee" aria-hidden="true"><div class="marquee-track"><span class="mlogo"><img src="/img/vendors/aws.svg" alt="AWS" loading="lazy" decoding="async" /></span><span class="mlogo"><img src="/img/vendors/microsoft-azure.svg" alt="Azure" loading="lazy" decoding="async" /></span><span class="mlogo"><img src="/img/vendors/google-cloud.svg" alt="Google Cloud" loading="lazy" decoding="async" /></span><span class="mlogo"><img src="/img/vendors/oracle.svg" alt="Oracle OCI" loading="lazy" decoding="async" /></span><span class="mlogo"><img src="/img/vendors/kubernetes.svg" alt="Kubernetes" loading="lazy" decoding="async" /></span><span class="mlogo"><img src="/img/vendors/terraform-icon.svg" alt="Terraform" loading="lazy" decoding="async" /></span><span class="mlogo"><img src="/img/vendors/github-icon.svg" alt="GitHub" loading="lazy" decoding="async" /></span><span class="mlogo"><img src="/img/vendors/docker-icon.svg" alt="Docker" loading="lazy" decoding="async" /></span><span class="mlogo"><img src="/img/vendors/helm.svg" alt="Helm" loading="lazy" decoding="async" /></span><span class="mlogo"><img src="/img/vendors/argo.svg" alt="Argo CD" loading="lazy" decoding="async" /></span><span class="mlogo"><img src="/img/vendors/prometheus.svg" alt="Prometheus" loading="lazy" decoding="async" /></span><span class="mlogo"><img src="/img/vendors/grafana.svg" alt="Grafana" loading="lazy" decoding="async" /></span><span class="mlogo"><img src="/img/vendors/ansible.svg" alt="Ansible" loading="lazy" decoding="async" /></span><span class="mlogo"><img src="/img/vendors/jenkins.svg" alt="Jenkins" loading="lazy" decoding="async" /></span><span class="mlogo"><img src="/img/vendors/bitbucket.svg" alt="Bitbucket" loading="lazy" decoding="async" /></span><span class="mlogo"><img src="/img/vendors/zabbix.svg" alt="Zabbix" loading="lazy" decoding="async" /></span><span class="mlogo"><img src="/img/vendors/python.svg" alt="Python" loading="lazy" decoding="async" /></span><span class="mlogo"><img src="/img/vendors/aws.svg" alt="AWS" loading="lazy" decoding="async" /></span><span class="mlogo"><img src="/img/vendors/microsoft-azure.svg" alt="Azure" loading="lazy" decoding="async" /></span><span class="mlogo"><img src="/img/vendors/google-cloud.svg" alt="Google Cloud" loading="lazy" decoding="async" /></span><span class="mlogo"><img src="/img/vendors/oracle.svg" alt="Oracle OCI" loading="lazy" decoding="async" /></span><span class="mlogo"><img src="/img/vendors/kubernetes.svg" alt="Kubernetes" loading="lazy" decoding="async" /></span><span class="mlogo"><img src="/img/vendors/terraform-icon.svg" alt="Terraform" loading="lazy" decoding="async" /></span><span class="mlogo"><img src="/img/vendors/github-icon.svg" alt="GitHub" loading="lazy" decoding="async" /></span><span class="mlogo"><img src="/img/vendors/docker-icon.svg" alt="Docker" loading="lazy" decoding="async" /></span><span class="mlogo"><img src="/img/vendors/helm.svg" alt="Helm" loading="lazy" decoding="async" /></span><span class="mlogo"><img src="/img/vendors/argo.svg" alt="Argo CD" loading="lazy" decoding="async" /></span><span class="mlogo"><img src="/img/vendors/prometheus.svg" alt="Prometheus" loading="lazy" decoding="async" /></span><span class="mlogo"><img src="/img/vendors/grafana.svg" alt="Grafana" loading="lazy" decoding="async" /></span><span class="mlogo"><img src="/img/vendors/ansible.svg" alt="Ansible" loading="lazy" decoding="async" /></span><span class="mlogo"><img src="/img/vendors/jenkins.svg" alt="Jenkins" loading="lazy" decoding="async" /></span><span class="mlogo"><img src="/img/vendors/bitbucket.svg" alt="Bitbucket" loading="lazy" decoding="async" /></span><span class="mlogo"><img src="/img/vendors/zabbix.svg" alt="Zabbix" loading="lazy" decoding="async" /></span><span class="mlogo"><img src="/img/vendors/python.svg" alt="Python" loading="lazy" decoding="async" /></span></div></div>
+
+  <section class="stats" aria-label="Números"><div class="container stats-row">
+    <div class="stat reveal"><span class="stat-num" data-count="4">0</span><span class="stat-label">clouds atendidas</span></div>
+    <div class="stat reveal"><span class="stat-num" data-count="4">0</span><span class="stat-label">Kubernetes gerenciados: EKS, AKS, GKE e OKE</span></div>
+    <div class="stat reveal"><span class="stat-num" data-count="7" data-suffix="+">0</span><span class="stat-label">anos de experiência em DevOps e cloud</span></div>
+    <div class="stat reveal"><span class="stat-num" data-count="6">0</span><span class="stat-label">frentes de solução</span></div>
+  </div></section>
+
+  <section id="solucoes" class="section"><div class="container">
+    <p class="kicker reveal">Soluções</p><h2 class="title reveal">Seis frentes, do planejamento à operação</h2>
+    <p class="desc reveal">Clique em uma frente para ver o que entregamos, como trabalhamos e as tecnologias envolvidas.</p>
+    <div class="grid three"><a class="sol reveal" href="/solucoes/cloud.html"><span class="sol-idx">01</span><svg class="ico big" aria-hidden="true"><use href="/img/sprite.svg#i-cloud"/></svg><h3>Cloud &amp; Multi-cloud</h3><p>Arquitetura, migração e governança em AWS, Azure, Google Cloud e OCI, com custo, segurança e disponibilidade no centro das decisões.</p><span class="more">Ver detalhes <svg class="ico " aria-hidden="true"><use href="/img/sprite.svg#i-arrow"/></svg></span></a><a class="sol reveal" href="/solucoes/kubernetes.html"><span class="sol-idx">02</span><svg class="ico big" aria-hidden="true"><use href="/img/sprite.svg#i-box"/></svg><h3>Kubernetes &amp; Containers</h3><p>Design e operação de clusters EKS, AKS, GKE e OKE, com Helm, autoscaling e rollouts sem indisponibilidade.</p><span class="more">Ver detalhes <svg class="ico " aria-hidden="true"><use href="/img/sprite.svg#i-arrow"/></svg></span></a><a class="sol reveal" href="/solucoes/cicd.html"><span class="sol-idx">03</span><svg class="ico big" aria-hidden="true"><use href="/img/sprite.svg#i-flow"/></svg><h3>CI/CD &amp; Automação</h3><p>Pipelines rápidos, auditáveis e com rollback previsível em GitHub Actions, Jenkins, Bitbucket, Azure DevOps e Argo CD.</p><span class="more">Ver detalhes <svg class="ico " aria-hidden="true"><use href="/img/sprite.svg#i-arrow"/></svg></span></a><a class="sol reveal" href="/solucoes/iac.html"><span class="sol-idx">04</span><svg class="ico big" aria-hidden="true"><use href="/img/sprite.svg#i-layers"/></svg><h3>Infraestrutura como Código</h3><p>Terraform e Ansible com plan antes de apply, módulos versionados e ambientes reproduzíveis de dev a produção.</p><span class="more">Ver detalhes <svg class="ico " aria-hidden="true"><use href="/img/sprite.svg#i-arrow"/></svg></span></a><a class="sol reveal" href="/solucoes/devsecops.html"><span class="sol-idx">05</span><svg class="ico big" aria-hidden="true"><use href="/img/sprite.svg#i-shield"/></svg><h3>DevSecOps</h3><p>Segredos fora do git, RBAC/IAM com menor privilégio e verificações automatizadas em cada entrega.</p><span class="more">Ver detalhes <svg class="ico " aria-hidden="true"><use href="/img/sprite.svg#i-arrow"/></svg></span></a><a class="sol reveal" href="/solucoes/observabilidade.html"><span class="sol-idx">06</span><svg class="ico big" aria-hidden="true"><use href="/img/sprite.svg#i-chart"/></svg><h3>Observabilidade</h3><p>Prometheus, Grafana e Zabbix para visibilidade real de saúde, performance e custo, com alertas que importam.</p><span class="more">Ver detalhes <svg class="ico " aria-hidden="true"><use href="/img/sprite.svg#i-arrow"/></svg></span></a></div>
+  </div></section>
+
+  <section id="tecnologias" class="section section-glow"><div class="container">
+    <p class="kicker reveal">Tecnologias</p><h2 class="title reveal">As plataformas com as quais trabalhamos</h2>
+    <div class="vwall"><div class="vgroup reveal"><h3>Clouds</h3><ul class="vgrid"><li class="vtile" title="AWS"><img src="/img/vendors/aws.svg" alt="AWS" loading="lazy" decoding="async" /><span>AWS</span></li><li class="vtile" title="Microsoft Azure"><img src="/img/vendors/microsoft-azure.svg" alt="Microsoft Azure" loading="lazy" decoding="async" /><span>Microsoft Azure</span></li><li class="vtile" title="Google Cloud"><img src="/img/vendors/google-cloud.svg" alt="Google Cloud" loading="lazy" decoding="async" /><span>Google Cloud</span></li><li class="vtile" title="Oracle Cloud (OCI)"><img src="/img/vendors/oracle.svg" alt="Oracle Cloud (OCI)" loading="lazy" decoding="async" /><span>Oracle Cloud (OCI)</span></li></ul></div><div class="vgroup reveal"><h3>Plataforma</h3><ul class="vgrid"><li class="vtile" title="Kubernetes"><img src="/img/vendors/kubernetes.svg" alt="Kubernetes" loading="lazy" decoding="async" /><span>Kubernetes</span></li><li class="vtile" title="Docker"><img src="/img/vendors/docker-icon.svg" alt="Docker" loading="lazy" decoding="async" /><span>Docker</span></li><li class="vtile" title="Helm"><img src="/img/vendors/helm.svg" alt="Helm" loading="lazy" decoding="async" /><span>Helm</span></li><li class="vtile" title="Argo CD"><img src="/img/vendors/argo.svg" alt="Argo CD" loading="lazy" decoding="async" /><span>Argo CD</span></li></ul></div><div class="vgroup reveal"><h3>Automação & IaC</h3><ul class="vgrid"><li class="vtile" title="Terraform"><img src="/img/vendors/terraform-icon.svg" alt="Terraform" loading="lazy" decoding="async" /><span>Terraform</span></li><li class="vtile" title="Ansible"><img src="/img/vendors/ansible.svg" alt="Ansible" loading="lazy" decoding="async" /><span>Ansible</span></li><li class="vtile" title="Jenkins"><img src="/img/vendors/jenkins.svg" alt="Jenkins" loading="lazy" decoding="async" /><span>Jenkins</span></li><li class="vtile" title="GitHub Actions"><img src="/img/vendors/github-icon.svg" alt="GitHub Actions" loading="lazy" decoding="async" /><span>GitHub Actions</span></li><li class="vtile" title="Bitbucket Pipelines"><img src="/img/vendors/bitbucket.svg" alt="Bitbucket Pipelines" loading="lazy" decoding="async" /><span>Bitbucket Pipelines</span></li></ul></div><div class="vgroup reveal"><h3>Observabilidade & Scripts</h3><ul class="vgrid"><li class="vtile" title="Prometheus"><img src="/img/vendors/prometheus.svg" alt="Prometheus" loading="lazy" decoding="async" /><span>Prometheus</span></li><li class="vtile" title="Grafana"><img src="/img/vendors/grafana.svg" alt="Grafana" loading="lazy" decoding="async" /><span>Grafana</span></li><li class="vtile" title="Zabbix"><img src="/img/vendors/zabbix.svg" alt="Zabbix" loading="lazy" decoding="async" /><span>Zabbix</span></li><li class="vtile" title="Python"><img src="/img/vendors/python.svg" alt="Python" loading="lazy" decoding="async" /><span>Python</span></li><li class="vtile" title="Bash"><img src="/img/vendors/bash-icon.svg" alt="Bash" loading="lazy" decoding="async" /><span>Bash</span></li></ul></div></div>
+    <p class="fine reveal">Azure DevOps, AWS CodePipeline, PowerShell, Drupal, WordPress, Pantheon e Acquia também fazem parte do dia a dia.</p>
+  </div></section>
+
+  <section id="projetos" class="section"><div class="container">
+    <p class="kicker reveal">Projetos</p><h2 class="title reveal">Tipos de projeto que entregamos</h2>
+    <div class="grid four">
+      <a class="proj reveal" href="/solucoes/kubernetes.html"><span class="tag">Kubernetes</span><h3>Migração para Kubernetes gerenciado</h3><p class="meta">Terraform · Helm · OKE / EKS</p><p>Provisionamento como código e deploy progressivo de workloads existentes.</p></a>
+      <a class="proj reveal" href="/solucoes/cicd.html"><span class="tag">CI/CD</span><h3>Padronização de pipelines</h3><p class="meta">GitHub Actions · Bitbucket · Jenkins</p><p>Templates reutilizáveis, revisão obrigatória e PRs somente de pipeline.</p></a>
+      <a class="proj reveal" href="/solucoes/observabilidade.html"><span class="tag">Observabilidade</span><h3>Monitoramento unificado</h3><p class="meta">Prometheus · Grafana · Zabbix</p><p>Alertas com SLO claros e dashboards de disponibilidade.</p></a>
+      <a class="proj reveal" href="/solucoes/devsecops.html"><span class="tag">DevSecOps</span><h3>Hardening de segredos e RBAC</h3><p class="meta">Cofre de segredos · IAM · RBAC</p><p>Eliminação de credenciais em repositórios e privilégio mínimo.</p></a>
+    </div>
+  </div></section>
+
+  <section id="metodo" class="section section-alt"><div class="container">
+    <p class="kicker reveal">Método</p><h2 class="title reveal">Da primeira conversa à entrega em seis etapas</h2>
+    <ol class="journey">
+      <li class="reveal"><span>01</span><h3>Diagnóstico</h3><p>Leitura do ambiente antes de qualquer mudança.</p></li>
+      <li class="reveal"><span>02</span><h3>Arquitetura</h3><p>Desenho, riscos e plano reversível.</p></li>
+      <li class="reveal"><span>03</span><h3>Infraestrutura</h3><p>Provisionamento como código.</p></li>
+      <li class="reveal"><span>04</span><h3>Automação</h3><p>Pipelines e rollouts padronizados.</p></li>
+      <li class="reveal"><span>05</span><h3>Testes</h3><p>Validação e observabilidade ativas.</p></li>
+      <li class="reveal"><span>06</span><h3>Entrega</h3><p>Go-live, documentação e runbooks.</p></li>
+    </ol>
+  </div></section>
+
+  <section id="contato" class="section section-glow"><div class="container contact-grid">
+    <div>
+      <p class="kicker reveal">Contato</p><h2 class="title reveal">Solicite um diagnóstico</h2>
+      <p class="desc reveal">Conte sobre o seu projeto. Ao enviar, abrimos uma conversa no WhatsApp com os dados preenchidos — você confirma antes de enviar.</p>
+      <ul class="contact-list reveal">
+        <li><span>WhatsApp</span><a href="https://wa.me/5511950783983" target="_blank" rel="noopener">+55 11 95078-3983</a></li>
+        <li><span>E-mail</span><a href="mailto:flavio.rssilva@gmail.com">flavio.rssilva@gmail.com</a></li>
+        <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/flavio-santos-5628b05b/" target="_blank" rel="noopener">Flavio Silva</a></li>
       </ul>
     </div>
-  </section>
-
-  <!-- CONFIAN&Ccedil;A -->
-  <section class="trust" aria-label="Diferenciais">
-    <div class="container trust-row">
-      <div class="trust-badge reveal"><span class="trust-num" data-count="7" data-suffix="+">0</span><span>anos de experi&ecirc;ncia em DevOps e cloud</span></div>
-      <ul class="trust-list reveal">
-        <li>Certifica&ccedil;&otilde;es AWS, Azure, GCP e OCI</li>
-        <li>Kubernetes em EKS, AKS, GKE e OKE</li>
-        <li>Terraform e Ansible com plan antes de apply</li>
-        <li>Pipelines em GitHub Actions, Jenkins, Bitbucket e Argo CD</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- SOLU&Ccedil;&Otilde;ES -->
-  <section id="solucoes" class="section">
-    <div class="container">
-      <p class="kicker reveal">Solu&ccedil;&otilde;es</p>
-      <h2 class="title reveal">Do planejamento &agrave; opera&ccedil;&atilde;o, em quatro frentes</h2>
-      <div class="grid four">
-        <article class="sol reveal"><span class="sol-idx">01</span><svg aria-hidden="true"><use href="#i-cloud"/></svg><h3>Cloud &amp; Infraestrutura</h3><p>Arquitetura multi-cloud, migra&ccedil;&otilde;es, governan&ccedil;a e FinOps.</p></article>
-        <article class="sol reveal"><span class="sol-idx">02</span><svg aria-hidden="true"><use href="#i-flow"/></svg><h3>Plataforma &amp; Kubernetes</h3><p>Clusters gerenciados com Helm, autoscaling e rollouts sem indisponibilidade.</p></article>
-        <article class="sol reveal"><span class="sol-idx">03</span><svg aria-hidden="true"><use href="#i-shield"/></svg><h3>Entrega &amp; Seguran&ccedil;a</h3><p>Pipelines padronizados, segredos fora do reposit&oacute;rio e RBAC/IAM enxuto.</p></article>
-        <article class="sol reveal"><span class="sol-idx">04</span><svg aria-hidden="true"><use href="#i-chart"/></svg><h3>Observabilidade</h3><p>Prometheus, Grafana e Zabbix com alertas &uacute;teis e dashboards claros.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROJETOS -->
-  <section id="projetos" class="section section-alt">
-    <div class="container">
-      <p class="kicker reveal">Projetos</p>
-      <h2 class="title reveal">Tipos de projeto que entregamos</h2>
-      <div class="grid projects">
-        <article class="proj reveal"><div class="proj-art"><svg role="img" aria-label="Kubernetes"><use href="#art-k8s"/></svg></div><div class="proj-body"><h3>Migra&ccedil;&atilde;o para Kubernetes gerenciado</h3><p class="meta">Stack: Terraform &middot; Helm &middot; OKE / EKS</p><p>Provisionamento como c&oacute;digo e deploy progressivo de workloads existentes.</p></div></article>
-        <article class="proj reveal"><div class="proj-art"><svg role="img" aria-label="Pipeline"><use href="#art-ci"/></svg></div><div class="proj-body"><h3>Padroniza&ccedil;&atilde;o de pipelines</h3><p class="meta">Stack: GitHub Actions &middot; Bitbucket &middot; Jenkins</p><p>Templates reutiliz&aacute;veis, revis&atilde;o obrigat&oacute;ria e PRs somente de pipeline.</p></div></article>
-        <article class="proj reveal"><div class="proj-art"><svg role="img" aria-label="Cloud"><use href="#art-cloud"/></svg></div><div class="proj-body"><h3>Monitoramento unificado</h3><p class="meta">Stack: Prometheus &middot; Grafana &middot; Zabbix</p><p>Alertas com SLO claros e dashboards de disponibilidade.</p></div></article>
-        <article class="proj reveal"><div class="proj-art"><svg role="img" aria-label="Seguran&ccedil;a"><use href="#art-sec"/></svg></div><div class="proj-body"><h3>Hardening de segredos e RBAC</h3><p class="meta">Stack: Vault de segredos &middot; IAM &middot; RBAC</p><p>Elimina&ccedil;&atilde;o de credenciais em reposit&oacute;rios e privil&eacute;gio m&iacute;nimo.</p></div></article>
-      </div>
-    </div>
-  </section>
-
-  <!-- PLATAFORMAS (abas) -->
-  <section id="plataformas" class="section">
-    <div class="container">
-      <p class="kicker reveal">Plataformas</p>
-      <h2 class="title reveal">Tecnologias por frente de trabalho</h2>
-      <div class="tabs reveal" id="tabs">
-        <div class="tab-list" role="tablist" aria-label="Frentes">
-          <button role="tab" id="t1" aria-controls="p1" aria-selected="true">Cloud</button>
-          <button role="tab" id="t2" aria-controls="p2" aria-selected="false" tabindex="-1">Kubernetes</button>
-          <button role="tab" id="t3" aria-controls="p3" aria-selected="false" tabindex="-1">CI/CD</button>
-          <button role="tab" id="t4" aria-controls="p4" aria-selected="false" tabindex="-1">Seguran&ccedil;a</button>
-        </div>
-        <div class="tab-panel is-active" role="tabpanel" id="p1" aria-labelledby="t1">
-          <ul class="spec"><li><svg aria-hidden="true"><use href="#i-check"/></svg>AWS, Azure, Google Cloud e OCI</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Terraform e Ansible com plan antes de apply</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Ambientes dev, uat e prod reprodut&iacute;veis</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Governan&ccedil;a de custos e tagging</li></ul>
-          <svg class="spec-art" role="img" aria-label="Cloud"><use href="#art-cloud"/></svg>
-        </div>
-        <div class="tab-panel" role="tabpanel" id="p2" aria-labelledby="t2" hidden>
-          <ul class="spec"><li><svg aria-hidden="true"><use href="#i-check"/></svg>EKS, AKS, GKE e OKE</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Helm charts reutiliz&aacute;veis e Kustomize</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Probes, HPA e RollingUpdate sem downtime</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>RBAC restrito por namespace</li></ul>
-          <svg class="spec-art" role="img" aria-label="Kubernetes"><use href="#art-k8s"/></svg>
-        </div>
-        <div class="tab-panel" role="tabpanel" id="p3" aria-labelledby="t3" hidden>
-          <ul class="spec"><li><svg aria-hidden="true"><use href="#i-check"/></svg>GitHub Actions, Jenkins, Bitbucket Pipelines</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Azure DevOps, Argo CD e CodePipeline</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Migra&ccedil;&atilde;o Jenkins &rarr; pipelines modernos</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Deploy de CMS: Drupal, WordPress, Pantheon, Acquia</li></ul>
-          <svg class="spec-art" role="img" aria-label="Pipeline"><use href="#art-ci"/></svg>
-        </div>
-        <div class="tab-panel" role="tabpanel" id="p4" aria-labelledby="t4" hidden>
-          <ul class="spec"><li><svg aria-hidden="true"><use href="#i-check"/></svg>Zero credenciais em reposit&oacute;rios</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>IAM e RBAC com menor privil&eacute;gio</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Scans de vulnerabilidades no pipeline</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Mudan&ccedil;as com plano de rollback</li></ul>
-          <svg class="spec-art" role="img" aria-label="Seguran&ccedil;a"><use href="#art-sec"/></svg>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- M&Eacute;TODO (6 etapas) -->
-  <section id="metodo" class="section section-dark">
-    <div class="container">
-      <p class="kicker reveal">M&eacute;todo</p>
-      <h2 class="title reveal">Da primeira conversa &agrave; entrega em seis etapas</h2>
-      <ol class="journey">
-        <li class="reveal"><span>01</span><h3>Diagn&oacute;stico</h3><p>Leitura do ambiente atual antes de qualquer mudan&ccedil;a.</p></li>
-        <li class="reveal"><span>02</span><h3>Arquitetura</h3><p>Desenho, riscos e plano revers&iacute;vel.</p></li>
-        <li class="reveal"><span>03</span><h3>Infraestrutura</h3><p>Provisionamento como c&oacute;digo.</p></li>
-        <li class="reveal"><span>04</span><h3>Automa&ccedil;&atilde;o</h3><p>Pipelines e rollouts padronizados.</p></li>
-        <li class="reveal"><span>05</span><h3>Testes</h3><p>Valida&ccedil;&atilde;o e observabilidade ativas.</p></li>
-        <li class="reveal"><span>06</span><h3>Entrega</h3><p>Go-live, documenta&ccedil;&atilde;o e runbooks.</p></li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- CONTATO -->
-  <section id="contato" class="section section-alt">
-    <div class="container contact-grid">
-      <div>
-        <p class="kicker reveal">Contato</p>
-        <h2 class="title reveal">Solicite um diagn&oacute;stico</h2>
-        <p class="desc reveal">Conte sobre o seu projeto. Ao enviar, abrimos uma conversa no WhatsApp com os dados preenchidos &mdash; voc&ecirc; confirma antes de enviar.</p>
-        <ul class="contact-list reveal">
-          <li><span>WhatsApp</span><a href="https://wa.me/5511950783983" target="_blank" rel="noopener">+55 11 95078-3983</a></li>
-          <li><span>E-mail</span><a href="mailto:flavio.rssilva@gmail.com">flavio.rssilva@gmail.com</a></li>
-          <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/flavio-santos-5628b05b/" target="_blank" rel="noopener">Flavio Silva</a></li>
-        </ul>
-      </div>
-      <form class="contact-form reveal" id="contactForm">
-        <div class="form-row">
-          <label class="sr-only" for="f-name">Nome</label><input id="f-name" type="text" name="name" placeholder="Nome" required />
-          <label class="sr-only" for="f-email">E-mail</label><input id="f-email" type="email" name="email" placeholder="E-mail" required />
-        </div>
-        <div class="form-row">
-          <label class="sr-only" for="f-company">Empresa</label><input id="f-company" type="text" name="company" placeholder="Empresa" />
-          <label class="sr-only" for="f-cloud">Cloud</label>
-          <select id="f-cloud" name="cloud"><option value="">Cloud utilizada</option><option>AWS</option><option>Azure</option><option>Google Cloud</option><option>OCI</option><option>Multi-cloud</option><option>On-premises</option></select>
-        </div>
-        <label class="sr-only" for="f-type">Tipo de projeto</label>
-        <select id="f-type" name="type" required><option value="">Tipo de projeto</option><option>Migra&ccedil;&atilde;o para cloud</option><option>Kubernetes / Containers</option><option>CI/CD e automa&ccedil;&atilde;o</option><option>Infraestrutura como C&oacute;digo</option><option>DevSecOps</option><option>Observabilidade</option><option>Deploy de CMS</option><option>Outro</option></select>
-        <label class="sr-only" for="f-message">Mensagem</label><textarea id="f-message" name="message" rows="4" placeholder="Conte sobre o projeto" required></textarea>
-        <label class="consent"><input type="checkbox" name="lgpd" required /> Concordo em compartilhar estes dados para receber contato (LGPD). Nada &eacute; armazenado neste site.</label>
-        <button type="submit" class="btn btn-primary btn-block">Enviar pelo WhatsApp <span aria-hidden="true">&rarr;</span></button>
-        <p class="form-note" id="formNote" role="status"></p>
-      </form>
-    </div>
-  </section>
+    <form class="contact-form reveal" id="contactForm">
+      <div class="form-row"><label class="sr-only" for="f-name">Nome</label><input id="f-name" type="text" name="name" placeholder="Nome" required /><label class="sr-only" for="f-email">E-mail</label><input id="f-email" type="email" name="email" placeholder="E-mail" required /></div>
+      <div class="form-row"><label class="sr-only" for="f-company">Empresa</label><input id="f-company" type="text" name="company" placeholder="Empresa" /><label class="sr-only" for="f-cloud">Cloud</label><select id="f-cloud" name="cloud"><option value="">Cloud utilizada</option><option>AWS</option><option>Azure</option><option>Google Cloud</option><option>OCI</option><option>Multi-cloud</option><option>On-premises</option></select></div>
+      <label class="sr-only" for="f-type">Tipo de projeto</label><select id="f-type" name="type" required><option value="">Tipo de projeto</option><option>Migração para cloud</option><option>Kubernetes / Containers</option><option>CI/CD e automação</option><option>Infraestrutura como Código</option><option>DevSecOps</option><option>Observabilidade</option><option>Deploy de CMS</option><option>Outro</option></select>
+      <label class="sr-only" for="f-message">Mensagem</label><textarea id="f-message" name="message" rows="4" placeholder="Conte sobre o projeto" required></textarea>
+      <label class="consent"><input type="checkbox" name="lgpd" required /> Concordo em compartilhar estes dados para receber contato (LGPD). Nada é armazenado neste site.</label>
+      <button type="submit" class="btn btn-primary btn-block">Enviar pelo WhatsApp <svg class="ico " aria-hidden="true"><use href="/img/sprite.svg#i-arrow"/></svg></button>
+      <p class="form-note" id="formNote" role="status"></p>
+    </form>
+  </div></section>
 </main>
-
 <footer class="footer">
   <div class="container footer-grid">
-    <div><img class="logo" src="img/logo-light.svg" alt="Dublin Consulting" width="200" height="43" /><p class="footer-desc">Cloud, DevOps e Kubernetes com seguran&ccedil;a e previsibilidade.</p></div>
-    <div><h3>Navega&ccedil;&atilde;o</h3><a href="#solucoes">Solu&ccedil;&otilde;es</a><a href="#projetos">Projetos</a><a href="#plataformas">Plataformas</a><a href="#metodo">M&eacute;todo</a></div>
+    <div><img class="logo" src="/img/logo-light.svg" alt="Dublin Consulting" width="200" height="43" /><p class="footer-desc">Cloud, DevOps e Kubernetes com segurança e previsibilidade.</p></div>
+    <div><h3>Soluções</h3><a href="/solucoes/cloud.html">Cloud &amp; Multi-cloud</a><a href="/solucoes/kubernetes.html">Kubernetes &amp; Containers</a><a href="/solucoes/cicd.html">CI/CD &amp; Automação</a><a href="/solucoes/iac.html">Infraestrutura como Código</a><a href="/solucoes/devsecops.html">DevSecOps</a><a href="/solucoes/observabilidade.html">Observabilidade</a></div>
+    <div><h3>Empresa</h3><a href="/#projetos">Projetos</a><a href="/#tecnologias">Tecnologias</a><a href="/#metodo">Método</a><a href="/#contato">Contato</a></div>
     <div><h3>Contato</h3><a href="https://wa.me/5511950783983" target="_blank" rel="noopener">WhatsApp</a><a href="mailto:flavio.rssilva@gmail.com">E-mail</a><a href="https://www.linkedin.com/in/flavio-santos-5628b05b/" target="_blank" rel="noopener">LinkedIn</a></div>
   </div>
-  <div class="container footer-bottom"><span>&copy; <span id="year"></span> Dublin Consulting. Todos os direitos reservados.</span><span>Privacidade: os dados do formul&aacute;rio n&atilde;o s&atilde;o armazenados por este site (LGPD).</span></div>
+  <div class="container footer-bottom"><span>&copy; <span id="year"></span> Dublin Consulting. Todos os direitos reservados.</span><span>Marcas e logotipos pertencem aos seus respectivos proprietários e são exibidos apenas para indicar as tecnologias com as quais trabalhamos.</span></div>
 </footer>
-
-<a class="wa-float" href="https://wa.me/5511950783983" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><use href="#i-wa"/></svg></a>
-
-<script src="js/main.js"></script>
+<a class="wa-float" href="https://wa.me/5511950783983" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><use href="/img/sprite.svg#i-wa"/></svg></a>
+<script src="/js/main.js"></script>
 </body>
 </html>
