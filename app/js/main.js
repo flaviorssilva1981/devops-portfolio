@@ -33,9 +33,6 @@ $$(".reveal").forEach((el) => {
   io.observe(el);
 });
 
-// Mapa do hero: desenhado uma única vez ao carregar
-const heroMap = $("#heroMap");
-if (heroMap) requestAnimationFrame(() => heroMap.classList.add("is-drawn"));
 
 // Formulário: monta a mensagem e abre o WhatsApp (nada é armazenado no site)
 const form = $("#contactForm"), formNote = $("#formNote");
