@@ -5,6 +5,9 @@ on:
     branches: [main]
   workflow_dispatch: {}
 
+permissions:
+  contents: read
+
 env:
   IMAGE_NAME: devops-portfolio
   NAMESPACE: devops-portfolio
@@ -46,7 +49,7 @@ jobs:
   deploy:
     needs: build-and-push
     runs-on: ubuntu-latest
-    # Só executa se o secret KUBE_CONFIG estiver configurado no repositório.
+    # Defina a variável de repositório SKIP_DEPLOY=true para pular o deploy.
     if: ${{ vars.SKIP_DEPLOY != 'true' }}
     steps:
       - name: Checkout
@@ -59,8 +62,11 @@ jobs:
 
       - name: Configurar kubeconfig (ServiceAccount com acesso restrito ao namespace)
         run: |
+          umask 077
           mkdir -p "$HOME/.kube"
-          echo "${{ secrets.KUBE_CONFIG }}" | base64 -d > "$HOME/.kube/config"
+          printf '%s' "$KUBE_CONFIG" | base64 -d > "$HOME/.kube/config"
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
 
       - name: Aplicar manifests (RBAC restrito ao namespace devops-portfolio)
         run: |
@@ -75,3 +81,7 @@ jobs:
             devops-portfolio=docker.io/${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ needs.build-and-push.outputs.image_tag }} \
             -n ${{ env.NAMESPACE }}
           kubectl rollout status deployment/${{ env.DEPLOYMENT }} -n ${{ env.NAMESPACE }} --timeout=120s
+
+      - name: Remover kubeconfig do runner
+        if: always()
+        run: rm -f "$HOME/.kube/config"
