@@ -105,13 +105,15 @@ h1 { font-size: clamp(2.6rem, 6.4vw, 5.5rem); letter-spacing: -.035em; line-heig
 
 /* Solutions list */
 .sol-list { border-top: 1px solid var(--ink); }
-.sol { display: grid; grid-template-columns: 44px 1fr 32px; gap: 20px; align-items: center; padding: 28px 8px 28px 0; border-bottom: 1px solid var(--line); text-decoration: none; transition: padding .35s var(--ease), background .2s; }
+.sol { display: grid; grid-template-columns: 44px 1fr 32px; gap: 20px; align-items: center; padding: 28px 8px 28px 0; border-bottom: 1px solid var(--line); text-decoration: none; transition: background .2s; }
+.sol-ico, .sol-body { transition: transform .35s var(--ease); }
 .sol-ico { width: 32px; height: 32px; color: var(--blue); }
 .sol-body { display: grid; gap: 6px; }
 .sol-body strong { font-size: clamp(1.25rem, 2.2vw, 1.65rem); letter-spacing: -.015em; }
 .sol-body span { color: var(--ink-2); font-size: 1rem; max-width: 34em; }
 .sol-go { color: var(--ink-2); transition: transform .3s var(--ease), color .2s; }
-.sol:hover { padding-left: 16px; background: var(--card); }
+.sol:hover { background: var(--card); }
+.sol:hover .sol-ico, .sol:hover .sol-body { transform: translateX(14px); }
 .sol:hover .sol-go { transform: translateX(6px); color: var(--blue); }
 
 /* Method (committed field) */
@@ -131,8 +133,10 @@ h1 { font-size: clamp(2.6rem, 6.4vw, 5.5rem); letter-spacing: -.035em; line-heig
 
 /* Projects */
 .proj-list { border-top: 1px solid var(--ink); }
-.proj { display: grid; grid-template-columns: 140px 1fr; gap: 8px 24px; padding: 28px 0; border-bottom: 1px solid var(--line); text-decoration: none; transition: background .2s, padding .35s var(--ease); }
-.proj:hover { background: var(--card); padding-inline: 16px; }
+.proj { display: grid; grid-template-columns: 140px 1fr; gap: 8px 24px; padding: 28px 0; border-bottom: 1px solid var(--line); text-decoration: none; transition: background .2s; }
+.proj-tag, .proj-main, .proj-meta { transition: transform .35s var(--ease); }
+.proj:hover { background: var(--card); }
+.proj:hover .proj-tag, .proj:hover .proj-main, .proj:hover .proj-meta { transform: translateX(14px); }
 .proj-tag { font-size: .9rem; font-weight: 700; color: var(--blue); padding-top: 4px; }
 .proj-main { display: grid; gap: 6px; }
 .proj-main strong { font-size: 1.35rem; letter-spacing: -.015em; }
