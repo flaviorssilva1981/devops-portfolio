@@ -4,21 +4,9 @@ const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
 $("#year").textContent = new Date().getFullYear();
 
-// Navbar, barra de progresso e menu mobile
-const navbar = $("#navbar"), navLinks = $("#navLinks"), navToggle = $("#navToggle"), progress = $("#scrollProgress");
-const onScroll = () => {
-  navbar.classList.toggle("scrolled", window.scrollY > 20);
-  const max = document.documentElement.scrollHeight - innerHeight;
-  progress.style.transform = `scaleX(${max > 0 ? scrollY / max : 0})`;
-  const tl = $("#timeline");
-  if (tl) {
-    const r = tl.getBoundingClientRect();
-    const p = Math.min(1, Math.max(0, (innerHeight * 0.65 - r.top) / r.height));
-    tl.style.setProperty("--tl", p.toFixed(3));
-  }
-};
-addEventListener("scroll", onScroll, { passive: true });
-onScroll();
+// Navbar e menu mobile
+const navbar = $("#navbar"), navLinks = $("#navLinks"), navToggle = $("#navToggle");
+addEventListener("scroll", () => navbar.classList.toggle("scrolled", scrollY > 20), { passive: true });
 navToggle.addEventListener("click", () => {
   const open = navLinks.classList.toggle("open");
   navToggle.setAttribute("aria-expanded", String(open));
@@ -28,7 +16,7 @@ $$("a", navLinks).forEach((a) => a.addEventListener("click", () => {
   navToggle.setAttribute("aria-expanded", "false");
 }));
 
-// Reveal on scroll (com cascata entre irmãos)
+// Reveal on scroll com cascata entre irmãos
 const io = new IntersectionObserver((entries) => {
   entries.forEach((e) => {
     if (!e.isIntersecting) return;
@@ -37,12 +25,11 @@ const io = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.15 });
 $$(".reveal").forEach((el) => {
-  const siblings = $$(".reveal", el.parentElement);
-  el.style.setProperty("--d", `${Math.min(siblings.indexOf(el), 5) * 90}ms`);
+  el.style.setProperty("--d", `${Math.min($$(".reveal", el.parentElement).indexOf(el), 5) * 90}ms`);
   io.observe(el);
 });
 
-// Contadores animados (valores verificáveis do perfil)
+// Contador (valor do perfil: ~7 anos)
 const countIO = new IntersectionObserver((entries) => {
   entries.forEach((e) => {
     if (!e.isIntersecting) return;
@@ -51,62 +38,56 @@ const countIO = new IntersectionObserver((entries) => {
     if (reduceMotion) { el.textContent = target + suffix; return; }
     const t0 = performance.now();
     const tick = (now) => {
-      const p = Math.min((now - t0) / 1400, 1);
+      const p = Math.min((now - t0) / 1200, 1);
       el.textContent = Math.round((1 - Math.pow(1 - p, 3)) * target) + (p === 1 ? suffix : "");
       if (p < 1) requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);
   });
 }, { threshold: 0.6 });
-$$(".stat-num").forEach((el) => countIO.observe(el));
+$$(".trust-num").forEach((el) => countIO.observe(el));
 
-// Carrossel do hero
+// Abas acessíveis (setas, Home/End)
 (() => {
-  const hero = $(".hero"), slides = $$(".slide"), dots = $$("#heroDots button");
-  const SLIDE_MS = 6500;
-  hero.style.setProperty("--slide-ms", `${SLIDE_MS}ms`);
-  let idx = 0, timer = null;
-  const go = (n) => {
-    idx = (n + slides.length) % slides.length;
-    slides.forEach((s, i) => {
-      s.classList.toggle("is-active", i === idx);
-      s.setAttribute("aria-hidden", String(i !== idx));
+  const tabs = $$('[role="tab"]', $("#tabs"));
+  const select = (i, focus) => {
+    tabs.forEach((t, n) => {
+      const on = n === i;
+      t.setAttribute("aria-selected", String(on));
+      t.tabIndex = on ? 0 : -1;
+      const panel = document.getElementById(t.getAttribute("aria-controls"));
+      panel.hidden = !on;
+      panel.classList.toggle("is-active", on);
     });
-    dots.forEach((d, i) => d.setAttribute("aria-selected", String(i === idx)));
-    schedule();
+    if (focus) tabs[i].focus();
   };
-  const schedule = () => {
-    clearTimeout(timer);
-    if (reduceMotion || hero.classList.contains("paused")) return;
-    timer = setTimeout(() => go(idx + 1), SLIDE_MS);
-  };
-  $("#heroNext").addEventListener("click", () => go(idx + 1));
-  $("#heroPrev").addEventListener("click", () => go(idx - 1));
-  dots.forEach((d, i) => d.addEventListener("click", () => go(i)));
-  hero.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowRight") go(idx + 1);
-    if (e.key === "ArrowLeft") go(idx - 1);
+  tabs.forEach((t, i) => {
+    t.addEventListener("click", () => select(i));
+    t.addEventListener("keydown", (e) => {
+      const k = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 }[e.key];
+      if (k === undefined) return;
+      e.preventDefault();
+      select((k + tabs.length) % tabs.length, true);
+    });
   });
-  hero.addEventListener("pointerenter", () => { hero.classList.add("paused"); clearTimeout(timer); });
-  hero.addEventListener("pointerleave", () => { hero.classList.remove("paused"); go(idx); });
-  schedule();
 })();
 
-// Formulário de contato: site estático, sem backend. Abre o cliente de e-mail
-// do visitante com a mensagem pré-preenchida (sem enviar dados a terceiros).
+// Formulário: monta a mensagem e abre o WhatsApp (nada é armazenado no site)
 const form = $("#contactForm"), formNote = $("#formNote");
-const CONTACT_EMAIL = "flavio.rssilva@gmail.com";
+const WHATSAPP = "5511950783983";
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-  const data = new FormData(form);
-  const subject = `Contato via portfólio — ${data.get("name")}`;
-  const body = [
-    `Nome: ${data.get("name")}`,
-    `E-mail: ${data.get("email")}`,
-    `Empresa: ${data.get("company") || "-"}`,
+  const d = new FormData(form);
+  const text = [
+    "Olá, Dublin Consulting! Gostaria de solicitar um diagnóstico.",
+    `Nome: ${d.get("name")}`,
+    `E-mail: ${d.get("email")}`,
+    `Empresa: ${d.get("company") || "-"}`,
+    `Cloud: ${d.get("cloud") || "-"}`,
+    `Tipo de projeto: ${d.get("type")}`,
     "",
-    data.get("message"),
+    d.get("message"),
   ].join("\n");
-  window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  formNote.textContent = "Abrindo seu aplicativo de e-mail. Se nada abrir, escreva para " + CONTACT_EMAIL + " ou chame no WhatsApp.";
+  window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`, "_blank", "noopener");
+  formNote.textContent = "Abrindo o WhatsApp com a sua mensagem. Confirme o envio por lá.";
 });
