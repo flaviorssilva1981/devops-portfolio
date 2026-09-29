@@ -254,10 +254,57 @@ input:user-invalid, select:user-invalid, textarea:user-invalid { border-color: #
 @keyframes rise { from { opacity: 0; transform: translateY(12px); } }
 .js .steps li::before { transform: scaleX(0); transform-origin: left; transition: transform .45s var(--ease-out); transition-delay: var(--d, 0ms); }
 .js .steps li.is-visible::before { transform: none; }
+
+/* Motion layer 2: signal / scan language. All effects are CSS-only (transform, opacity, clip-path). */
+:root { --ease-inout: cubic-bezier(.77, 0, .175, 1); }
+
+/* Focal moment: the hero is "scanned" once. The headline comes into focus, a cyan scan line crosses the photo. */
+.js .hero-copy h1 { animation: focus-in .9s var(--ease-out) both; }
+@keyframes focus-in { from { opacity: 0; filter: blur(10px); transform: translateY(14px); } }
+.js .hero::after { content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 220px; pointer-events: none; background: linear-gradient(90deg, transparent, rgba(34, 211, 238, .14)); border-right: 2px solid var(--accent); opacity: 0; transform: translateX(-100%); animation: scan 1.7s var(--ease-inout) .45s 1 both; }
+@keyframes scan { 0% { opacity: 0; transform: translateX(-100%); } 12% { opacity: 1; } 88% { opacity: 1; } 100% { opacity: 0; transform: translateX(calc(100vw + 220px)); } }
+
+/* Feedback: a sheen crosses the primary CTA on hover/focus, and once on the hero CTA after the headline lands. */
+.btn-primary { position: relative; overflow: hidden; isolation: isolate; }
+.btn-primary::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(105deg, transparent 32%, rgba(34, 211, 238, .6) 50%, transparent 68%); transform: translateX(-120%); pointer-events: none; }
+.btn-primary:focus-visible::after { animation: sheen .8s var(--ease-out); }
+@media (hover: hover) and (pointer: fine) { .btn-primary:hover::after { animation: sheen .8s var(--ease-out); } }
+.js .hero .btn-primary::after { animation: sheen .9s var(--ease-out) 1.5s 1; }
+@keyframes sheen { to { transform: translateX(120%); } }
+
+/* Emphasis: the three key phrases of the statement are underlined as the sentence enters. */
+.statement-text strong { background: linear-gradient(var(--accent), var(--accent)) 0 96% / 100% 3px no-repeat; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.js .statement-text.reveal strong { background-size: 0 3px; transition: background-size .8s var(--ease-out); transition-delay: 500ms; }
+.js .statement-text.reveal strong:nth-of-type(2) { transition-delay: 750ms; }
+.js .statement-text.reveal strong:nth-of-type(3) { transition-delay: 1000ms; }
+.js .statement-text.reveal.is-visible strong { background-size: 100% 3px; }
+
+/* Motif: each solution's transit line is drawn in from the left as its row appears. */
+.js .sol.reveal::before { clip-path: inset(0 100% 0 0); transition: clip-path .9s var(--ease-out) .15s; }
+.js .sol.reveal.is-visible::before { clip-path: inset(0); }
+
+/* Reveal variety: photos and tiles wipe in (photos also settle from a slight zoom); text keeps the quiet fade-up. */
+/* The wipe is on the <img>, never on the observed wrapper: Chrome's IntersectionObserver treats a fully clipped target as zero-area and would never reveal it. */
+.js .cimg.reveal, .js .tile.reveal { opacity: 1; transform: none; transition: none; }
+.js .cimg.reveal img { clip-path: inset(0 0 100% 0); transform: scale(1.1); transition: clip-path .9s var(--ease-inout), transform 1.3s var(--ease-out); transition-delay: var(--d, 0ms); }
+.js .cimg.reveal.is-visible img { clip-path: inset(0); transform: none; }
+.js .tile.reveal img { clip-path: inset(0 0 100% 0); transition: clip-path .9s var(--ease-inout) var(--d, 0ms), transform .5s var(--ease-out); }
+.js .tile.reveal.is-visible img { clip-path: inset(0); }
+
+/* Orientation: reading progress as a cyan line under the header (home only; needs scroll-driven animations). */
+@supports (animation-timeline: scroll()) {
+  body:has(> main > .hero) .navbar::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--accent); transform-origin: left; transform: scaleX(0); animation: progress linear both; animation-timeline: scroll(root block); }
+  @keyframes progress { to { transform: scaleX(1); } }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .js .reveal, .js .hero-copy > * { animation: none; opacity: 1; transform: none; transition: none; }
+  .js .reveal, .js .hero-copy > *, .js .hero-copy h1 { animation: none; opacity: 1; transform: none; filter: none; transition: none; }
   .js .steps li::before { transform: none; transition: none; }
+  .js .hero::after, .btn-primary::after, .navbar::after { display: none; }
+  .js .sol.reveal::before, .js .cimg.reveal img, .js .tile.reveal img { clip-path: none; }
+  .js .cimg.reveal img { transform: none; }
+  .js .statement-text.reveal strong { background-size: 100% 3px; }
   * { transition-duration: .01ms !important; }
 }
 
