@@ -4,23 +4,21 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="theme-color" content="#101b31" />
-<title>Dublin Consulting | Consultoria em Cloud, DevOps e Kubernetes</title>
+<title>Dublin Consulting | Cloud e DevOps do diagn&oacute;stico &agrave; primeira entrega</title>
 <meta name="robots" content="index,follow" />
-<meta name="description" content="Dublin Consulting: consultoria em Cloud, DevOps, Kubernetes, Infraestrutura como C&oacute;digo, DevSecOps e Observabilidade. AWS, Azure, GCP e OCI." />
-<meta property="og:title" content="Dublin Consulting | Cloud, DevOps e Kubernetes" />
+<meta name="description" content="Dublin Consulting: consultoria em Cloud, DevOps e Kubernetes. Do diagn&oacute;stico &agrave; primeira entrega em produ&ccedil;&atilde;o: AWS, Azure, GCP e OCI, CI/CD, IaC e DevSecOps." />
+<meta property="og:title" content="Dublin Consulting | Cloud e DevOps" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://devops-portfolio.dublinconsulting.com.br/" />
 <meta property="og:image" content="https://devops-portfolio.dublinconsulting.com.br/img/logo.svg" />
 <link rel="icon" type="image/svg+xml" href="img/favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 <a class="skip-link" href="#main">Ir para o conte&uacute;do</a>
-
-<!-- Ilustra&ccedil;&otilde;es originais (vetoriais = HD em qualquer tela) -->
 <svg class="svg-defs" width="0" height="0" aria-hidden="true" focusable="false">
   <defs>
     <linearGradient id="ga" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#19e3ea"/><stop offset="1" stop-color="#0a6cff"/></linearGradient>
@@ -54,31 +52,25 @@
       <path d="M280 100 L370 134 V210 C370 265 325 297 280 320 C235 297 190 265 190 210 V134 Z" fill="rgba(25,227,234,.12)" stroke="#19e3ea" stroke-width="2"/>
       <path class="check" d="M240 205 L270 235 L325 170"/>
     </symbol>
+
+    <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7 18a4.5 4.5 0 0 1-.6-8.96A6 6 0 0 1 18 8.5a4.75 4.75 0 0 1-.5 9.5Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+    <symbol id="i-flow" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2.2"/><circle cx="5" cy="18" r="2.2"/><circle cx="19" cy="12" r="2.2"/><path d="M7 6h4a4 4 0 0 1 4 4v0M7 18h4a4 4 0 0 0 4-4v0"/></g></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6Z"/><path d="m9 12 2.2 2.2L15.5 10"/></g></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V4M4 20h16"/><path d="m8 15 3-4 3 2 5-6"/></g></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-wa" viewBox="0 0 32 32"><path fill="currentColor" d="M16 3a13 13 0 1 0 6.5 24.2L29 29l-1.8-6.3A13 13 0 0 0 16 3Z"/><path fill="#fff" d="M11 10c0 6 5 11 11 11l1.5-2.5-3-1.6-1.4 1.2a7 7 0 0 1-3.6-3.6l1.2-1.4-1.6-3Z"/></symbol>
   </defs>
 </svg>
 
 <header class="navbar" id="navbar">
   <div class="container navbar-inner">
-    <a href="#top" class="brand" aria-label="Dublin Consulting - in&iacute;cio">
-      <img class="logo logo-dark" src="img/logo.svg" alt="Dublin Consulting" width="200" height="43" />
-      <img class="logo logo-light" src="img/logo-light.svg" alt="" width="200" height="43" />
-    </a>
+    <a href="#top" class="brand" aria-label="Dublin Consulting - in&iacute;cio"><img class="logo" src="img/logo.svg" alt="Dublin Consulting" width="200" height="43" /></a>
     <nav class="nav-links" id="navLinks" aria-label="Principal">
-      <a href="#empresa">A Empresa</a>
-      <div class="has-menu">
-        <a href="#solucoes" class="menu-trigger" aria-haspopup="true">Solu&ccedil;&otilde;es <span aria-hidden="true">&#9662;</span></a>
-        <div class="mega" role="menu">
-          <a href="#servicos" role="menuitem"><strong>Cloud &amp; Multi-cloud</strong><span>AWS, Azure, GCP e OCI</span></a>
-          <a href="#servicos" role="menuitem"><strong>Kubernetes &amp; Containers</strong><span>EKS, AKS, GKE e OKE</span></a>
-          <a href="#servicos" role="menuitem"><strong>CI/CD &amp; Automa&ccedil;&atilde;o</strong><span>Pipelines e entrega cont&iacute;nua</span></a>
-          <a href="#servicos" role="menuitem"><strong>Infra como C&oacute;digo</strong><span>Terraform e Ansible</span></a>
-          <a href="#servicos" role="menuitem"><strong>DevSecOps</strong><span>Seguran&ccedil;a no pipeline</span></a>
-          <a href="#servicos" role="menuitem"><strong>Observabilidade</strong><span>Prometheus, Grafana, Zabbix</span></a>
-        </div>
-      </div>
-      <a href="#metodo">Como Trabalhamos</a>
-      <a href="#tecnologias">Tecnologias</a>
-      <a href="#contact" class="nav-cta">Fale Conosco</a>
+      <a href="#solucoes">Solu&ccedil;&otilde;es</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#plataformas">Plataformas</a>
+      <a href="#metodo">M&eacute;todo</a>
+      <a href="#contato" class="nav-cta">Solicitar diagn&oacute;stico</a>
     </nav>
     <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-controls="navLinks" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
@@ -86,175 +78,147 @@
 
 <main id="main">
 
-  <!-- HERO CAROUSEL -->
-  <section class="hero" id="top" aria-roledescription="carousel" aria-label="Destaques">
-    <div class="hero-slides">
-      <article class="slide is-active" aria-roledescription="slide" aria-label="1 de 4">
-        <div class="container slide-inner">
-          <div class="slide-copy">
-            <p class="eyebrow">Cloud &amp; Multi-cloud</p>
-            <h1>Sua nuvem, <span class="grad">sob controle</span>.</h1>
-            <p class="lead">Arquitetura, migra&ccedil;&atilde;o e governan&ccedil;a em AWS, Azure, GCP e OCI &mdash; com custo, seguran&ccedil;a e disponibilidade no centro das decis&otilde;es.</p>
-            <a href="#solucoes" class="btn-arrow">Veja mais <span aria-hidden="true">&rarr;</span></a>
-          </div>
-          <svg class="slide-art" role="img" aria-label="Ilustra&ccedil;&atilde;o de multi-cloud"><use href="#art-cloud"/></svg>
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <p class="pill">Consultoria em Cloud &amp; DevOps</p>
+        <h1>Sua infraestrutura na nuvem, do diagn&oacute;stico &agrave; <span class="grad">primeira entrega em produ&ccedil;&atilde;o</span></h1>
+        <p class="lead">Arquitetura, automa&ccedil;&atilde;o e opera&ccedil;&atilde;o em AWS, Azure, GCP e OCI &mdash; com seguran&ccedil;a, custo sob controle e mudan&ccedil;as revers&iacute;veis.</p>
+        <div class="cta-row">
+          <a href="#contato" class="btn btn-primary">Solicitar um diagn&oacute;stico <span aria-hidden="true">&rarr;</span></a>
+          <a href="#solucoes" class="btn btn-ghost">Conhe&ccedil;a a Dublin Consulting</a>
         </div>
-      </article>
-      <article class="slide" aria-roledescription="slide" aria-label="2 de 4" aria-hidden="true">
-        <div class="container slide-inner">
-          <div class="slide-copy">
-            <p class="eyebrow">Kubernetes</p>
-            <h1>Plataformas que <span class="grad">escalam sem parar</span>.</h1>
-            <p class="lead">Design e opera&ccedil;&atilde;o de clusters EKS, AKS, GKE e OKE com Helm, autoscaling e rollouts sem indisponibilidade.</p>
-            <a href="#servicos" class="btn-arrow">Veja mais <span aria-hidden="true">&rarr;</span></a>
-          </div>
-          <svg class="slide-art" role="img" aria-label="Ilustra&ccedil;&atilde;o de cluster Kubernetes"><use href="#art-k8s"/></svg>
-        </div>
-      </article>
-      <article class="slide" aria-roledescription="slide" aria-label="3 de 4" aria-hidden="true">
-        <div class="container slide-inner">
-          <div class="slide-copy">
-            <p class="eyebrow">CI/CD &amp; Automa&ccedil;&atilde;o</p>
-            <h1>Entrega cont&iacute;nua, <span class="grad">sem surpresas</span>.</h1>
-            <p class="lead">Pipelines em GitHub Actions, Jenkins, Bitbucket, Azure DevOps e Argo CD, com Infraestrutura como C&oacute;digo e rollback previs&iacute;vel.</p>
-            <a href="#metodo" class="btn-arrow">Veja mais <span aria-hidden="true">&rarr;</span></a>
-          </div>
-          <svg class="slide-art" role="img" aria-label="Ilustra&ccedil;&atilde;o de pipeline"><use href="#art-ci"/></svg>
-        </div>
-      </article>
-      <article class="slide" aria-roledescription="slide" aria-label="4 de 4" aria-hidden="true">
-        <div class="container slide-inner">
-          <div class="slide-copy">
-            <p class="eyebrow">DevSecOps</p>
-            <h1>Seguran&ccedil;a <span class="grad">desde o primeiro commit</span>.</h1>
-            <p class="lead">Gest&atilde;o de segredos, RBAC/IAM com menor privil&eacute;gio e verifica&ccedil;&otilde;es automatizadas em cada entrega.</p>
-            <a href="#servicos" class="btn-arrow">Veja mais <span aria-hidden="true">&rarr;</span></a>
-          </div>
-          <svg class="slide-art" role="img" aria-label="Ilustra&ccedil;&atilde;o de seguran&ccedil;a"><use href="#art-sec"/></svg>
-        </div>
-      </article>
-    </div>
-    <div class="container hero-controls">
-      <div class="dots" id="heroDots" role="tablist" aria-label="Slides">
-        <button role="tab" aria-selected="true" aria-label="Slide 1"><i></i></button>
-        <button role="tab" aria-selected="false" aria-label="Slide 2"><i></i></button>
-        <button role="tab" aria-selected="false" aria-label="Slide 3"><i></i></button>
-        <button role="tab" aria-selected="false" aria-label="Slide 4"><i></i></button>
       </div>
-      <div class="arrows"><button id="heroPrev" aria-label="Slide anterior">&larr;</button><button id="heroNext" aria-label="Pr&oacute;ximo slide">&rarr;</button></div>
+      <svg class="hero-art" role="img" aria-label="Ilustra&ccedil;&atilde;o de infraestrutura em nuvem"><use href="#art-cloud"/></svg>
+    </div>
+    <div class="container">
+      <ul class="benefits">
+        <li><svg aria-hidden="true"><use href="#i-cloud"/></svg><div><strong>Multi-cloud</strong><span>AWS, Azure, GCP e OCI</span></div></li>
+        <li><svg aria-hidden="true"><use href="#i-flow"/></svg><div><strong>CI/CD e IaC</strong><span>Entrega automatizada</span></div></li>
+        <li><svg aria-hidden="true"><use href="#i-shield"/></svg><div><strong>DevSecOps</strong><span>Menor privil&eacute;gio, sem segredos no git</span></div></li>
+        <li><svg aria-hidden="true"><use href="#i-chart"/></svg><div><strong>Observabilidade</strong><span>Sa&uacute;de, performance e custo</span></div></li>
+      </ul>
     </div>
   </section>
 
-  <!-- STATS -->
-  <section class="stats" aria-label="N&uacute;meros">
-    <div class="container stats-row">
-      <div class="stat reveal"><span class="stat-num" data-count="4">0</span><span class="stat-label">clouds atendidas: AWS, Azure, GCP e OCI</span></div>
-      <div class="stat reveal"><span class="stat-num" data-count="4">0</span><span class="stat-label">orquestradores Kubernetes: EKS, AKS, GKE e OKE</span></div>
-      <div class="stat reveal"><span class="stat-num" data-count="6">0</span><span class="stat-label">plataformas de CI/CD</span></div>
-      <div class="stat reveal"><span class="stat-num" data-count="6">0</span><span class="stat-label">frentes de servi&ccedil;o</span></div>
+  <!-- CONFIAN&Ccedil;A -->
+  <section class="trust" aria-label="Diferenciais">
+    <div class="container trust-row">
+      <div class="trust-badge reveal"><span class="trust-num" data-count="7" data-suffix="+">0</span><span>anos de experi&ecirc;ncia em DevOps e cloud</span></div>
+      <ul class="trust-list reveal">
+        <li>Certifica&ccedil;&otilde;es AWS, Azure, GCP e OCI</li>
+        <li>Kubernetes em EKS, AKS, GKE e OKE</li>
+        <li>Terraform e Ansible com plan antes de apply</li>
+        <li>Pipelines em GitHub Actions, Jenkins, Bitbucket e Argo CD</li>
+      </ul>
     </div>
   </section>
 
-  <!-- EMPRESA -->
-  <section id="empresa" class="section">
-    <div class="container intro">
-      <div>
-        <p class="kicker reveal">Quem somos</p>
-        <h2 class="title reveal">Consultoria de tecnologia focada em infraestrutura moderna</h2>
-      </div>
-      <div class="reveal">
-        <p class="desc">A Dublin Consulting ajuda empresas a construir, automatizar e operar plataformas em nuvem com seguran&ccedil;a e previsibilidade. Trabalhamos com mudan&ccedil;as pequenas, revers&iacute;veis e documentadas &mdash; sem conhecimento tribal e sem surpresas em produ&ccedil;&atilde;o.</p>
-        <a href="#contact" class="link-arrow">Conhe&ccedil;a nossa abordagem <span aria-hidden="true">&rarr;</span></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- SOLU&Ccedil;&Otilde;ES (linhas texto + imagem) -->
-  <section id="solucoes" class="section section-alt">
+  <!-- SOLU&Ccedil;&Otilde;ES -->
+  <section id="solucoes" class="section">
     <div class="container">
       <p class="kicker reveal">Solu&ccedil;&otilde;es</p>
-      <h2 class="title reveal">Do planejamento &agrave; opera&ccedil;&atilde;o</h2>
-
-      <div class="row reveal">
-        <div class="row-copy"><h3>Cloud &amp; Infraestrutura</h3><p>Arquitetura multi-cloud, migra&ccedil;&otilde;es, governan&ccedil;a e FinOps. Ambientes reprodut&iacute;veis com Terraform e Ansible, sempre com plan antes de apply.</p><a class="link-arrow" href="#contact">Saiba mais <span aria-hidden="true">&rarr;</span></a></div>
-        <div class="row-art"><svg role="img" aria-label="Ilustra&ccedil;&atilde;o de cloud"><use href="#art-cloud"/></svg></div>
-      </div>
-      <div class="row flip reveal">
-        <div class="row-copy"><h3>Plataforma &amp; Kubernetes</h3><p>Clusters gerenciados em EKS, AKS, GKE e OKE com Helm, probes, HPA e estrat&eacute;gias de rollout seguras para atualizar sem derrubar servi&ccedil;os.</p><a class="link-arrow" href="#contact">Saiba mais <span aria-hidden="true">&rarr;</span></a></div>
-        <div class="row-art"><svg role="img" aria-label="Ilustra&ccedil;&atilde;o de Kubernetes"><use href="#art-k8s"/></svg></div>
-      </div>
-      <div class="row reveal">
-        <div class="row-copy"><h3>Entrega &amp; Seguran&ccedil;a</h3><p>Pipelines de CI/CD padronizados, segredos fora do reposit&oacute;rio, RBAC/IAM com menor privil&eacute;gio e observabilidade com Prometheus, Grafana e Zabbix.</p><a class="link-arrow" href="#contact">Saiba mais <span aria-hidden="true">&rarr;</span></a></div>
-        <div class="row-art"><svg role="img" aria-label="Ilustra&ccedil;&atilde;o de seguran&ccedil;a"><use href="#art-sec"/></svg></div>
+      <h2 class="title reveal">Do planejamento &agrave; opera&ccedil;&atilde;o, em quatro frentes</h2>
+      <div class="grid four">
+        <article class="sol reveal"><span class="sol-idx">01</span><svg aria-hidden="true"><use href="#i-cloud"/></svg><h3>Cloud &amp; Infraestrutura</h3><p>Arquitetura multi-cloud, migra&ccedil;&otilde;es, governan&ccedil;a e FinOps.</p></article>
+        <article class="sol reveal"><span class="sol-idx">02</span><svg aria-hidden="true"><use href="#i-flow"/></svg><h3>Plataforma &amp; Kubernetes</h3><p>Clusters gerenciados com Helm, autoscaling e rollouts sem indisponibilidade.</p></article>
+        <article class="sol reveal"><span class="sol-idx">03</span><svg aria-hidden="true"><use href="#i-shield"/></svg><h3>Entrega &amp; Seguran&ccedil;a</h3><p>Pipelines padronizados, segredos fora do reposit&oacute;rio e RBAC/IAM enxuto.</p></article>
+        <article class="sol reveal"><span class="sol-idx">04</span><svg aria-hidden="true"><use href="#i-chart"/></svg><h3>Observabilidade</h3><p>Prometheus, Grafana e Zabbix com alertas &uacute;teis e dashboards claros.</p></article>
       </div>
     </div>
   </section>
 
-  <!-- SERVI&Ccedil;OS -->
-  <section id="servicos" class="section">
+  <!-- PROJETOS -->
+  <section id="projetos" class="section section-alt">
     <div class="container">
-      <p class="kicker reveal">Servi&ccedil;os</p>
-      <h2 class="title reveal">O que a Dublin Consulting entrega</h2>
-      <div class="grid services-grid">
-        <article class="card reveal"><span class="card-idx">01</span><h3>CI/CD Pipelines</h3><p>Jenkins, GitHub Actions, Bitbucket Pipelines, Azure DevOps, Argo CD e CodePipeline.</p><a class="link-arrow" href="#contact">Saiba mais <span aria-hidden="true">&rarr;</span></a></article>
-        <article class="card reveal"><span class="card-idx">02</span><h3>Kubernetes &amp; Containers</h3><p>Docker, Helm e clusters EKS, AKS, GKE e OKE em produ&ccedil;&atilde;o.</p><a class="link-arrow" href="#contact">Saiba mais <span aria-hidden="true">&rarr;</span></a></article>
-        <article class="card reveal"><span class="card-idx">03</span><h3>Infraestrutura como C&oacute;digo</h3><p>Terraform e Ansible com m&oacute;dulos versionados e ambientes dev, uat e prod.</p><a class="link-arrow" href="#contact">Saiba mais <span aria-hidden="true">&rarr;</span></a></article>
-        <article class="card reveal"><span class="card-idx">04</span><h3>DevSecOps</h3><p>Segredos, RBAC/IAM, menor privil&eacute;gio e zero credenciais em reposit&oacute;rio.</p><a class="link-arrow" href="#contact">Saiba mais <span aria-hidden="true">&rarr;</span></a></article>
-        <article class="card reveal"><span class="card-idx">05</span><h3>Observabilidade</h3><p>Prometheus, Grafana e Zabbix para sa&uacute;de, performance e custo.</p><a class="link-arrow" href="#contact">Saiba mais <span aria-hidden="true">&rarr;</span></a></article>
-        <article class="card reveal"><span class="card-idx">06</span><h3>Deploy de CMS</h3><p>Drupal, WordPress, Pantheon e Acquia com Composer, Drush e SSH.</p><a class="link-arrow" href="#contact">Saiba mais <span aria-hidden="true">&rarr;</span></a></article>
+      <p class="kicker reveal">Projetos</p>
+      <h2 class="title reveal">Tipos de projeto que entregamos</h2>
+      <div class="grid projects">
+        <article class="proj reveal"><div class="proj-art"><svg role="img" aria-label="Kubernetes"><use href="#art-k8s"/></svg></div><div class="proj-body"><h3>Migra&ccedil;&atilde;o para Kubernetes gerenciado</h3><p class="meta">Stack: Terraform &middot; Helm &middot; OKE / EKS</p><p>Provisionamento como c&oacute;digo e deploy progressivo de workloads existentes.</p></div></article>
+        <article class="proj reveal"><div class="proj-art"><svg role="img" aria-label="Pipeline"><use href="#art-ci"/></svg></div><div class="proj-body"><h3>Padroniza&ccedil;&atilde;o de pipelines</h3><p class="meta">Stack: GitHub Actions &middot; Bitbucket &middot; Jenkins</p><p>Templates reutiliz&aacute;veis, revis&atilde;o obrigat&oacute;ria e PRs somente de pipeline.</p></div></article>
+        <article class="proj reveal"><div class="proj-art"><svg role="img" aria-label="Cloud"><use href="#art-cloud"/></svg></div><div class="proj-body"><h3>Monitoramento unificado</h3><p class="meta">Stack: Prometheus &middot; Grafana &middot; Zabbix</p><p>Alertas com SLO claros e dashboards de disponibilidade.</p></div></article>
+        <article class="proj reveal"><div class="proj-art"><svg role="img" aria-label="Seguran&ccedil;a"><use href="#art-sec"/></svg></div><div class="proj-body"><h3>Hardening de segredos e RBAC</h3><p class="meta">Stack: Vault de segredos &middot; IAM &middot; RBAC</p><p>Elimina&ccedil;&atilde;o de credenciais em reposit&oacute;rios e privil&eacute;gio m&iacute;nimo.</p></div></article>
       </div>
     </div>
   </section>
 
-  <!-- M&Eacute;TODO -->
+  <!-- PLATAFORMAS (abas) -->
+  <section id="plataformas" class="section">
+    <div class="container">
+      <p class="kicker reveal">Plataformas</p>
+      <h2 class="title reveal">Tecnologias por frente de trabalho</h2>
+      <div class="tabs reveal" id="tabs">
+        <div class="tab-list" role="tablist" aria-label="Frentes">
+          <button role="tab" id="t1" aria-controls="p1" aria-selected="true">Cloud</button>
+          <button role="tab" id="t2" aria-controls="p2" aria-selected="false" tabindex="-1">Kubernetes</button>
+          <button role="tab" id="t3" aria-controls="p3" aria-selected="false" tabindex="-1">CI/CD</button>
+          <button role="tab" id="t4" aria-controls="p4" aria-selected="false" tabindex="-1">Seguran&ccedil;a</button>
+        </div>
+        <div class="tab-panel is-active" role="tabpanel" id="p1" aria-labelledby="t1">
+          <ul class="spec"><li><svg aria-hidden="true"><use href="#i-check"/></svg>AWS, Azure, Google Cloud e OCI</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Terraform e Ansible com plan antes de apply</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Ambientes dev, uat e prod reprodut&iacute;veis</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Governan&ccedil;a de custos e tagging</li></ul>
+          <svg class="spec-art" role="img" aria-label="Cloud"><use href="#art-cloud"/></svg>
+        </div>
+        <div class="tab-panel" role="tabpanel" id="p2" aria-labelledby="t2" hidden>
+          <ul class="spec"><li><svg aria-hidden="true"><use href="#i-check"/></svg>EKS, AKS, GKE e OKE</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Helm charts reutiliz&aacute;veis e Kustomize</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Probes, HPA e RollingUpdate sem downtime</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>RBAC restrito por namespace</li></ul>
+          <svg class="spec-art" role="img" aria-label="Kubernetes"><use href="#art-k8s"/></svg>
+        </div>
+        <div class="tab-panel" role="tabpanel" id="p3" aria-labelledby="t3" hidden>
+          <ul class="spec"><li><svg aria-hidden="true"><use href="#i-check"/></svg>GitHub Actions, Jenkins, Bitbucket Pipelines</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Azure DevOps, Argo CD e CodePipeline</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Migra&ccedil;&atilde;o Jenkins &rarr; pipelines modernos</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Deploy de CMS: Drupal, WordPress, Pantheon, Acquia</li></ul>
+          <svg class="spec-art" role="img" aria-label="Pipeline"><use href="#art-ci"/></svg>
+        </div>
+        <div class="tab-panel" role="tabpanel" id="p4" aria-labelledby="t4" hidden>
+          <ul class="spec"><li><svg aria-hidden="true"><use href="#i-check"/></svg>Zero credenciais em reposit&oacute;rios</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>IAM e RBAC com menor privil&eacute;gio</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Scans de vulnerabilidades no pipeline</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Mudan&ccedil;as com plano de rollback</li></ul>
+          <svg class="spec-art" role="img" aria-label="Seguran&ccedil;a"><use href="#art-sec"/></svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- M&Eacute;TODO (6 etapas) -->
   <section id="metodo" class="section section-dark">
     <div class="container">
-      <p class="kicker reveal">Como trabalhamos</p>
-      <h2 class="title reveal">Um m&eacute;todo, sem surpresas</h2>
-      <ol class="steps">
-        <li class="reveal"><span class="step-num">01</span><h3>Ler antes de mudar</h3><p>Levantamos o estado atual via CLI, exports e runbooks antes de propor qualquer mudan&ccedil;a.</p></li>
-        <li class="reveal"><span class="step-num">02</span><h3>Raio de impacto m&iacute;nimo</h3><p>Mudan&ccedil;as focadas: pipeline separado de c&oacute;digo de aplica&ccedil;&atilde;o.</p></li>
-        <li class="reveal"><span class="step-num">03</span><h3>Plano revers&iacute;vel</h3><p>Mostramos impacto e rollback e pedimos aprova&ccedil;&atilde;o antes de escrever em produ&ccedil;&atilde;o.</p></li>
-        <li class="reveal"><span class="step-num">04</span><h3>Documenta&ccedil;&atilde;o como padr&atilde;o</h3><p>Ambientes, vari&aacute;veis e runbooks documentados para o seu time.</p></li>
+      <p class="kicker reveal">M&eacute;todo</p>
+      <h2 class="title reveal">Da primeira conversa &agrave; entrega em seis etapas</h2>
+      <ol class="journey">
+        <li class="reveal"><span>01</span><h3>Diagn&oacute;stico</h3><p>Leitura do ambiente atual antes de qualquer mudan&ccedil;a.</p></li>
+        <li class="reveal"><span>02</span><h3>Arquitetura</h3><p>Desenho, riscos e plano revers&iacute;vel.</p></li>
+        <li class="reveal"><span>03</span><h3>Infraestrutura</h3><p>Provisionamento como c&oacute;digo.</p></li>
+        <li class="reveal"><span>04</span><h3>Automa&ccedil;&atilde;o</h3><p>Pipelines e rollouts padronizados.</p></li>
+        <li class="reveal"><span>05</span><h3>Testes</h3><p>Valida&ccedil;&atilde;o e observabilidade ativas.</p></li>
+        <li class="reveal"><span>06</span><h3>Entrega</h3><p>Go-live, documenta&ccedil;&atilde;o e runbooks.</p></li>
       </ol>
     </div>
   </section>
 
-  <!-- TECNOLOGIAS -->
-  <section id="tecnologias" class="section">
-    <div class="container">
-      <p class="kicker reveal">Tecnologias</p>
-      <h2 class="title reveal">Ferramentas que dominamos</h2>
-      <div class="stack-columns">
-        <div class="stack-col reveal"><h3>Cloud &amp; Infra</h3><ul class="tag-list"><li>AWS</li><li>Azure</li><li>Google Cloud</li><li>OCI</li><li>Terraform</li><li>Ansible</li></ul></div>
-        <div class="stack-col reveal"><h3>Containers</h3><ul class="tag-list"><li>Docker</li><li>Kubernetes</li><li>EKS</li><li>AKS</li><li>GKE</li><li>OKE</li><li>Helm</li></ul></div>
-        <div class="stack-col reveal"><h3>CI/CD</h3><ul class="tag-list"><li>Jenkins</li><li>GitHub Actions</li><li>Bitbucket Pipelines</li><li>Argo CD</li><li>Azure DevOps</li><li>CodePipeline</li></ul></div>
-        <div class="stack-col reveal"><h3>Scripting &amp; Observ.</h3><ul class="tag-list"><li>Bash</li><li>Python</li><li>PowerShell</li><li>Prometheus</li><li>Grafana</li><li>Zabbix</li></ul></div>
-      </div>
-    </div>
-  </section>
-
   <!-- CONTATO -->
-  <section id="contact" class="section section-alt">
+  <section id="contato" class="section section-alt">
     <div class="container contact-grid">
       <div>
-        <p class="kicker reveal">Fale conosco</p>
-        <h2 class="title reveal">Vamos conversar sobre a sua infraestrutura</h2>
-        <p class="desc reveal">Conte sobre o projeto &mdash; stack atual, cloud e principal desafio &mdash; e retornamos com uma proposta objetiva.</p>
+        <p class="kicker reveal">Contato</p>
+        <h2 class="title reveal">Solicite um diagn&oacute;stico</h2>
+        <p class="desc reveal">Conte sobre o seu projeto. Ao enviar, abrimos uma conversa no WhatsApp com os dados preenchidos &mdash; voc&ecirc; confirma antes de enviar.</p>
         <ul class="contact-list reveal">
-          <li><span>E-mail</span><a href="mailto:flavio.rssilva@gmail.com">flavio.rssilva@gmail.com</a></li>
           <li><span>WhatsApp</span><a href="https://wa.me/5511950783983" target="_blank" rel="noopener">+55 11 95078-3983</a></li>
+          <li><span>E-mail</span><a href="mailto:flavio.rssilva@gmail.com">flavio.rssilva@gmail.com</a></li>
           <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/flavio-santos-5628b05b/" target="_blank" rel="noopener">Flavio Silva</a></li>
         </ul>
       </div>
       <form class="contact-form reveal" id="contactForm">
         <div class="form-row">
-          <label class="sr-only" for="f-name">Seu nome</label><input id="f-name" type="text" name="name" placeholder="Seu nome" required />
-          <label class="sr-only" for="f-email">Seu e-mail</label><input id="f-email" type="email" name="email" placeholder="Seu e-mail" required />
+          <label class="sr-only" for="f-name">Nome</label><input id="f-name" type="text" name="name" placeholder="Nome" required />
+          <label class="sr-only" for="f-email">E-mail</label><input id="f-email" type="email" name="email" placeholder="E-mail" required />
         </div>
-        <label class="sr-only" for="f-company">Empresa</label><input id="f-company" type="text" name="company" placeholder="Empresa" />
-        <label class="sr-only" for="f-message">Mensagem</label><textarea id="f-message" name="message" rows="5" placeholder="Como podemos ajudar?" required></textarea>
-        <button type="submit" class="btn btn-primary btn-block">Enviar mensagem</button>
+        <div class="form-row">
+          <label class="sr-only" for="f-company">Empresa</label><input id="f-company" type="text" name="company" placeholder="Empresa" />
+          <label class="sr-only" for="f-cloud">Cloud</label>
+          <select id="f-cloud" name="cloud"><option value="">Cloud utilizada</option><option>AWS</option><option>Azure</option><option>Google Cloud</option><option>OCI</option><option>Multi-cloud</option><option>On-premises</option></select>
+        </div>
+        <label class="sr-only" for="f-type">Tipo de projeto</label>
+        <select id="f-type" name="type" required><option value="">Tipo de projeto</option><option>Migra&ccedil;&atilde;o para cloud</option><option>Kubernetes / Containers</option><option>CI/CD e automa&ccedil;&atilde;o</option><option>Infraestrutura como C&oacute;digo</option><option>DevSecOps</option><option>Observabilidade</option><option>Deploy de CMS</option><option>Outro</option></select>
+        <label class="sr-only" for="f-message">Mensagem</label><textarea id="f-message" name="message" rows="4" placeholder="Conte sobre o projeto" required></textarea>
+        <label class="consent"><input type="checkbox" name="lgpd" required /> Concordo em compartilhar estes dados para receber contato (LGPD). Nada &eacute; armazenado neste site.</label>
+        <button type="submit" class="btn btn-primary btn-block">Enviar pelo WhatsApp <span aria-hidden="true">&rarr;</span></button>
         <p class="form-note" id="formNote" role="status"></p>
       </form>
     </div>
@@ -263,13 +227,14 @@
 
 <footer class="footer">
   <div class="container footer-grid">
-    <div><img class="logo" src="img/logo-light.svg" alt="Dublin Consulting" width="200" height="43" /><p class="footer-desc">Consultoria em Cloud, DevOps e Kubernetes.</p></div>
-    <div><h3>Empresa</h3><a href="#empresa">A Empresa</a><a href="#metodo">Como Trabalhamos</a><a href="#tecnologias">Tecnologias</a></div>
-    <div><h3>Solu&ccedil;&otilde;es</h3><a href="#solucoes">Cloud &amp; Infra</a><a href="#solucoes">Kubernetes</a><a href="#servicos">CI/CD &amp; DevSecOps</a></div>
-    <div><h3>Contato</h3><a href="mailto:flavio.rssilva@gmail.com">flavio.rssilva@gmail.com</a><a href="https://wa.me/5511950783983" target="_blank" rel="noopener">WhatsApp</a><a href="https://www.linkedin.com/in/flavio-santos-5628b05b/" target="_blank" rel="noopener">LinkedIn</a></div>
+    <div><img class="logo" src="img/logo-light.svg" alt="Dublin Consulting" width="200" height="43" /><p class="footer-desc">Cloud, DevOps e Kubernetes com seguran&ccedil;a e previsibilidade.</p></div>
+    <div><h3>Navega&ccedil;&atilde;o</h3><a href="#solucoes">Solu&ccedil;&otilde;es</a><a href="#projetos">Projetos</a><a href="#plataformas">Plataformas</a><a href="#metodo">M&eacute;todo</a></div>
+    <div><h3>Contato</h3><a href="https://wa.me/5511950783983" target="_blank" rel="noopener">WhatsApp</a><a href="mailto:flavio.rssilva@gmail.com">E-mail</a><a href="https://www.linkedin.com/in/flavio-santos-5628b05b/" target="_blank" rel="noopener">LinkedIn</a></div>
   </div>
-  <div class="container footer-bottom"><span>&copy; <span id="year"></span> Dublin Consulting. Todos os direitos reservados.</span></div>
+  <div class="container footer-bottom"><span>&copy; <span id="year"></span> Dublin Consulting. Todos os direitos reservados.</span><span>Privacidade: os dados do formul&aacute;rio n&atilde;o s&atilde;o armazenados por este site (LGPD).</span></div>
 </footer>
+
+<a class="wa-float" href="https://wa.me/5511950783983" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><use href="#i-wa"/></svg></a>
 
 <script src="js/main.js"></script>
 </body>
