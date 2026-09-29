@@ -62,15 +62,28 @@ const countObserver = new IntersectionObserver(
 );
 counters.forEach((el) => countObserver.observe(el));
 
-// Formulário de contato (demo - sem backend configurado)
+// Formulário de contato: site estático, sem backend. Abre o cliente de e-mail
+// do visitante com a mensagem pré-preenchida (sem enviar dados a terceiros).
 const form = document.getElementById("contactForm");
 const formNote = document.getElementById("formNote");
+const CONTACT_EMAIL = "flavio.rssilva@gmail.com";
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-  const formData = new FormData(form);
-  const name = formData.get("name");
+  const data = new FormData(form);
+  const subject = `Contato via portfólio — ${data.get("name")}`;
+  const body = [
+    `Nome: ${data.get("name")}`,
+    `E-mail: ${data.get("email")}`,
+    `Empresa: ${data.get("company") || "-"}`,
+    "",
+    data.get("message"),
+  ].join("\n");
 
-  formNote.textContent = `Obrigado, ${name}! Sua mensagem foi registrada localmente. Configure um endpoint de envio (ex: e-mail ou webhook) para receber mensagens reais.`;
-  form.reset();
+  window.location.href =
+    `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+  formNote.textContent =
+    "Abrindo seu aplicativo de e-mail. Se nada abrir, escreva para " +
+    CONTACT_EMAIL + " ou chame no WhatsApp.";
 });
