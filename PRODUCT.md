@@ -12,7 +12,7 @@ Mid-size companies in Brazil buying cloud and DevOps services. The visitor is ty
 
 ## Product Purpose
 
-Marketing and lead-generation site for Dublin Consulting, a Cloud, DevOps and Kubernetes consultancy. It presents six solution areas (Cloud & Multi-cloud, Kubernetes & Containers, CI/CD & Automação, Infraestrutura como Código, DevSecOps, Observabilidade), the technologies used, types of projects delivered, and a six-step method. Success is a qualified visitor submitting the contact form, which opens a prefilled WhatsApp conversation.
+Marketing and lead-generation site for Dublin Consulting, a Cloud, DevOps and Kubernetes consultancy. It presents seven solution areas (Cloud & Multi-cloud, Kubernetes & Containers, CI/CD & Automação, Infraestrutura como Código, DevSecOps, Observabilidade, Soluções de IA), the technologies used, types of projects delivered, and a six-step method. Success is a qualified visitor submitting the contact form, which opens a prefilled WhatsApp conversation.
 
 ## Positioning
 
@@ -27,17 +27,17 @@ Multi-cloud and DevSecOps specialist: certified across AWS, Azure, GCP and OCI, 
 
 - Static HTML/CSS/JS only, no framework and no backend. Strict CSP and hardened nginx.conf must keep working; keep assets CSP-friendly (no inline handlers, no third-party origins without review).
 - Copy is Portuguese (pt-BR). Form carries LGPD consent.
-- Pages: `app/index.html`, six solution pages in `app/solucoes/`, `404.html`, `robots.txt`, `sitemap.xml`.
+- Pages: `app/index.html`, seven solution pages in `app/solucoes/` (including `ia.html`), `404.html`, `robots.txt`, `sitemap.xml`.
 - Contact channels: WhatsApp +55 11 95078-3983 (primary), e-mail, LinkedIn.
 - Undecided: legal entity details, pricing, engagement models.
 
 ## Brand Commitments
 
-Name: Dublin Consulting. Brand and technology logos belong to their owners and are shown only to indicate technologies worked with (footer disclaimer must remain).
+Name: Dublin Consulting. Third-party vendor logos were removed at the owner's request (dark futuristic redesign); technologies are named in text. If vendor logos return, restore the footer disclaimer. Visual world: dark instrument field, transit-map diagram (one line per solution, told apart by stroke pattern), one electric-cyan accent.
 
 ## Evidence on Hand
 
-- Real: technology list, solution descriptions, method steps, contact channels, and platform certifications held by the lead engineer (AWS SAA, AZ-900, GCP CDL, OCI Architect).
+- Real: technology list, solution descriptions, method steps, contact channels, and platform certifications held by the lead engineer (AWS SAA, AZ-900, GCP CDL, OCI Architect). AI Solutions copy is drawn from the lead engineer's own work: an AIOps agent that watches Kubernetes warning events and proposes/executes remediation via MCP, a real-time voice assistant on Gemini Live, and multi-provider LLM/MCP/RAG experience (Claude, GPT, Gemini). Owner should confirm wording.
 - Absent, must not be fabricated: named clients, testimonials, case-study results, customer logos, revenue or savings figures. The project cards describe project types, not real named engagements. Hero stat counters must reflect true facts only (verify "anos de experiência" against the source before changing).
 
 ## Product Principles

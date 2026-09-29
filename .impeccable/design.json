@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-29T00:00:00Z",
+  "title": "Design System: Dublin Consulting",
+  "extensions": {
+    "colorMeta": {
+      "ground": { "role": "neutral", "displayName": "Instrument Black", "canonical": "#000000", "tonalRamp": ["#000000", "#0a0a0a", "#121212", "#1f1f1f", "#3d3d3d", "#a1a1a1", "#ededed", "#ffffff"] },
+      "panel": { "role": "neutral", "displayName": "Panel Black", "canonical": "#0a0a0a", "tonalRamp": ["#000000", "#0a0a0a", "#121212", "#1f1f1f", "#3d3d3d", "#a1a1a1", "#ededed", "#ffffff"] },
+      "panel-raised": { "role": "neutral", "displayName": "Raised Panel", "canonical": "#121212", "tonalRamp": ["#000000", "#0a0a0a", "#121212", "#1f1f1f", "#3d3d3d", "#a1a1a1", "#ededed", "#ffffff"] },
+      "ink": { "role": "neutral", "displayName": "Near-White Ink", "canonical": "#ededed", "tonalRamp": ["#3d3d3d", "#666666", "#8a8a8a", "#a1a1a1", "#c4c4c4", "#ededed", "#f5f5f5", "#ffffff"] },
+      "ink-muted": { "role": "neutral", "displayName": "Muted Grey", "canonical": "#a1a1a1", "tonalRamp": ["#1f1f1f", "#3d3d3d", "#666666", "#8a8a8a", "#a1a1a1", "#c4c4c4", "#ededed", "#ffffff"] },
+      "hairline": { "role": "neutral", "displayName": "Hairline", "canonical": "#1f1f1f", "tonalRamp": ["#000000", "#0a0a0a", "#121212", "#1f1f1f", "#2a2a2a", "#3d3d3d", "#666666", "#a1a1a1"] },
+      "rule": { "role": "neutral", "displayName": "Rule", "canonical": "#3d3d3d", "tonalRamp": ["#0a0a0a", "#1f1f1f", "#2a2a2a", "#3d3d3d", "#666666", "#8a8a8a", "#a1a1a1", "#ededed"] },
+      "signal-cyan": { "role": "primary", "displayName": "Signal Cyan", "canonical": "#22d3ee", "tonalRamp": ["#083344", "#0e4f63", "#0e7490", "#0891b2", "#22d3ee", "#67e8f9", "#a5f3fc", "#cffafe"] },
+      "signal-cyan-hover": { "role": "primary", "displayName": "Signal Cyan Hover", "canonical": "#67e8f9", "tonalRamp": ["#083344", "#0e4f63", "#0e7490", "#0891b2", "#22d3ee", "#67e8f9", "#a5f3fc", "#cffafe"] },
+      "on-signal": { "role": "neutral", "displayName": "Ink on Cyan", "canonical": "#04121a", "tonalRamp": ["#04121a", "#0a1f2b", "#12303f", "#1c4256", "#2b5a73", "#47788f", "#7aa0b2", "#b5cbd5"] },
+      "invalid-red": { "role": "tertiary", "displayName": "Invalid Red", "canonical": "#b3261e", "tonalRamp": ["#3a0d0a", "#5c1510", "#7f1d17", "#b3261e", "#d0463d", "#e0726b", "#eea19c", "#f8d0cd"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Home h1 in Bricolage Grotesque 800; inner-page h1 scales up to 4.25rem." },
+      "headline": { "displayName": "Headline", "purpose": "Section titles and the statement band." },
+      "title": { "displayName": "Title", "purpose": "Solution, project, and tile names." },
+      "body": { "displayName": "Body", "purpose": "Figtree running text and lead paragraphs." },
+      "label": { "displayName": "Label", "purpose": "Nav, chips, form labels, and h3 in Figtree." }
+    },
+    "shadows": [
+      { "name": "menu-drop", "value": "0 18px 40px -18px rgba(0, 0, 0, .8)", "purpose": "Mega-menu floating above the page." },
+      { "name": "hub-glow", "value": "drop-shadow(0 0 6px rgba(34, 211, 238, .7))", "purpose": "Cyan glow on the map hub station." },
+      { "name": "focus-halo", "value": "0 0 0 3px rgba(34, 211, 238, .28)", "purpose": "Input focus halo." }
+    ],
+    "motion": [
+      { "name": "ease-out", "value": "cubic-bezier(.23, 1, .32, 1)", "purpose": "All transforms, reveals, and the map draw." },
+      { "name": "map-draw", "value": "clip-path 1.1s ease-out .15s", "purpose": "One authored moment: the hero map is drawn once." },
+      { "name": "reveal", "value": "opacity+translateY(12px) .5s", "purpose": "Quiet scroll reveals; disabled under reduced motion." }
+    ],
+    "breakpoints": [
+      { "name": "lg", "value": "1024px" },
+      { "name": "md", "value": "860px" },
+      { "name": "sm", "value": "640px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Near-white pill; the main action.",
+      "html": "<button class=\"ds-btn-primary\">Falar com a Dublin</button>",
+      "css": ".ds-btn-primary { background: var(--ink, #ededed); color: #000; padding: 14px 26px; border-radius: 999px; border: 1.5px solid transparent; font: 600 1rem/1 Figtree, system-ui, sans-serif; cursor: pointer; transition: background-color .15s ease, transform .16s cubic-bezier(.23,1,.32,1); } .ds-btn-primary:hover { background: #fff; } .ds-btn-primary:active { transform: scale(.97); } .ds-btn-primary:focus-visible { outline: 3px solid #22d3ee; outline-offset: 3px; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Outlined pill; inverts on hover.",
+      "html": "<button class=\"ds-btn-ghost\">Ver solucoes</button>",
+      "css": ".ds-btn-ghost { background: transparent; color: #ededed; padding: 14px 26px; border-radius: 999px; border: 1.5px solid #ededed; font: 600 1rem/1 Figtree, system-ui, sans-serif; cursor: pointer; transition: background-color .15s ease, color .15s ease, transform .16s cubic-bezier(.23,1,.32,1); } .ds-btn-ghost:hover { background: #ededed; color: #000; } .ds-btn-ghost:active { transform: scale(.97); } .ds-btn-ghost:focus-visible { outline: 3px solid #22d3ee; outline-offset: 3px; }"
+    },
+    {
+      "name": "Nav CTA",
+      "kind": "nav",
+      "refersTo": "nav-cta",
+      "description": "Outlined pill in the navbar; border turns cyan on hover.",
+      "html": "<a class=\"ds-nav-cta\" href=\"#\">Contato</a>",
+      "css": ".ds-nav-cta { display: inline-block; background: transparent; border: 1px solid #3d3d3d; color: #ededed; padding: 9px 20px; border-radius: 999px; font: 600 .95rem Figtree, system-ui, sans-serif; text-decoration: none; transition: border-color .15s ease, color .15s ease; } .ds-nav-cta:hover { border-color: #22d3ee; color: #22d3ee; } .ds-nav-cta:focus-visible { outline: 3px solid #22d3ee; outline-offset: 3px; }"
+    },
+    {
+      "name": "Link Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Pill link to a related solution.",
+      "html": "<a class=\"ds-chip\" href=\"#\">Kubernetes</a>",
+      "css": ".ds-chip { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border: 1px solid #3d3d3d; border-radius: 999px; background: #0a0a0a; color: #ededed; text-decoration: none; font: 500 .95rem Figtree, system-ui, sans-serif; transition: border-color .15s ease, background-color .15s ease; } .ds-chip:hover { border-color: #22d3ee; background: #121212; } .ds-chip:focus-visible { outline: 3px solid #22d3ee; outline-offset: 3px; }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Raised-panel field with cyan focus.",
+      "html": "<input class=\"ds-input\" placeholder=\"Seu nome\">",
+      "css": ".ds-input { width: 100%; font: 400 1rem/1.4 Figtree, system-ui, sans-serif; color: #ededed; background: #121212; border: 1px solid #3d3d3d; border-radius: 4px; padding: 13px 14px; caret-color: #22d3ee; transition: border-color .15s ease, box-shadow .15s ease; } .ds-input:hover { border-color: #ededed; } .ds-input:focus-visible { outline: none; border-color: #22d3ee; box-shadow: 0 0 0 3px rgba(34,211,238,.28); }"
+    },
+    {
+      "name": "Solution Row",
+      "kind": "custom",
+      "refersTo": "tile",
+      "description": "Ruled row with a stroke-pattern bar on its top edge (dashed shown).",
+      "html": "<a class=\"ds-sol\" href=\"#\"><strong>Kubernetes</strong><span>Clusters operados com previsibilidade.</span></a>",
+      "css": ".ds-sol { position: relative; display: grid; gap: 8px; padding: 28px 0 8px; color: #ededed; text-decoration: none; } .ds-sol::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 6px; background: repeating-linear-gradient(90deg, #ededed 0 14px, transparent 14px 22px); } .ds-sol strong { font: 700 1.5rem/1.1 'Bricolage Grotesque', 'Arial Narrow', system-ui, sans-serif; letter-spacing: -.02em; transition: transform .22s cubic-bezier(.23,1,.32,1); } .ds-sol span { color: #a1a1a1; } .ds-sol:hover strong { transform: translateX(8px); } .ds-sol:focus-visible { outline: 3px solid #22d3ee; outline-offset: 3px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Transit Map",
+    "overview": "The site is drawn like a metro diagram on an instrument-black field. Each solution is a line, and lines are told apart by stroke pattern (solid, double, dashed, dotted, long-short, hairline, tick), never by hue. Colour is nearly absent: near-white ink on true black, with one electric cyan reserved for the hub, focus, and interactive response. Structure comes from ruled lines and route metaphors, not from cards and shadows.\n\nDensity is editorial and calm: large tightly-set display type against generous section padding, muted grey supporting copy, and authored vector artwork under dark scrims rather than photography or stock icons. Motion is one authored moment (the map is drawn left to right once) plus quiet 12px reveals.",
+    "keyCharacteristics": [
+      "True black ground with two barely-lifted panel tones; no light theme.",
+      "One accent (cyan), used sparingly; ink itself does most of the emphasis.",
+      "Stroke pattern is the identity of each solution line.",
+      "Pills for actions and filter chips; 4px for every container and field.",
+      "Ruled, borderless-card lists: 3px ink rule on top, 1px hairline between rows."
+    ],
+    "rules": [
+      { "name": "The One Signal Rule", "body": "Cyan is the sole accent and marks response and focus, never decoration or line identity.", "section": "colors" },
+      { "name": "The Pattern Not Hue Rule", "body": "Solution lines are distinguished by stroke pattern; never assign them colours.", "section": "colors" },
+      { "name": "The Two Voices Rule", "body": "Bricolage speaks for headings and station names; Figtree does everything else. Do not add a third family.", "section": "typography" },
+      { "name": "The Tonal Depth Rule", "body": "Separate surfaces with panel tone and hairlines; shadows are only for floating menus and cyan focus or hub glow.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do keep the ground true black and reserve cyan for focus, response, and the hub.",
+      "Do identify solutions by stroke pattern and reuse the same pattern on map, list, and page.",
+      "Do use pills for buttons and link chips and 4px for everything else.",
+      "Do build lists as ruled rows (3px ink top rule, 1px hairline) and move hover content with transform.",
+      "Do use inline stroke SVG icons and authored SVG artwork from `img/art`.",
+      "Do honor `prefers-reduced-motion` and gate hover effects to fine pointers."
+    ],
+    "donts": [
+      "Don't colour-code lines or add a second accent hue.",
+      "Don't introduce a light theme, gradient text, or drop-shadowed cards.",
+      "Don't add a third typeface or set headings in Figtree at display size.",
+      "Don't animate layout properties; use transform and opacity."
+    ]
+  }
+}

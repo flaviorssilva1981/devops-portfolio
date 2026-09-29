@@ -29,9 +29,13 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
 $$(".reveal").forEach((el) => {
   const sibs = $$(".reveal", el.parentElement);
-  el.style.setProperty("--d", `${Math.min(sibs.indexOf(el), 5) * 70}ms`);
+  el.style.setProperty("--d", `${Math.min(sibs.indexOf(el), 5) * 60}ms`);
   io.observe(el);
 });
+
+// Mapa do hero: desenhado uma única vez ao carregar
+const heroMap = $("#heroMap");
+if (heroMap) requestAnimationFrame(() => heroMap.classList.add("is-drawn"));
 
 // Formulário: monta a mensagem e abre o WhatsApp (nada é armazenado no site)
 const form = $("#contactForm"), formNote = $("#formNote");
