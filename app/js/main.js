@@ -60,13 +60,6 @@ const countIO = new IntersectionObserver((entries) => {
 }, { threshold: 0.6 });
 $$(".stat-num").forEach((el) => countIO.observe(el));
 
-// Spotlight nos cards que segue o cursor
-$$(".spot").forEach((el) => el.addEventListener("pointermove", (ev) => {
-  const r = el.getBoundingClientRect();
-  el.style.setProperty("--mx", `${ev.clientX - r.left}px`);
-  el.style.setProperty("--my", `${ev.clientY - r.top}px`);
-}));
-
 // Carrossel do hero
 (() => {
   const hero = $(".hero"), slides = $$(".slide"), dots = $$("#heroDots button");
@@ -97,57 +90,6 @@ $$(".spot").forEach((el) => el.addEventListener("pointermove", (ev) => {
   hero.addEventListener("pointerenter", () => { hero.classList.add("paused"); clearTimeout(timer); });
   hero.addEventListener("pointerleave", () => { hero.classList.remove("paused"); go(idx); });
   schedule();
-})();
-
-// Rede de partículas (canvas em resolução nativa/HiDPI) + brilho do cursor
-(() => {
-  const cv = $("#fx"), ctx = cv.getContext("2d"), glow = $("#cursorGlow");
-  let w, h, dpr, pts = [], mouse = { x: -999, y: -999 };
-  const resize = () => {
-    dpr = Math.min(devicePixelRatio || 1, 2);
-    w = innerWidth; h = innerHeight;
-    cv.width = w * dpr; cv.height = h * dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const n = Math.min(90, Math.floor((w * h) / 16000));
-    pts = Array.from({ length: n }, () => ({
-      x: Math.random() * w, y: Math.random() * h,
-      vx: (Math.random() - 0.5) * 0.35, vy: (Math.random() - 0.5) * 0.35,
-    }));
-  };
-  addEventListener("resize", resize);
-  addEventListener("pointermove", (e) => {
-    mouse.x = e.clientX; mouse.y = e.clientY;
-    glow.style.opacity = 1;
-    glow.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-  });
-  const draw = () => {
-    ctx.clearRect(0, 0, w, h);
-    for (const p of pts) {
-      p.x += p.vx; p.y += p.vy;
-      if (p.x < 0 || p.x > w) p.vx *= -1;
-      if (p.y < 0 || p.y > h) p.vy *= -1;
-      ctx.fillStyle = "rgba(25,227,234,.7)";
-      ctx.beginPath(); ctx.arc(p.x, p.y, 1.4, 0, 6.283); ctx.fill();
-    }
-    for (let i = 0; i < pts.length; i++) {
-      for (let j = i + 1; j < pts.length; j++) {
-        const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y, d = Math.hypot(dx, dy);
-        if (d < 130) {
-          ctx.strokeStyle = `rgba(124,92,255,${0.28 * (1 - d / 130)})`;
-          ctx.beginPath(); ctx.moveTo(pts[i].x, pts[i].y); ctx.lineTo(pts[j].x, pts[j].y); ctx.stroke();
-        }
-      }
-      const mx = pts[i].x - mouse.x, my = pts[i].y - mouse.y, md = Math.hypot(mx, my);
-      if (md < 160) {
-        ctx.strokeStyle = `rgba(25,227,234,${0.5 * (1 - md / 160)})`;
-        ctx.beginPath(); ctx.moveTo(pts[i].x, pts[i].y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
-      }
-    }
-    if (!document.hidden) requestAnimationFrame(draw); else setTimeout(() => requestAnimationFrame(draw), 500);
-  };
-  resize();
-  if (reduceMotion) { draw(); return; }
-  requestAnimationFrame(draw);
 })();
 
 // Formulário de contato: site estático, sem backend. Abre o cliente de e-mail
