@@ -21,6 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="preload" as="image" href="/img/photos/hero-poster.webp" fetchpriority="high" />
 <link rel="stylesheet" href="/css/style.css?v=20260930" />
 </head>
 <body>
@@ -44,7 +45,7 @@
 
 <main id="main">
   <section class="hero" id="top">
-    <video class="hero-video" muted loop playsinline preload="metadata" poster="/img/photos/hero-poster.webp" aria-hidden="true" tabindex="-1"><source src="/media/cloud-hero.webm" type="video/webm" /></video>
+    <video class="hero-video" muted loop playsinline preload="none" poster="/img/photos/hero-poster.webp" aria-hidden="true" tabindex="-1"><source src="/media/cloud-hero.webm" type="video/webm" /></video>
     <div class="container hero-grid">
       <div class="hero-copy">
         <h1>Cloud e DevOps inteligentes, operação segura.</h1>
@@ -61,9 +62,9 @@
   </div></section>
 
   <section class="section"><div class="container tiles">
-    <a class="tile reveal" href="/solucoes/cloud.html"><img src="/img/photos/datacenter.webp" alt="" width="1408" height="768" loading="lazy" decoding="async" /><span class="tile-body"><h3>Plataforma inteligente</h3><p>Cloud e Kubernetes prontos para escalar, com custo e segurança sob controle.</p></span></a>
-    <a class="tile reveal" href="/solucoes/ia.html"><img src="/img/photos/ai.webp" alt="" width="1774" height="887" loading="lazy" decoding="async" /><span class="tile-body"><h3>IA em primeiro lugar</h3><p>Agentes que observam a operação e só agem com a sua aprovação.</p></span></a>
-    <a class="tile reveal" href="/solucoes/iac.html"><img src="/img/photos/pipeline.webp" alt="" width="1408" height="768" loading="lazy" decoding="async" /><span class="tile-body"><h3>Operação sob controle</h3><p>Infraestrutura versionada e observável, do desenvolvimento à produção.</p></span></a>
+    <a class="tile reveal" href="/solucoes/cloud.html"><img src="/img/photos/datacenter.webp" srcset="/img/photos/datacenter-800.webp 800w, /img/photos/datacenter.webp 1400w" sizes="(max-width: 1024px) 100vw, 33vw" alt="" width="1408" height="768" loading="lazy" decoding="async" /><span class="tile-body"><h3>Plataforma inteligente</h3><p>Cloud e Kubernetes prontos para escalar, com custo e segurança sob controle.</p></span></a>
+    <a class="tile reveal" href="/solucoes/ia.html"><img src="/img/photos/ai.webp" srcset="/img/photos/ai-800.webp 800w, /img/photos/ai.webp 1400w" sizes="(max-width: 1024px) 100vw, 33vw" alt="" width="1400" height="700" loading="lazy" decoding="async" /><span class="tile-body"><h3>IA em primeiro lugar</h3><p>Agentes que observam a operação e só agem com a sua aprovação.</p></span></a>
+    <a class="tile reveal" href="/solucoes/iac.html"><img src="/img/photos/pipeline.webp" srcset="/img/photos/pipeline-800.webp 800w, /img/photos/pipeline.webp 1400w" sizes="(max-width: 1024px) 100vw, 33vw" alt="" width="1408" height="768" loading="lazy" decoding="async" /><span class="tile-body"><h3>Operação sob controle</h3><p>Infraestrutura versionada e observável, do desenvolvimento à produção.</p></span></a>
   </div></section>
 
   <section id="solucoes" class="section"><div class="container stack">
@@ -80,7 +81,7 @@
 
   <section id="cultura" class="section field"><div class="container">
     <div class="culture-lead">
-      <figure class="cimg reveal"><img src="/img/photos/team.webp" alt="Pessoas colaborando em uma mesa de trabalho" width="1408" height="768" loading="lazy" decoding="async" /></figure>
+      <figure class="cimg reveal"><img src="/img/photos/team.webp" srcset="/img/photos/team-800.webp 800w, /img/photos/team.webp 1400w" sizes="(max-width: 1024px) 100vw, 50vw" alt="Pessoas colaborando em uma mesa de trabalho" width="1408" height="768" loading="lazy" decoding="async" /></figure>
       <div>
         <h2 class="title reveal">Cultura e valores</h2>
         <p class="desc reveal">Trabalhamos como parte do seu time: com transparência, método e foco em deixar você autônomo para operar.</p>
@@ -115,7 +116,7 @@
   <section id="tecnologias" class="section section-tint"><div class="container">
     <h2 class="title reveal">As plataformas com as quais trabalhamos</h2>
     <div class="tech-groups"><div class="tg reveal"><h3>Clouds</h3><ul><li class="vchip"><span>AWS</span></li><li class="vchip"><span>Microsoft Azure</span></li><li class="vchip"><span>Google Cloud</span></li><li class="vchip"><span>Oracle Cloud (OCI)</span></li></ul></div><div class="tg reveal"><h3>Plataforma</h3><ul><li class="vchip"><span>Kubernetes</span></li><li class="vchip"><span>Docker</span></li><li class="vchip"><span>Helm</span></li><li class="vchip"><span>Argo CD</span></li></ul></div><div class="tg reveal"><h3>Automação e IaC</h3><ul><li class="vchip"><span>Terraform</span></li><li class="vchip"><span>Ansible</span></li><li class="vchip"><span>Jenkins</span></li><li class="vchip"><span>GitHub Actions</span></li><li class="vchip"><span>Bitbucket Pipelines</span></li></ul></div><div class="tg reveal"><h3>Observabilidade e scripts</h3><ul><li class="vchip"><span>Prometheus</span></li><li class="vchip"><span>Grafana</span></li><li class="vchip"><span>Zabbix</span></li><li class="vchip"><span>Python</span></li><li class="vchip"><span>Bash</span></li></ul></div><div class="tg reveal"><h3>IA e agentes</h3><ul><li class="vchip"><span>Claude</span></li><li class="vchip"><span>OpenAI GPT</span></li><li class="vchip"><span>Google Gemini</span></li><li class="vchip"><span>MCP</span></li><li class="vchip"><span>RAG</span></li></ul></div></div>
-    <figure class="cimg cimg-wide reveal"><img src="/img/photos/command.webp" alt="Equipes acompanhando painéis de operação em uma sala de controle" width="1408" height="768" loading="lazy" decoding="async" /></figure>
+    <figure class="cimg cimg-wide reveal"><img src="/img/photos/command.webp" srcset="/img/photos/command-800.webp 800w, /img/photos/command.webp 1400w" sizes="(max-width: 1240px) 100vw, 1200px" alt="Equipes acompanhando painéis de operação em uma sala de controle" width="1408" height="768" loading="lazy" decoding="async" /></figure>
     <p class="fine reveal">Azure DevOps, AWS CodePipeline, PowerShell, Drupal, WordPress, Pantheon e Acquia também fazem parte do dia a dia.</p>
   </div></section>
 
