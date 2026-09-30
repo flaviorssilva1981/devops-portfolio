@@ -19,21 +19,6 @@ if (navLinks && navToggle) {
   addEventListener("keydown", (e) => { if (e.key === "Escape") setOpen(false); });
 }
 
-// Links para #contato: salto instantâneo em vez de rolagem suave. Em Chrome Android a
-// animação longa é cancelada por mudanças de layout (imagens lazy, barra de endereço)
-// e o usuário fica longe do formulário; realinhamos depois que o layout assenta.
-const contato = $("#contato");
-if (contato) {
-  const jump = () => contato.scrollIntoView({ behavior: "instant", block: "start" });
-  const settle = () => { jump(); setTimeout(() => { if (Math.abs(contato.getBoundingClientRect().top - parseFloat(getComputedStyle(doc).scrollPaddingTop || 0)) > 4) jump(); }, 350); };
-  $$('a[href="#contato"], a[href="/#contato"]').forEach((a) => a.addEventListener("click", (e) => {
-    e.preventDefault();
-    settle();
-    history.pushState(null, "", "#contato");
-  }));
-  if (location.hash === "#contato") addEventListener("load", settle, { once: true });
-}
-
 // Vídeo do hero: só toca se o usuário não pediu menos movimento nem economia de dados, pausa fora da tela
 // e pode ser pausado manualmente (WCAG 2.2.2). Sem JS ou sem suporte a WebM, o poster permanece.
 const heroVideo = $(".hero-video"), heroPause = $("#heroPause");
