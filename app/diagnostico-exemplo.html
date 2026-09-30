@@ -4,15 +4,16 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="theme-color" content="#000000" />
-<title>Página não encontrada | Dublin Consulting</title>
-<meta name="description" content="Página não encontrada" />
-<meta name="robots" content="noindex,follow" />
-<meta property="og:title" content="Página não encontrada | Dublin Consulting" />
-<meta property="og:description" content="Página não encontrada" />
+<title>Exemplo de relatório de diagnóstico | Dublin Consulting</title>
+<meta name="description" content="Veja o formato do relatório entregue no diagnóstico de cloud e DevOps: resumo executivo, riscos priorizados, ganhos rápidos e roadmap de 90 dias. Exemplo com dados fictícios." />
+<meta name="robots" content="index,follow" />
+<link rel="canonical" href="https://dublinconsulting.com.br/diagnostico-exemplo" />
+<meta property="og:title" content="Exemplo de relatório de diagnóstico | Dublin Consulting" />
+<meta property="og:description" content="Veja o formato do relatório entregue no diagnóstico de cloud e DevOps: resumo executivo, riscos priorizados, ganhos rápidos e roadmap de 90 dias. Exemplo com dados fictícios." />
 <meta property="og:locale" content="pt_BR" />
 <meta property="og:site_name" content="Dublin Consulting" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://dublinconsulting.com.br/404.html" />
+<meta property="og:url" content="https://dublinconsulting.com.br/diagnostico-exemplo" />
 <meta property="og:image" content="https://dublinconsulting.com.br/img/og-image.jpg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
@@ -24,7 +25,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="/css/style.css?v=20260930" />
 </head>
-<body>
+<body class="report-page">
 <a class="skip-link" href="#main">Ir para o conteúdo</a>
 <header class="navbar" id="navbar">
   <div class="container navbar-inner">
@@ -44,8 +45,39 @@
 </header>
 
 <main id="main"><section class="page-hero"><div class="container narrow">
-  <h1>Página não encontrada</h1><p class="lead">O endereço que você tentou acessar não existe ou foi movido.</p>
-  <div class="cta-row"><a href="/" class="btn btn-primary">Voltar ao início <svg class="ico " aria-hidden="true"><use href="/img/sprite.svg#i-arrow"/></svg></a></div>
+  <h1>Exemplo de relatório de diagnóstico</h1><p class="lead">O formato que você recebe ao fim dos 5 dias de diagnóstico. Empresa, ambiente e números deste exemplo são fictícios.</p>
+  <div class="cta-row"><a href="/docs/exemplo-relatorio-diagnostico.pdf" class="btn btn-ghost" download>Baixar em PDF</a><a href="/#contato" class="btn btn-primary">Solicitar diagnóstico <svg class="ico " aria-hidden="true"><use href="/img/sprite.svg#i-arrow"/></svg></a></div>
+</div></section>
+<section class="section"><div class="container legal report">
+  <p class="report-flag">Exemplo ilustrativo. Os dados abaixo não se referem a nenhum cliente real.</p>
+  <h2>1. Resumo executivo</h2>
+  <p>Ambiente avaliado: uma conta AWS de produção e uma de homologação, um cluster Kubernetes (EKS) com 14 serviços, banco PostgreSQL gerenciado e pipelines no GitHub Actions.</p>
+  <ul>
+    <li><strong>3 riscos altos</strong> de segurança, recuperação e detecção de falhas (R1 a R3).</li>
+    <li><strong>Custos:</strong> estimativa ilustrativa de 15% a 20% do gasto mensal em recursos ociosos ou superdimensionados.</li>
+    <li><strong>Entrega:</strong> 12 dos 14 serviços já têm deploy automatizado; faltam dois.</li>
+  </ul>
+  <h2>2. Escopo e método</h2>
+  <p>Cinco dias úteis, com acesso somente leitura: perfis de leitura na AWS e no Kubernetes, revisão dos repositórios de Terraform e dos pipelines, relatórios de custo e entrevistas com quatro pessoas do time. Nenhuma alteração é feita no ambiente durante o diagnóstico.</p>
+  <h2>3. Riscos priorizados</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>ID</th><th>Área</th><th>Achado</th><th>Impacto</th><th>Severidade</th><th>Esforço</th></tr></thead>
+    <tbody><tr><td>R1</td><td>Segurança</td><td>Chaves de acesso estáticas da AWS nos segredos do CI, sem rotação.</td><td>Um vazamento daria acesso de escrita à produção.</td><td><span class="sev sev-alta">Alta</span></td><td>Baixo</td></tr><tr><td>R2</td><td>Resiliência</td><td>Backups do banco existem, mas o restore nunca foi testado.</td><td>Tempo de recuperação desconhecido em caso de falha.</td><td><span class="sev sev-alta">Alta</span></td><td>Médio</td></tr><tr><td>R3</td><td>Observabilidade</td><td>Não há alertas por serviço; os incidentes chegam pelos clientes.</td><td>Problemas são detectados tarde.</td><td><span class="sev sev-alta">Alta</span></td><td>Médio</td></tr><tr><td>R4</td><td>Custos</td><td>Nós do cluster com uso médio de CPU abaixo de 15%.</td><td>Gasto mensal acima do necessário.</td><td><span class="sev sev-média">Média</span></td><td>Baixo</td></tr><tr><td>R5</td><td>Entrega</td><td>Dois serviços ainda publicados manualmente, por SSH.</td><td>Mudanças sem rastreabilidade e sem rollback.</td><td><span class="sev sev-média">Média</span></td><td>Médio</td></tr><tr><td>R6</td><td>Kubernetes</td><td>Pods sem limites de recursos, rodando como root.</td><td>Instabilidade e maior superfície de ataque.</td><td><span class="sev sev-média">Média</span></td><td>Baixo</td></tr></tbody>
+  </table></div>
+  <h2>4. Ganhos rápidos (primeiras duas semanas)</h2>
+  <ul>
+    <li>Trocar as chaves estáticas do CI por federação OIDC entre o GitHub Actions e a AWS (R1).</li>
+    <li>Executar e documentar um teste de restore do banco, com o tempo medido (R2).</li>
+    <li>Ajustar o tamanho dos nós e as requisições de CPU e memória dos pods (R4, R6).</li>
+  </ul>
+  <h2>5. Roadmap de 90 dias</h2>
+  <ul>
+    <li><strong>Dias 1 a 30:</strong> segurança e recuperação (R1, R2) e alertas por serviço com os sinais essenciais (R3).</li>
+    <li><strong>Dias 31 a 60:</strong> otimização de custos (R4) e pipelines para os dois serviços manuais (R5).</li>
+    <li><strong>Dias 61 a 90:</strong> hardening do Kubernetes (R6), SLOs dos serviços críticos e runbooks de operação.</li>
+  </ul>
+  <h2>6. Próximos passos</h2>
+  <p>O relatório e o roadmap são seus, mesmo que você decida executar com outro time. Se contratar a implementação conosco, o valor do diagnóstico é abatido.</p>
 </div></section></main>
 <footer class="footer">
   <div class="container footer-grid">

@@ -436,6 +436,43 @@ body[data-line="7"] .page-hero { background-image: linear-gradient(90deg, #000 0
 /* Oferta de diagnóstico */
 .offer { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
 .offer-free { margin-top: 20px; color: var(--ink-2); font-size: .98rem; max-width: 30em; }
+.offer-sample { margin-top: 24px; color: var(--ink-2); font-size: .98rem; max-width: 30em; }
+.offer-sample a { color: var(--ink); font-weight: 600; text-underline-offset: 4px; }
+@media (hover: hover) and (pointer: fine) { .offer-sample a:hover { color: var(--accent); } }
+/* Diagramas reais (arquitetura, entrega): nunca recortados, com legenda */
+.cimg.diagram { background: #000; border: 1px solid var(--line); }
+.cimg.diagram figcaption { padding: 12px 16px 14px; color: var(--ink-2); font-size: .9rem; border-top: 1px solid var(--line); }
+/* Tecnologias recolhidas dentro de Frentes */
+.tech-more { margin-top: clamp(40px, 5vw, 64px); }
+.tech-more .tech-groups { padding: 4px 0 8px; }
+.tech-more details p.fine { margin-top: 24px; padding: 0 0 24px; }
+.anchor-alias { display: block; height: 0; }
+/* Exemplo de relatório */
+.report-flag { border: 1px solid var(--rule); padding: 12px 16px; border-radius: var(--r); color: var(--ink) !important; font-weight: 600; }
+.report ul li strong { color: var(--ink); }
+.table-wrap { overflow-x: auto; margin-top: 14px; }
+.report table { width: 100%; border-collapse: collapse; border-top: 3px solid var(--ink); font-size: .95rem; min-width: 640px; }
+.report th, .report td { text-align: left; vertical-align: top; padding: 12px 10px; border-bottom: 1px solid var(--line); }
+.report th { color: var(--ink); font-weight: 700; }
+.report td { color: var(--ink-2); }
+.sev { font-weight: 700; color: var(--ink); }
+.sev-alta { color: var(--accent); }
+@media print {
+  html:has(body.report-page), body.report-page { background: #fff !important; color: #111; color-scheme: light; }
+  body.report-page h2 { break-after: avoid; }
+  body.report-page .table-wrap { break-before: avoid; }
+  body.report-page .navbar, body.report-page .footer, body.report-page .wa-float, body.report-page .cta-row, body.report-page .skip-link { display: none !important; }
+  body.report-page .page-hero::before { display: none; }
+  body.report-page h1, body.report-page h2, body.report-page .report th, body.report-page .sev, body.report-page .report ul li strong, body.report-page .report-flag { color: #111 !important; }
+  body.report-page .lead, body.report-page .report p, body.report-page .report li, body.report-page .report td { color: #333 !important; }
+  body.report-page .table-wrap, body.report-page .report th, body.report-page .report td, body.report-page .report-flag { border-color: #bbb !important; }
+  body.report-page .table-wrap { overflow: visible; }
+  body.report-page .report table { border-top-color: #111 !important; }
+  body.report-page .report table { min-width: 0; }
+  body.report-page .sev-alta { color: #0a6c7f !important; }
+  body.report-page .section, body.report-page .page-hero { padding: 16px 0; border: 0; }
+  body.report-page tr { break-inside: avoid; }
+}
 .offer-card { display: grid; gap: 28px; background: var(--panel); border: 1px solid var(--rule); border-top: 3px solid var(--ink); padding: clamp(24px, 4vw, 40px); }
 .offer-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 24px; margin: 0; }
 .offer-facts dt { font-size: .88rem; font-weight: 600; color: var(--ink-2); }
