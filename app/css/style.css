@@ -184,9 +184,6 @@ h1 { font-size: clamp(2.4rem, 4.4vw, 3.75rem); letter-spacing: -.03em; line-heig
 .case-steps dt { font-size: .92rem; font-weight: 700; color: var(--ink); padding-top: 1px; }
 .case-steps dd { margin: 0; color: var(--ink-2); max-width: 38em; }
 .case-steps .case-res { color: var(--ink); font-weight: 600; }
-.case-link { display: inline-flex; align-items: center; gap: 8px; width: fit-content; margin-top: 4px; font-weight: 600; text-decoration: underline; text-underline-offset: 4px; }
-.case-link .ico { width: 16px; height: 16px; transition: transform .2s var(--ease-out); }
-@media (hover: hover) and (pointer: fine) { .case-link:hover { color: var(--accent); } .case-link:hover .ico { transform: translateX(4px); } }
 @media (max-width: 640px) {
   .case { grid-template-columns: 1fr; padding: 28px 0; }
   .case-steps { grid-template-columns: 1fr; gap: 2px; }
@@ -477,8 +474,6 @@ body[data-line="7"] .page-hero { background-image: linear-gradient(90deg, #000 0
 @media (max-width: 1024px) { .offer { grid-template-columns: 1fr; } }
 @media (max-width: 480px) { .offer-facts { grid-template-columns: 1fr; } }
 .case-fig { margin-top: 18px; }
-.footer-proof { margin-top: 40px; color: var(--ink-2); font-size: .92rem; }
-.footer-proof a { color: var(--ink); display: inline; text-decoration: underline; text-underline-offset: 3px; }
 /* Quem está por trás */
 .founder { display: grid; grid-template-columns: minmax(0, .75fr) minmax(0, 1.25fr); gap: clamp(32px, 6vw, 96px); align-items: center; }
 .founder-photo { max-width: 440px; }
