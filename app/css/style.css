@@ -309,11 +309,6 @@ input:user-invalid, select:user-invalid, textarea:user-invalid { border-color: #
 @keyframes sheen { to { transform: translateX(120%); } }
 
 /* Emphasis: the three key phrases of the statement are underlined as the sentence enters. */
-.statement-text strong { background: linear-gradient(var(--accent), var(--accent)) 0 96% / 100% 3px no-repeat; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
-.js .statement-text.reveal strong { background-size: 0 3px; transition: background-size .8s var(--ease-out); transition-delay: 500ms; }
-.js .statement-text.reveal strong:nth-of-type(2) { transition-delay: 750ms; }
-.js .statement-text.reveal strong:nth-of-type(3) { transition-delay: 1000ms; }
-.js .statement-text.reveal.is-visible strong { background-size: 100% 3px; }
 
 /* Motif: each solution's transit line is drawn in from the left as its row appears. */
 .js .sol.reveal::before { clip-path: inset(0 100% 0 0); transition: clip-path .9s var(--ease-out) .15s; }
@@ -334,7 +329,6 @@ input:user-invalid, select:user-invalid, textarea:user-invalid { border-color: #
   .js .steps li::before { transform: none; transition: none; }
   .btn-primary::after, .navbar::after { display: none; }
   .js .sol.reveal::before { clip-path: none; }
-  .js .statement-text.reveal strong { background-size: 100% 3px; }
   * { transition-duration: .01ms !important; }
 }
 
