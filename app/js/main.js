@@ -91,7 +91,7 @@ const openModal = (nodes, from, live = []) => {
     const c = n.cloneNode(true);
     $$("[id]", c).forEach((x) => x.removeAttribute("id"));
     [c, ...$$(".reveal", c)].forEach((x) => x.classList.remove("reveal", "is-visible"));
-    $$("details", c).forEach((d) => { d.open = true; });
+    $$("details", c).forEach((d) => { if ($(".tech-groups", d)) d.open = true; });
     return c;
   });
   live.forEach((l) => dlgRestore.push(() => l.home.append(l.node)));
@@ -165,8 +165,9 @@ if (offer && canModal) {
 
 // Seções inteiras viram um cartão-resumo (título, resumo, imagem) e o conteúdo completo abre no modal.
 // O conteúdo original fica oculto na página (e intacto para quem não tem JS).
-const collapse = (id, opt) => {
-  const section = $(`#${id}`);
+const collapse = (target, opt) => {
+  const section = typeof target === "string" ? $(`#${target}`) : target;
+  const id = typeof target === "string" ? target : opt.key;
   const src = section && $(":scope > .container", section);
   if (!src || !canModal) return;
   const title = $("h2", src).textContent;
@@ -224,6 +225,23 @@ if (canModal) {
     openOnLink: true,
     lead: (src) => { const t = $$(".deliver h3", src).map((h) => h.textContent); return `${t.length} entregas: ${t.slice(0, 3).join(", ")} e mais.`; },
   });
+  // Páginas de solução: "Quatro passos" e "Dúvidas comuns" também viram cartão + modal (hero, chips e faixa de contato ficam na página)
+  const stepsList = $(".steps-4");
+  if (stepsList && stepsList.closest("section") && !stepsList.closest("section").id) {
+    collapse(stepsList.closest("section"), {
+      key: "passos",
+      label: "Ver os quatro passos",
+      lead: (src) => { const t = $$(".steps-4 li p", src).map((x) => x.textContent); return `${t.length} passos, de \u201c${t[0]}\u201d até \u201c${t[t.length - 1]}\u201d.`; },
+    });
+  }
+  const faqList = $$(".faq").find((f) => !f.classList.contains("tech-more") && !f.closest("[hidden]"));
+  if (faqList && faqList.closest("section")) {
+    collapse(faqList.closest("section"), {
+      key: "duvidas",
+      label: "Ver as dúvidas comuns",
+      lead: (src) => { const q = $$(".faq summary", src).map((x) => x.textContent); return `${q.length} perguntas, como \u201c${q[0]}\u201d`; },
+    });
+  }
   document.addEventListener("click", (e) => {
     if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     const a = e.target.closest("a[href^=\"#\"]");
@@ -287,7 +305,7 @@ if (canModal && window.fetch && window.DOMParser) {
     });
   }
   // Soluções na home: resumo e entregas no modal, com link para a página completa
-  viaModal(".sol-list a.sol", async (url, a) => {
+  viaModal(".sol-list a.sol, a.tile", async (url, a) => {
     const d = await fetchPage(url.pathname);
     const deliver = $(".deliver", d);
     const cta = el("div", "cta-row");
