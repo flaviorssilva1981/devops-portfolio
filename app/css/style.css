@@ -497,3 +497,33 @@ body[data-line="7"] .page-hero { background-image: linear-gradient(90deg, #000 0
 .cimg-wide { margin-top: 48px; }
 .cimg-wide img { aspect-ratio: 21 / 8; object-fit: cover; }
 @media (max-width: 1024px) { .statement-grid, .method-head { grid-template-columns: 1fr; } }
+
+/* Casos como cartões + modal (só com JS; sem JS a lista completa permanece) */
+.js .proj-list { border-top: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 16px; }
+.js .case.is-card { display: flex; flex-direction: column; gap: 12px; padding: 24px; border: 1px solid var(--line); border-radius: var(--r); background: var(--panel); transition: border-color .2s var(--ease-out), transform .2s var(--ease-out); }
+.js .case.is-card .case-main { flex: 1; align-content: start; }
+.js .case.is-card .case-steps, .js .case.is-card .case-fig { display: none; }
+.js .case.is-card h3 { font-size: 1.25rem; }
+.case-summary { color: var(--ink-2); font-size: .98rem; margin: 0; }
+.case-open { justify-self: start; margin-top: 8px; padding: 10px 0; background: none; border: 0; border-bottom: 1px solid var(--accent); color: var(--accent-d); font: inherit; font-weight: 600; cursor: pointer; }
+.case-open:focus-visible, .modal-close:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+@media (hover: hover) { .js .case.is-card:hover { border-color: var(--accent); transform: translateY(-3px); } }
+.modal { border: 0; padding: 0; background: transparent; color: var(--ink); max-width: min(720px, calc(100vw - 32px)); width: 100%; max-height: calc(100dvh - 32px); overflow: visible; }
+.modal::backdrop { background: rgba(0, 0, 0, .78); backdrop-filter: blur(6px); }
+.modal[open] { animation: modal-in .22s var(--ease-out); }
+.modal-card { position: relative; background: var(--panel); border: 1px solid var(--rule); border-radius: var(--r); padding: clamp(24px, 4vw, 40px); max-height: calc(100dvh - 32px); overflow-y: auto; overscroll-behavior: contain; }
+.modal-body { display: grid; gap: 12px; }
+.modal-body .case-summary, .modal-body .case-open { display: none; }
+.modal-body .case-steps, .modal-body .case-fig { display: grid; }
+.modal-body .case-fig { display: block; }
+.modal-body h3 { font-size: clamp(1.4rem, 3vw, 1.8rem); }
+.modal-close { position: absolute; top: 8px; right: 8px; width: 44px; height: 44px; background: none; border: 0; color: var(--ink); font-size: 2rem; line-height: 1; cursor: pointer; }
+.modal-close:hover { color: var(--accent-d); }
+.modal-open { overflow: hidden; }
+@keyframes modal-in { from { opacity: 0; transform: translateY(12px) scale(.98); } }
+@media (prefers-reduced-motion: reduce) { .modal[open] { animation: none; } .js .case.is-card { transition: none; } }
+
+.js .offer-card.is-compact > div, .js .offer-card.is-compact > p { display: none; }
+.offer-card.is-compact > .case-open { margin-top: 4px; }
+.modal-body .offer-detail { display: grid; gap: 12px; }
+.modal-body .offer-detail h3:first-child { font-family: var(--display); font-size: clamp(1.4rem, 3vw, 1.8rem); }

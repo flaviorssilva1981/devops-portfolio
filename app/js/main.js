@@ -56,6 +56,98 @@ if (techMore && techMore.tagName === "DETAILS") {
   addEventListener("hashchange", openIfTarget);
 }
 
+// Modal de conteúdo: <dialog> nativo (foco preso, Esc fecha, foco volta ao botão). Sem JS, o conteúdo completo
+// continua visível na página. Usado nos casos (#caso-*) e nos detalhes do diagnóstico (#diagnostico-detalhes).
+let dlg = null, dlgBody = null, dlgOpener = null;
+const openModal = (nodes, from) => {
+  if (!dlg) {
+    dlg = document.createElement("dialog");
+    dlg.className = "modal";
+    dlg.setAttribute("aria-labelledby", "modalTitle");
+    dlg.innerHTML = '<div class="modal-card"><button type="button" class="modal-close" aria-label="Fechar">&times;</button><div class="modal-body"></div></div>';
+    document.body.appendChild(dlg);
+    dlgBody = $(".modal-body", dlg);
+    dlg.addEventListener("close", () => {
+      doc.classList.remove("modal-open");
+      if (/^#(caso-|diagnostico-detalhes)/.test(location.hash)) history.replaceState(null, "", location.pathname + location.search);
+      if (dlgOpener) dlgOpener.focus();
+    });
+    dlg.addEventListener("click", (e) => { if (e.target === dlg || e.target.closest(".modal-close")) dlg.close(); });
+  }
+  const clones = nodes.map((n) => n.cloneNode(true));
+  clones.forEach((c) => { $$("[id]", c).forEach((n) => n.removeAttribute("id")); });
+  const title = clones.map((c) => c.matches("h3") ? c : $("h3", c)).find(Boolean);
+  if (title) title.id = "modalTitle";
+  dlgBody.replaceChildren(...clones);
+  dlgOpener = from || null;
+  doc.classList.add("modal-open");
+  if (!dlg.open) dlg.showModal();
+};
+const canModal = typeof HTMLDialogElement === "function";
+
+// Casos: cada caso vira um cartão compacto com o resultado; o caso completo abre no modal.
+const cases = $$(".proj-list .case");
+if (cases.length && canModal) {
+  cases.forEach((c) => {
+    const res = $(".case-res", c);
+    const summary = document.createElement("p");
+    summary.className = "case-summary";
+    summary.textContent = res ? res.textContent : "";
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "case-open";
+    btn.innerHTML = 'Ver o caso completo <span aria-hidden="true">&rarr;</span>';
+    btn.setAttribute("aria-label", `Ver o caso completo: ${$("h3", c).textContent}`);
+    const show = (from) => {
+      const tag = document.createElement("span");
+      tag.className = "proj-tag";
+      tag.textContent = $(".proj-tag", c).textContent;
+      openModal([tag, $(".case-main", c)], from);
+    };
+    btn.addEventListener("click", () => show(btn));
+    c.show = show;
+    $(".case-main", c).append(summary, btn);
+    c.classList.add("is-card");
+  });
+}
+
+// Diagnóstico: fatos e preço ficam visíveis; "O que analisamos" e "Como funciona" abrem no modal.
+const offer = $(".offer-card");
+if (offer && canModal) {
+  const [facts, scope, how] = [$(".offer-facts", offer), $(".offer-list", offer)?.parentElement, $("p", offer)];
+  if (facts && scope && how) {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "case-open";
+    btn.id = "diagnostico-detalhes";
+    btn.innerHTML = 'O que analisamos e como funciona <span aria-hidden="true">&rarr;</span>';
+    btn.addEventListener("click", () => {
+      const wrap = document.createElement("div");
+      wrap.className = "offer-detail";
+      const h = document.createElement("h3");
+      h.textContent = "O diagnóstico, em detalhe";
+      const sc = scope.cloneNode(true);
+      $("h3", sc)?.remove();
+      const t1 = document.createElement("h3"); t1.className = "sub"; t1.textContent = "O que analisamos";
+      const t2 = document.createElement("h3"); t2.className = "sub"; t2.textContent = "Como funciona";
+      const hp = how.cloneNode(true);
+      hp.textContent = how.textContent.replace(/^Como funciona:\s*/, "");
+      wrap.append(h, t1, sc, t2, hp);
+      openModal([wrap], btn);
+    });
+    offer.classList.add("is-compact");
+    offer.append(btn);
+  }
+}
+
+const openHash = () => {
+  if (location.hash === "#diagnostico-detalhes") { const b = $("#diagnostico-detalhes"); if (b) b.click(); return; }
+  const c = cases.find((x) => `#${x.id}` === location.hash);
+  if (c && c.show) c.show(null);
+};
+openHash();
+addEventListener("hashchange", openHash);
+
 // Entrada ao rolar: uma vez por elemento, com cascata entre irmãos
 const io = new IntersectionObserver((entries) => {
   entries.forEach((e) => {
