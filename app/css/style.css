@@ -174,6 +174,30 @@ h1 { font-size: clamp(2.4rem, 4.4vw, 3.75rem); letter-spacing: -.03em; line-heig
 @media (hover: hover) and (pointer: fine) {
   .proj:hover .proj-tag, .proj:hover .proj-main, .proj:hover .proj-meta { transform: translateX(10px); }
 }
+/* Casos reais: mesma linha da lista de projetos, com contexto, ação e resultado */
+.case { display: grid; grid-template-columns: 140px 1fr; gap: 8px 24px; padding: 32px 0; border-bottom: 1px solid var(--line); }
+.case-main { display: grid; gap: 10px; }
+.case-src { font-size: .88rem; font-weight: 600; color: var(--ink-2); }
+.case h3 { font-family: var(--display); font-weight: 700; font-size: 1.45rem; letter-spacing: -.02em; line-height: 1.15; }
+.case-steps { display: grid; grid-template-columns: 8.5em 1fr; gap: 8px 16px; margin: 6px 0 0; }
+.case-steps dt { font-size: .92rem; font-weight: 700; color: var(--ink); padding-top: 1px; }
+.case-steps dd { margin: 0; color: var(--ink-2); max-width: 38em; }
+.case-steps .case-res { color: var(--ink); font-weight: 600; }
+.case-link { display: inline-flex; align-items: center; gap: 8px; width: fit-content; margin-top: 4px; font-weight: 600; text-decoration: underline; text-underline-offset: 4px; }
+.case-link .ico { width: 16px; height: 16px; transition: transform .2s var(--ease-out); }
+@media (hover: hover) and (pointer: fine) { .case-link:hover { color: var(--accent); } .case-link:hover .ico { transform: translateX(4px); } }
+.oss { margin-top: 48px; }
+.oss-list { border-top: 3px solid var(--ink); }
+.oss-list a { display: grid; grid-template-columns: minmax(0, 14em) 1fr; gap: 4px 24px; padding: 16px 0; border-bottom: 1px solid var(--line); text-decoration: none; }
+.oss-list strong { font-weight: 700; overflow-wrap: anywhere; }
+.oss-list span { color: var(--ink-2); }
+@media (hover: hover) and (pointer: fine) { .oss-list a:hover strong { color: var(--accent); } }
+@media (max-width: 640px) {
+  .case { grid-template-columns: 1fr; padding: 28px 0; }
+  .case-steps { grid-template-columns: 1fr; gap: 2px; }
+  .case-steps dd { margin-bottom: 10px; }
+  .oss-list a { grid-template-columns: 1fr; }
+}
 
 /* Technologies */
 .tech-groups { display: grid; grid-template-columns: repeat(5, 1fr); gap: 32px 32px; margin-top: 48px; }
