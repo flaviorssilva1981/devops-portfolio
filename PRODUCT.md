@@ -29,11 +29,11 @@ Multi-cloud and DevSecOps specialist: certified across AWS, Azure, GCP and OCI, 
 - Copy is Portuguese (pt-BR). Form carries LGPD consent.
 - Pages: `app/index.html`, seven solution pages in `app/solucoes/` (including `ia.html`), `404.html`, `robots.txt`, `sitemap.xml`.
 - Contact channels: WhatsApp +55 11 95078-3983 (primary), e-mail, LinkedIn.
-- Undecided: legal entity details, pricing, engagement models.
+- Diagnóstico offer (home `#diagnostico`, proposed from market research 2026-09-30): 5 business days, read-only access, report with prioritized risks plus a 90-day roadmap, "a partir de R$ 7.500" for one environment in one cloud, fee credited if the client hires the implementation; first 30-minute conversation free. Undecided: legal entity details, engagement models beyond the diagnóstico.
 
 ## Brand Commitments
 
-Name: Dublin Consulting. Third-party vendor logos were removed at the owner's request (dark futuristic redesign); technologies are named in text. If vendor logos return, restore the footer disclaimer. Visual world: dark instrument field, transit-map diagram (one line per solution, told apart by stroke pattern), one electric-cyan accent.
+Name: Dublin Consulting. Third-party vendor logos were removed at the owner's request (dark futuristic redesign); technologies are named in text. Exception: the floating WhatsApp button uses the official WhatsApp glyph and green (#25D366) at the owner's request (2026-09-30). If vendor logos return, restore the footer disclaimer. Visual world: dark instrument field, transit-map diagram (one line per solution, told apart by stroke pattern), one electric-cyan accent.
 
 ## Evidence on Hand
 
