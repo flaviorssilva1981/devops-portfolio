@@ -2,6 +2,7 @@ const doc = document.documentElement;
 doc.classList.add("js");
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text) n.textContent = text; return n; };
 
 const yearEl = $("#year");
 if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -58,8 +59,11 @@ if (techMore && techMore.tagName === "DETAILS") {
 
 // Modal de conteúdo: <dialog> nativo (foco preso, Esc fecha, foco volta ao botão). Sem JS, o conteúdo completo
 // continua visível na página. Usado nos casos (#caso-*) e nos detalhes do diagnóstico (#diagnostico-detalhes).
-let dlg = null, dlgBody = null, dlgOpener = null;
-const openModal = (nodes, from) => {
+let dlg = null, dlgBody = null, dlgOpener = null, dlgRestore = [];
+const teasers = {};
+const restoreLive = () => { dlgRestore.forEach((fn) => fn()); dlgRestore = []; };
+// live: [{ node, home }] são nós reais (ex.: o formulário) movidos para o modal e devolvidos ao fechar.
+const openModal = (nodes, from, live = []) => {
   if (!dlg) {
     dlg = document.createElement("dialog");
     dlg.className = "modal";
@@ -68,21 +72,36 @@ const openModal = (nodes, from) => {
     document.body.appendChild(dlg);
     dlgBody = $(".modal-body", dlg);
     dlg.addEventListener("close", () => {
+      restoreLive();
       doc.classList.remove("modal-open");
-      if (/^#(caso-|diagnostico-detalhes)/.test(location.hash)) history.replaceState(null, "", location.pathname + location.search);
+      if (/^#(caso-|diagnostico-detalhes|contato|entregas)/.test(location.hash)) history.replaceState(null, "", location.pathname + location.search);
       if (dlgOpener) dlgOpener.focus();
     });
-    dlg.addEventListener("click", (e) => { if (e.target === dlg || e.target.closest(".modal-close") || e.target.closest("a[href^=\"#\"]")) dlg.close(); });
+    dlg.addEventListener("click", (e) => {
+      if (e.target.closest(".modal-back") && teasers.solucoes) { teasers.solucoes.show(null); return; }
+      const link = e.target.closest("a[href^=\"#\"]");
+      const swap = link && teasers[link.hash.slice(1)] && teasers[link.hash.slice(1)].openOnLink;
+      if (e.target === dlg || e.target.closest(".modal-close") || (link && !swap)) dlg.close();
+    });
   }
-  const clones = nodes.map((n) => n.cloneNode(true));
-  clones.forEach((c) => {
-    $$("[id]", c).forEach((n) => n.removeAttribute("id"));
-    [c, ...$$(".reveal", c)].forEach((n) => n.classList.remove("reveal", "is-visible"));
+  restoreLive();
+  const liveNodes = live.map((l) => l.node);
+  const clones = nodes.map((n) => {
+    if (liveNodes.includes(n)) return n;
+    const c = n.cloneNode(true);
+    $$("[id]", c).forEach((x) => x.removeAttribute("id"));
+    [c, ...$$(".reveal", c)].forEach((x) => x.classList.remove("reveal", "is-visible"));
+    $$("details", c).forEach((d) => { d.open = true; });
+    return c;
   });
-  const title = clones.map((c) => c.matches("h3") ? c : $("h3", c)).find(Boolean);
+  live.forEach((l) => dlgRestore.push(() => l.home.append(l.node)));
+  const title = clones.map((c) => (c.matches(".modal-title") ? c : $(".modal-title", c)) || (c.matches("h3") ? c : $("h3", c))).find(Boolean);
   if (title) title.id = "modalTitle";
   dlgBody.replaceChildren(...clones);
-  dlgOpener = from || null;
+  dlgBody.scrollTop = 0;
+  $(".modal-card", dlg).scrollTop = 0;
+  const inside = from && dlg.contains(from);
+  if (!inside && (from || !dlg.open)) dlgOpener = from || null;
   doc.classList.add("modal-open");
   if (!dlg.open) dlg.showModal();
 };
@@ -144,8 +163,81 @@ if (offer && canModal) {
   }
 }
 
+// Seções inteiras viram um cartão-resumo (título, resumo, imagem) e o conteúdo completo abre no modal.
+// O conteúdo original fica oculto na página (e intacto para quem não tem JS).
+const collapse = (id, opt) => {
+  const section = $(`#${id}`);
+  const src = section && $(":scope > .container", section);
+  if (!src || !canModal) return;
+  const title = $("h2", src).textContent;
+  const leadText = opt.lead ? opt.lead(src) : ($(".desc", src) || {}).textContent || "";
+  const btn = el("button", `btn ${opt.primary ? "btn-primary" : "btn-ghost"}`, `${opt.label} \u2192`);
+  btn.type = "button";
+  btn.setAttribute("aria-haspopup", "dialog");
+  const text = el("div", "teaser-text");
+  text.append(el("h2", "title", title), el("p", "desc", leadText), btn);
+  const wrap = el("div", "container teaser");
+  wrap.append(text);
+  const img = $("figure img", src);
+  if (img) {
+    const fig = el("figure", "cimg teaser-fig");
+    fig.append(img.cloneNode(true));
+    wrap.append(fig);
+    wrap.classList.add("has-fig");
+  }
+  src.hidden = true;
+  src.after(wrap);
+  const show = (from) => {
+    if (opt.build) {
+      const { nodes, live } = opt.build(src);
+      openModal(nodes, from, live);
+      return;
+    }
+    const c = src.cloneNode(true);
+    c.className = "modal-section";
+    c.hidden = false;
+    const h2 = $("h2", c);
+    h2.replaceWith(el("h3", "modal-title", h2.textContent));
+    openModal([c], from);
+  };
+  btn.addEventListener("click", () => show(btn));
+  teasers[id] = { show, openOnLink: Boolean(opt.openOnLink) };
+};
+const contactBuild = (src) => {
+  const form = $("#contactForm", src);
+  form.classList.remove("reveal", "is-visible");
+  const privacy = $(".consent a", form);
+  if (privacy) { privacy.target = "_blank"; privacy.rel = "noopener"; }
+  return {
+    nodes: [el("h3", "modal-title", $("h2", src).textContent), el("p", "lead", $(".desc", src).textContent), form, $(".contact-list", src)],
+    live: [{ node: form, home: form.parentElement }],
+  };
+};
+if (canModal) {
+  collapse("solucoes", { label: "Ver as sete frentes" });
+  collapse("metodo", { label: "Ver as seis etapas" });
+  collapse("cultura", { label: "Ver cultura e valores" });
+  collapse("sobre", { label: "Ver o perfil completo" });
+  collapse("contato", { label: "Abrir o formulário", primary: true, openOnLink: true, build: contactBuild });
+  collapse("entregas", {
+    label: "Ver o que entregamos",
+    openOnLink: true,
+    lead: (src) => { const t = $$(".deliver h3", src).map((h) => h.textContent); return `${t.length} entregas: ${t.slice(0, 3).join(", ")} e mais.`; },
+  });
+  document.addEventListener("click", (e) => {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    const a = e.target.closest("a[href^=\"#\"]");
+    const t = a && teasers[a.hash.slice(1)];
+    if (!t || !t.openOnLink) return;
+    e.preventDefault();
+    t.show(a.closest("dialog") ? null : a);
+  });
+}
+
 const openHash = () => {
   if (location.hash === "#diagnostico-detalhes") { const b = $("#diagnostico-detalhes"); if (b) b.click(); return; }
+  const tz = teasers[location.hash.slice(1)];
+  if (tz && tz.openOnLink) { tz.show(null); return; }
   const c = cases.find((x) => `#${x.id}` === location.hash);
   if (c && c.show) c.show(null);
 };
@@ -164,13 +256,12 @@ const fetchPage = (path) => {
   }
   return pageCache.get(path);
 };
-const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text) n.textContent = text; return n; };
 const viaModal = (selector, build) => {
   $$(selector).forEach((a) => a.setAttribute("aria-haspopup", "dialog"));
   document.addEventListener("click", (e) => {
     if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     const a = e.target.closest(selector);
-    if (!a || a.closest("dialog")) return;
+    if (!a || (a.closest("dialog") && !a.matches(".sol"))) return;
     const url = new URL(a.href, location.href);
     if (url.origin !== location.origin || url.pathname.replace(/\.html$/, "") === location.pathname.replace(/\.html$/, "") && !a.matches(".sol")) return;
     e.preventDefault();
@@ -205,7 +296,9 @@ if (canModal && window.fetch && window.DOMParser) {
     const ask = el("a", "btn btn-ghost", "Solicitar diagnóstico");
     ask.href = "#contato";
     cta.append(open, ask);
-    return [el("span", "proj-tag", "Solução"), el("h3", "", $("h1", d).textContent), el("p", "lead", $(".page-hero .lead", d).textContent), ...(deliver ? [deliver] : []), cta];
+    const back = el("button", "modal-back", "\u2190 Voltar às sete frentes");
+    back.type = "button";
+    return [...(a.closest("dialog") && teasers.solucoes ? [back] : []), el("span", "proj-tag", "Solução"), el("h3", "", $("h1", d).textContent), el("p", "lead", $(".page-hero .lead", d).textContent), ...(deliver ? [deliver] : []), cta];
   });
 }
 
