@@ -284,10 +284,11 @@ input:user-invalid, select:user-invalid, textarea:user-invalid { border-color: #
 .footer a:hover { color: #fff; text-decoration: underline; }
 .footer-bottom { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-top: 56px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.18); font-size: .85rem; }
 .footer-bottom span:last-child { max-width: 46em; }
-.wa-float { position: fixed; right: 20px; bottom: 20px; width: 56px; height: 56px; border-radius: 50%; background: var(--accent); color: var(--on-accent); display: grid; place-items: center; z-index: 40; box-shadow: 0 10px 24px -10px rgba(14, 20, 27, .5); transition: transform .16s var(--ease-out), background-color .15s ease; }
+/* Botão flutuante com as cores oficiais do WhatsApp (exceção ao acento único, a pedido do dono) */
+.wa-float { --wa-green: #25d366; position: fixed; right: 20px; bottom: 20px; width: 56px; height: 56px; border-radius: 50%; background: var(--wa-green); color: #fff; display: grid; place-items: center; z-index: 40; box-shadow: 0 10px 24px -10px rgba(37, 211, 102, .55); transition: transform .16s var(--ease-out), background-color .15s ease; }
 .wa-float:active { transform: scale(.94); }
-@media (hover: hover) and (pointer: fine) { .wa-float:hover { background: var(--accent-d); } }
-.wa-float svg { width: 28px; height: 28px; fill: currentColor; }
+@media (hover: hover) and (pointer: fine) { .wa-float:hover { background: #1ebe5d; } }
+.wa-float svg { width: 30px; height: 30px; fill: currentColor; }
 
 /* Motion: content is visible by default; JS opts in. One authored moment (the map is drawn once), quiet reveals elsewhere. */
 .js .reveal { opacity: 0; transform: translateY(12px); transition: opacity .5s var(--ease-out), transform .5s var(--ease-out); transition-delay: var(--d, 0ms); }
@@ -435,10 +436,23 @@ body[data-line="7"] .page-hero { background-image: linear-gradient(90deg, #000 0
 .fit li:first-child { border-top: 3px solid var(--ink); }
 .fit strong { display: block; color: var(--ink); font-size: 1.1rem; margin-bottom: 2px; }
 .values-title { margin-top: clamp(48px, 7vw, 88px); }
+/* Oferta de diagnóstico */
+.offer { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
+.offer-free { margin-top: 20px; color: var(--ink-2); font-size: .98rem; max-width: 30em; }
+.offer-card { display: grid; gap: 28px; background: var(--panel); border: 1px solid var(--rule); border-top: 3px solid var(--ink); padding: clamp(24px, 4vw, 40px); }
+.offer-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 24px; margin: 0; }
+.offer-facts dt { font-size: .88rem; font-weight: 600; color: var(--ink-2); }
+.offer-facts dd { margin: 4px 0 0; font-family: var(--display); font-weight: 700; font-size: 1.3rem; letter-spacing: -.02em; line-height: 1.15; }
+.offer-card .sub { margin-bottom: 4px; }
+.offer-list li { padding: 12px 0; border-bottom: 1px solid var(--line); color: var(--ink); }
+.offer-list li:first-child { border-top: 1px solid var(--line); }
+.offer-card p { color: var(--ink-2); font-size: .95rem; }
+@media (max-width: 1024px) { .offer { grid-template-columns: 1fr; } }
+@media (max-width: 480px) { .offer-facts { grid-template-columns: 1fr; } }
 /* Quem está por trás */
 .founder { display: grid; grid-template-columns: minmax(0, .75fr) minmax(0, 1.25fr); gap: clamp(32px, 6vw, 96px); align-items: center; }
 .founder-photo { max-width: 440px; }
-.founder-name { display: grid; gap: 4px; margin-top: 20px; }
+.founder-name { display: grid; gap: 6px; margin-top: 24px; }
 .founder-name strong { font-family: var(--display); font-size: 1.45rem; letter-spacing: -.02em; }
 .founder-name span { color: var(--ink-2); }
 .founder-sub { margin-top: 32px; margin-bottom: 4px; }
