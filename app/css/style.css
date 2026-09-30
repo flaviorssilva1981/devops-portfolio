@@ -583,3 +583,4 @@ body[data-line="7"] .page-hero { background-image: linear-gradient(90deg, var(--
 [hidden] { display: none !important; }
 .modal-body .tech-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 24px; }
 @media (max-width: 480px) { .modal-body .tech-groups { grid-template-columns: 1fr; } }
+.map .st-tick { stroke: var(--rule); stroke-width: 1; }
