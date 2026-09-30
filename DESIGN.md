@@ -1,6 +1,6 @@
 ---
 name: Dublin Consulting
-description: A transit-map consultancy site on true black, near-white ink and one electric cyan.
+description: A transit-map consultancy site on a soft slate ground, near-white ink and one electric cyan.
 colors:
   ground: "#000000"
   panel: "#0a0a0a"
