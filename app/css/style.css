@@ -584,3 +584,21 @@ body[data-line="7"] .page-hero { background-image: linear-gradient(90deg, var(--
 .modal-body .tech-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 24px; }
 @media (max-width: 480px) { .modal-body .tech-groups { grid-template-columns: 1fr; } }
 .map .st-tick { stroke: var(--rule); stroke-width: 1; }
+
+/* Relatório em PDF (imprimir): logo na primeira página; cabeçalho e rodapé profissionais em todas as páginas.
+   Margin boxes funcionam no Chrome/Edge 131+; em outros navegadores valem os cabeçalhos do próprio navegador. */
+.print-brand { display: none; }
+@media print {
+  .print-brand { display: block; margin: 0 0 18px; }
+  .print-brand img { display: block; height: 40px; width: auto; }
+  body.report-page { page: report; }
+  @page report {
+    size: A4;
+    margin: 24mm 16mm 20mm;
+    @top-left { content: url("/img/logo-print.svg"); vertical-align: middle; }
+    @top-right { content: "Relatório de diagnóstico \00B7  Exemplo ilustrativo (dados fictícios)"; font: 8.5pt Arial, Helvetica, sans-serif; color: #555; vertical-align: middle; }
+    @bottom-left { content: "Dublin Consulting \00B7  Relatório técnico profissional \00B7  dublinconsulting.com.br"; font: 8.5pt Arial, Helvetica, sans-serif; color: #555; vertical-align: middle; }
+    @bottom-right { content: "Página " counter(page) " de " counter(pages); font: 8.5pt Arial, Helvetica, sans-serif; color: #555; vertical-align: middle; }
+  }
+  @page report:first { @top-left { content: none; } }
+}
