@@ -1,5 +1,11 @@
 # Mesmo padrão usado nas demais apps do cluster (ex.: aiops.dublinconsulting.com.br):
-# ingress-nginx + cert-manager (ClusterIssuer "letsencrypt") + external-dns/Cloudflare.
+# ingress-nginx + cert-manager (ClusterIssuer "letsencrypt", HTTP-01) + external-dns/Cloudflare.
+#
+# Hosts: dublinconsulting.com.br é o endereço principal; www e o subdomínio antigo
+# (devops-portfolio) continuam atendidos para redirecionar com 301 (redirecionamento feito
+# no nginx da aplicação, pois o controller tem allow-snippet-annotations=false).
+# Um único certificado cobre os três nomes; o secretName é mantido para que o cert-manager
+# reemita o mesmo Certificate sem janela sem TLS no host antigo.
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -7,11 +13,31 @@ metadata:
   namespace: devops-portfolio
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
-    external-dns.alpha.kubernetes.io/hostname: devops-portfolio.dublinconsulting.com.br
+    external-dns.alpha.kubernetes.io/hostname: dublinconsulting.com.br,www.dublinconsulting.com.br,devops-portfolio.dublinconsulting.com.br
     external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
 spec:
   ingressClassName: nginx
   rules:
+    - host: dublinconsulting.com.br
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: devops-portfolio
+                port:
+                  name: http
+    - host: www.dublinconsulting.com.br
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: devops-portfolio
+                port:
+                  name: http
     - host: devops-portfolio.dublinconsulting.com.br
       http:
         paths:
@@ -24,5 +50,7 @@ spec:
                   name: http
   tls:
     - hosts:
+        - dublinconsulting.com.br
+        - www.dublinconsulting.com.br
         - devops-portfolio.dublinconsulting.com.br
       secretName: devops-portfolio-tls
