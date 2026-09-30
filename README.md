@@ -5,7 +5,7 @@ desenvolvimento DevOps, empacotado em uma imagem Docker mínima (Nginx Alpine),
 publicada no **Docker Hub** via **GitHub Actions** e implantada no cluster
 **OKE (Oracle Kubernetes Engine)**.
 
-Live: https://devops-portfolio.dublinconsulting.com.br
+Live: https://dublinconsulting.com.br
 
 ## Estrutura do projeto
 

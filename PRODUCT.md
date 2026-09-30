@@ -20,7 +20,7 @@ Multi-cloud and DevSecOps specialist: certified across AWS, Azure, GCP and OCI, 
 
 ## Operating Context
 
-- Deployed as a static Nginx image (Alpine, non-root, port 8080) to OKE via GitHub Actions and Docker Hub; live at https://devops-portfolio.dublinconsulting.com.br.
+- Deployed as a static Nginx image (Alpine, non-root, port 8080) to OKE via GitHub Actions and Docker Hub; live at https://dublinconsulting.com.br.
 - Conversion runs through a client-side form that composes a WhatsApp message or, via a second button, an e-mail (`mailto:`); nothing is stored or sent to a backend. Users confirm before sending. The LGPD notice lives at `/privacidade` (linked from the consent checkbox and every footer). Share previews use `img/og-image.jpg` (1200×630).
 
 ## Capabilities and Constraints
