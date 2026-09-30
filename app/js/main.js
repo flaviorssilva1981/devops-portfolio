@@ -56,6 +56,57 @@ if (techMore && techMore.tagName === "DETAILS") {
   addEventListener("hashchange", openIfTarget);
 }
 
+// Casos: cada caso vira um cartão compacto que abre o conteúdo completo num <dialog> nativo (foco preso,
+// Esc fecha). Sem JS, a lista completa continua visível. Links #caso-* abrem o modal direto.
+const cases = $$(".proj-list .case");
+if (cases.length && typeof HTMLDialogElement === "function") {
+  const dlg = document.createElement("dialog");
+  dlg.className = "modal";
+  dlg.setAttribute("aria-labelledby", "modalTitle");
+  dlg.innerHTML = '<div class="modal-card"><button type="button" class="modal-close" aria-label="Fechar">&times;</button><div class="modal-body"></div></div>';
+  document.body.appendChild(dlg);
+  const body = $(".modal-body", dlg);
+  let opener = null;
+  const open = (c, from) => {
+    const main = $(".case-main", c).cloneNode(true);
+    $("h3", main).id = "modalTitle";
+    $$("[id]", main).forEach((n) => { if (n.id !== "modalTitle") n.removeAttribute("id"); });
+    const tag = document.createElement("span");
+    tag.className = "proj-tag";
+    tag.textContent = $(".proj-tag", c).textContent;
+    body.replaceChildren(tag, main);
+    opener = from || null;
+    doc.classList.add("modal-open");
+    if (!dlg.open) dlg.showModal();
+  };
+  dlg.addEventListener("close", () => {
+    doc.classList.remove("modal-open");
+    if (location.hash.startsWith("#caso-")) history.replaceState(null, "", location.pathname + location.search);
+    if (opener) opener.focus();
+  });
+  dlg.addEventListener("click", (e) => { if (e.target === dlg || e.target.closest(".modal-close")) dlg.close(); });
+  cases.forEach((c) => {
+    const res = $(".case-res", c);
+    const summary = document.createElement("p");
+    summary.className = "case-summary";
+    summary.textContent = res ? res.textContent : "";
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "case-open";
+    btn.innerHTML = 'Ver o caso completo <span aria-hidden="true">&rarr;</span>';
+    btn.setAttribute("aria-label", `Ver o caso completo: ${$("h3", c).textContent}`);
+    btn.addEventListener("click", () => open(c, btn));
+    $(".case-main", c).append(summary, btn);
+    c.classList.add("is-card");
+  });
+  const openHash = () => {
+    const c = cases.find((x) => `#${x.id}` === location.hash);
+    if (c) open(c, null);
+  };
+  openHash();
+  addEventListener("hashchange", openHash);
+}
+
 // Entrada ao rolar: uma vez por elemento, com cascata entre irmãos
 const io = new IntersectionObserver((entries) => {
   entries.forEach((e) => {
