@@ -8,6 +8,12 @@ on:
 permissions:
   contents: read
 
+# Um pipeline por vez no mesmo branch: merges em sequência entram na fila (o mais recente roda por último)
+# em vez de fazer build e deploy em paralelo, o que podia deixar produção na imagem mais antiga.
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
 env:
   IMAGE_NAME: devops-portfolio
   NAMESPACE: devops-portfolio
