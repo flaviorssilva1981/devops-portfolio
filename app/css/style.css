@@ -228,6 +228,16 @@ input:user-invalid, select:user-invalid, textarea:user-invalid { border-color: #
 .consent { display: flex; gap: 12px; align-items: flex-start; font-size: .92rem; color: var(--ink-2); }
 .consent input { width: 20px; height: 20px; margin-top: 2px; flex: none; accent-color: var(--accent); }
 .form-note { font-size: .95rem; color: var(--accent); min-height: 1.4em; font-weight: 600; }
+.send-row { display: grid; gap: 12px; }
+.consent a { color: var(--ink); text-underline-offset: 3px; }
+/* Página de privacidade */
+.legal { max-width: 760px; }
+.legal h2 { font-size: 1.35rem; letter-spacing: -.015em; margin-top: 40px; }
+.legal h2:first-child { margin-top: 0; }
+.legal p, .legal ul { color: var(--ink-2); margin-top: 10px; max-width: 44em; }
+.legal ul { padding-left: 1.2em; list-style: disc; }
+.legal li { margin-top: 6px; }
+.legal a { color: var(--ink); text-underline-offset: 3px; overflow-wrap: anywhere; }
 
 /* Inner pages */
 .page-hero { position: relative; padding: clamp(48px, 7vw, 88px) 0 clamp(40px, 6vw, 72px); border-bottom: 1px solid var(--line); }

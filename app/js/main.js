@@ -58,10 +58,10 @@ $$(".reveal").forEach((el) => {
 });
 
 
-// Formulário: monta a mensagem e abre o WhatsApp (nada é armazenado no site)
+// Formulário: monta a mensagem e abre o WhatsApp ou o e-mail, conforme o botão (nada é armazenado no site)
 const form = $("#contactForm"), formNote = $("#formNote");
 if (form) {
-  const WHATSAPP = "5511950783983";
+  const WHATSAPP = "5511950783983", EMAIL = "flavio.rssilva@gmail.com";
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     const d = new FormData(form);
@@ -75,6 +75,11 @@ if (form) {
       "",
       d.get("message"),
     ].join("\n");
+    if (event.submitter && event.submitter.value === "email") {
+      location.href = `mailto:${EMAIL}?subject=${encodeURIComponent("Solicitação de diagnóstico")}&body=${encodeURIComponent(text)}`;
+      formNote.textContent = "Abrindo o seu e-mail com a mensagem. Confirme o envio por lá.";
+      return;
+    }
     window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`, "_blank", "noopener");
     formNote.textContent = "Abrindo o WhatsApp com a sua mensagem. Confirme o envio por lá.";
   });

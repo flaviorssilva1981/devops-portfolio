@@ -21,7 +21,7 @@ Multi-cloud and DevSecOps specialist: certified across AWS, Azure, GCP and OCI, 
 ## Operating Context
 
 - Deployed as a static Nginx image (Alpine, non-root, port 8080) to OKE via GitHub Actions and Docker Hub; live at https://devops-portfolio.dublinconsulting.com.br.
-- Conversion runs through a client-side form that composes a WhatsApp message; nothing is stored or sent to a backend. Users confirm before sending.
+- Conversion runs through a client-side form that composes a WhatsApp message or, via a second button, an e-mail (`mailto:`); nothing is stored or sent to a backend. Users confirm before sending. The LGPD notice lives at `/privacidade` (linked from the consent checkbox and every footer). Share previews use `img/og-image.jpg` (1200×630).
 
 ## Capabilities and Constraints
 
@@ -39,7 +39,7 @@ Name: Dublin Consulting. Third-party vendor logos were removed at the owner's re
 
 - Real: technology list, solution descriptions, method steps, contact channels, and platform certifications held by the lead engineer (AWS SAA, AZ-900, GCP CDL, OCI Architect). AI Solutions copy is drawn from the lead engineer's own work: an AIOps agent that watches Kubernetes warning events and proposes/executes remediation via MCP, a real-time voice assistant on Gemini Live, and multi-provider LLM/MCP/RAG experience (Claude, GPT, Gemini). Owner should confirm wording.
 - Real cases (owner-confirmed 2026-09-30, shown anonymized in the home "Projetos entregues" section): FinOps with multi-cloud governance, tagging and cost controls (~25% lower monthly cloud cost); refactor from VMs to AKS; migration of workloads from on-premises to AWS; the AIOps agent for Kubernetes. All four were client work: never name the clients. Own open-source projects on GitHub (flaviorssilva1981): guiadodevops (multi-cloud GitOps platform, self-hosted OpenClaw on OKE), boilerplate-copa-aiops, azuredevops-aks, AzureDevops-AppService, jarvis-ai. Case details beyond these facts (metrics, sectors, durations) are not confirmed.
-- Founder (owner-confirmed 2026-09-30): Flavio Silva, senior DevOps engineer leading Dublin Consulting, 15 years of experience; real photo at `app/img/photos/flavio.webp` (the only real person on the site); GitHub github.com/flaviorssilva1981. Shown in the home "Quem está por trás" section (`#sobre`). The earlier "mais de 7 anos" claim is superseded by the confirmed 15 years.
+- Founder (owner-confirmed 2026-09-30): Flavio Silva, senior DevOps engineer leading Dublin Consulting, 15 years of experience; owner-provided portrait at `app/img/photos/flavio.webp` (the only image of a real person on the site; replaced 2026-09-30 with a new owner-supplied portrait); GitHub github.com/flaviorssilva1981. Shown in the home "Quem está por trás" section (`#sobre`). The earlier "mais de 7 anos" claim is superseded by the confirmed 15 years.
 - Absent, must not be fabricated: named clients, testimonials, case-study results beyond the confirmed cases above, customer logos, revenue or savings figures other than the confirmed ~25% FinOps result. Any stat on the site must reflect true, owner-confirmed facts (15 years of experience confirmed 2026-09-30).
 
 ## Product Principles

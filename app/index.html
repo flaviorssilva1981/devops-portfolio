@@ -12,7 +12,11 @@
 <meta property="og:description" content="Dublin Consulting: consultoria em Cloud, DevOps, Kubernetes e IA. Do diagnóstico à primeira entrega em produção, em AWS, Azure, GCP e OCI." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://devops-portfolio.dublinconsulting.com.br/" />
-<meta property="og:image" content="https://devops-portfolio.dublinconsulting.com.br/img/logo-light.svg" />
+<meta property="og:image" content="https://devops-portfolio.dublinconsulting.com.br/img/og-image.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Dublin Consulting: Cloud e DevOps inteligentes, operação segura." />
+<meta name="twitter:card" content="summary_large_image" />
 <link rel="icon" type="image/svg+xml" href="/img/favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -31,7 +35,7 @@
       </div>
       <a href="/#projetos">Projetos</a>
       <a href="/#tecnologias">Tecnologias</a>
-      <a href="/#metodo">Método</a><a href="/#cultura">Cultura</a>
+      <a href="/#metodo">Método</a><a href="/#cultura">Cultura</a><a href="/#sobre">Sobre</a>
       <a href="/#contato" class="nav-cta">Solicitar diagnóstico</a>
     </nav>
     <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-controls="navLinks" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -97,7 +101,7 @@
   </div></section>
 
   <section id="sobre" class="section"><div class="container founder">
-    <figure class="cimg founder-photo reveal"><img src="/img/photos/flavio.webp" alt="Flavio Silva em São Paulo" width="560" height="700" loading="lazy" decoding="async" /></figure>
+    <figure class="cimg founder-photo reveal"><img src="/img/photos/flavio.webp" alt="Flavio Silva" width="560" height="700" loading="lazy" decoding="async" /></figure>
     <div>
       <h2 class="title reveal">Quem está por trás</h2>
       <p class="founder-name reveal"><strong>Flavio Silva</strong><span>Engenheiro DevOps sênior à frente da Dublin Consulting</span></p>
@@ -118,7 +122,7 @@
   <section id="contato" class="section"><div class="container contact-grid">
     <div>
       <h2 class="title reveal">Solicite um diagnóstico</h2>
-      <p class="desc reveal">Conte sobre o seu projeto. Ao enviar, abrimos uma conversa no WhatsApp com os dados preenchidos; você confirma antes de enviar.</p>
+      <p class="desc reveal">Conte sobre o seu projeto. Ao enviar, abrimos o WhatsApp ou o seu e-mail com os dados preenchidos; você confirma antes de enviar.</p>
       <figure class="cimg reveal"><img src="/img/photos/collab.webp" alt="Reunião híbrida com pessoas na sala e em videochamada" width="704" height="384" loading="lazy" decoding="async" /></figure>
       <ul class="contact-list reveal">
         <li><span>WhatsApp</span><a href="https://wa.me/5511950783983" target="_blank" rel="noopener">+55 11 95078-3983</a></li>
@@ -131,8 +135,8 @@
       <div class="form-row"><div class="fld"><label for="f-company">Empresa</label><input id="f-company" type="text" name="company" autocomplete="organization" /></div><div class="fld"><label for="f-cloud">Cloud utilizada</label><select id="f-cloud" name="cloud"><option value="">Selecione</option><option>AWS</option><option>Azure</option><option>Google Cloud</option><option>OCI</option><option>Multi-cloud</option><option>On-premises</option></select></div></div>
       <div class="fld"><label for="f-type">Tipo de projeto</label><select id="f-type" name="type" required><option value="">Selecione</option><option>Migração para cloud</option><option>Kubernetes / Containers</option><option>CI/CD e automação</option><option>Infraestrutura como Código</option><option>DevSecOps</option><option>Observabilidade</option><option>Soluções de IA</option><option>Deploy de CMS</option><option>Outro</option></select></div>
       <div class="fld"><label for="f-message">Conte sobre o projeto</label><textarea id="f-message" name="message" rows="4" required></textarea></div>
-      <label class="consent"><input type="checkbox" name="lgpd" required /><span>Concordo em compartilhar estes dados para receber contato (LGPD). Nada é armazenado neste site.</span></label>
-      <button type="submit" class="btn btn-primary btn-block">Enviar pelo WhatsApp <svg class="ico " aria-hidden="true"><use href="/img/sprite.svg#i-arrow"/></svg></button>
+      <label class="consent"><input type="checkbox" name="lgpd" required /><span>Concordo em compartilhar estes dados para receber contato (LGPD). Nada é armazenado neste site. <a href="/privacidade">Política de privacidade</a>.</span></label>
+      <div class="send-row"><button type="submit" value="whatsapp" class="btn btn-primary btn-block">Enviar pelo WhatsApp <svg class="ico " aria-hidden="true"><use href="/img/sprite.svg#i-arrow"/></svg></button><button type="submit" value="email" class="btn btn-ghost btn-block">Enviar por e-mail</button></div>
       <p class="form-note" id="formNote" role="status"></p>
     </form>
   </div></section>
@@ -141,7 +145,7 @@
   <div class="container footer-grid">
     <div><img class="logo" src="/img/logo-light.svg" alt="Dublin Consulting" width="188" height="40" /><p class="footer-desc">Cloud, DevOps e Kubernetes com segurança e previsibilidade.</p></div>
     <div><h3>Soluções</h3><a href="/solucoes/cloud.html">Cloud &amp; Multi-cloud</a><a href="/solucoes/kubernetes.html">Kubernetes &amp; Containers</a><a href="/solucoes/cicd.html">CI/CD &amp; Automação</a><a href="/solucoes/iac.html">Infraestrutura como Código</a><a href="/solucoes/devsecops.html">DevSecOps</a><a href="/solucoes/observabilidade.html">Observabilidade</a><a href="/solucoes/ia.html">Soluções de IA</a></div>
-    <div><h3>Empresa</h3><a href="/#projetos">Projetos</a><a href="/#tecnologias">Tecnologias</a><a href="/#metodo">Método</a><a href="/#cultura">Cultura</a><a href="/#contato">Contato</a></div>
+    <div><h3>Empresa</h3><a href="/#projetos">Projetos</a><a href="/#tecnologias">Tecnologias</a><a href="/#metodo">Método</a><a href="/#cultura">Cultura</a><a href="/#sobre">Sobre</a><a href="/#contato">Contato</a><a href="/privacidade">Privacidade</a></div>
     <div><h3>Contato</h3><a href="https://wa.me/5511950783983" target="_blank" rel="noopener">WhatsApp</a><a href="mailto:flavio.rssilva@gmail.com">E-mail</a><a href="https://www.linkedin.com/in/flavio-santos-5628b05b/" target="_blank" rel="noopener">LinkedIn</a></div>
   </div>
   <div class="container footer-bottom"><span>&copy; <span id="year"></span> Dublin Consulting. Todos os direitos reservados.</span></div>
