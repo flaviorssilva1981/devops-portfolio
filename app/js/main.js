@@ -131,7 +131,8 @@ if (offer && canModal) {
       const t1 = document.createElement("h3"); t1.className = "sub"; t1.textContent = "O que analisamos";
       const t2 = document.createElement("h3"); t2.className = "sub"; t2.textContent = "Como funciona";
       const hp = how.cloneNode(true);
-      hp.textContent = how.textContent.replace(/^Como funciona:\s*/, "");
+      const plain = how.textContent.replace(/^Como funciona:\s*/, "");
+      hp.textContent = plain.charAt(0).toUpperCase() + plain.slice(1);
       wrap.append(h, t1, sc, t2, hp);
       openModal([wrap], btn);
     });
