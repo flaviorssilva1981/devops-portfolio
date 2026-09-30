@@ -38,7 +38,8 @@ Name: Dublin Consulting. Third-party vendor logos were removed at the owner's re
 ## Evidence on Hand
 
 - Real: technology list, solution descriptions, method steps, contact channels, and platform certifications held by the lead engineer (AWS SAA, AZ-900, GCP CDL, OCI Architect). AI Solutions copy is drawn from the lead engineer's own work: an AIOps agent that watches Kubernetes warning events and proposes/executes remediation via MCP, a real-time voice assistant on Gemini Live, and multi-provider LLM/MCP/RAG experience (Claude, GPT, Gemini). Owner should confirm wording.
-- Absent, must not be fabricated: named clients, testimonials, case-study results, customer logos, revenue or savings figures. The project cards describe project types, not real named engagements. Hero stat counters must reflect true facts only (verify "anos de experiência" against the source before changing).
+- Real cases (owner-confirmed 2026-09-30, shown anonymized in the home "Projetos entregues" section): FinOps with multi-cloud governance, tagging and cost controls (~25% lower monthly cloud cost); refactor from VMs to AKS; migration of workloads to AWS; the AIOps agent for Kubernetes. All four were client work: never name the clients. Own open-source projects on GitHub (flaviorssilva1981): guiadodevops (multi-cloud GitOps platform, self-hosted OpenClaw on OKE), boilerplate-copa-aiops, azuredevops-aks, AzureDevops-AppService, jarvis-ai. Case details beyond these facts (metrics, sectors, durations) are not confirmed.
+- Absent, must not be fabricated: named clients, testimonials, case-study results beyond the confirmed cases above, customer logos, revenue or savings figures other than the confirmed ~25% FinOps result. The project cards describe project types, not real named engagements. Hero stat counters must reflect true facts only (verify "anos de experiência" against the source before changing).
 
 ## Product Principles
 
