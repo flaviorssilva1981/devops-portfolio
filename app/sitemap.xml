@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://dublinconsulting.com.br/</loc></url>
-  <url><loc>https://dublinconsulting.com.br/solucoes/cloud.html</loc></url>
-  <url><loc>https://dublinconsulting.com.br/solucoes/kubernetes.html</loc></url>
-  <url><loc>https://dublinconsulting.com.br/solucoes/cicd.html</loc></url>
-  <url><loc>https://dublinconsulting.com.br/solucoes/iac.html</loc></url>
-  <url><loc>https://dublinconsulting.com.br/solucoes/devsecops.html</loc></url>
-  <url><loc>https://dublinconsulting.com.br/solucoes/observabilidade.html</loc></url>
-  <url><loc>https://dublinconsulting.com.br/solucoes/ia.html</loc></url>
-  <url><loc>https://dublinconsulting.com.br/privacidade</loc></url>
+  <url><loc>https://dublinconsulting.com.br/</loc><lastmod>2026-09-30</lastmod></url>
+  <url><loc>https://dublinconsulting.com.br/solucoes/cloud.html</loc><lastmod>2026-09-30</lastmod></url>
+  <url><loc>https://dublinconsulting.com.br/solucoes/kubernetes.html</loc><lastmod>2026-09-30</lastmod></url>
+  <url><loc>https://dublinconsulting.com.br/solucoes/cicd.html</loc><lastmod>2026-09-30</lastmod></url>
+  <url><loc>https://dublinconsulting.com.br/solucoes/iac.html</loc><lastmod>2026-09-30</lastmod></url>
+  <url><loc>https://dublinconsulting.com.br/solucoes/devsecops.html</loc><lastmod>2026-09-30</lastmod></url>
+  <url><loc>https://dublinconsulting.com.br/solucoes/observabilidade.html</loc><lastmod>2026-09-30</lastmod></url>
+  <url><loc>https://dublinconsulting.com.br/solucoes/ia.html</loc><lastmod>2026-09-30</lastmod></url>
+  <url><loc>https://dublinconsulting.com.br/privacidade</loc><lastmod>2026-09-30</lastmod></url>
 </urlset>
