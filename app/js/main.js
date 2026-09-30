@@ -72,10 +72,13 @@ const openModal = (nodes, from) => {
       if (/^#(caso-|diagnostico-detalhes)/.test(location.hash)) history.replaceState(null, "", location.pathname + location.search);
       if (dlgOpener) dlgOpener.focus();
     });
-    dlg.addEventListener("click", (e) => { if (e.target === dlg || e.target.closest(".modal-close")) dlg.close(); });
+    dlg.addEventListener("click", (e) => { if (e.target === dlg || e.target.closest(".modal-close") || e.target.closest("a[href^=\"#\"]")) dlg.close(); });
   }
   const clones = nodes.map((n) => n.cloneNode(true));
-  clones.forEach((c) => { $$("[id]", c).forEach((n) => n.removeAttribute("id")); });
+  clones.forEach((c) => {
+    $$("[id]", c).forEach((n) => n.removeAttribute("id"));
+    [c, ...$$(".reveal", c)].forEach((n) => n.classList.remove("reveal", "is-visible"));
+  });
   const title = clones.map((c) => c.matches("h3") ? c : $("h3", c)).find(Boolean);
   if (title) title.id = "modalTitle";
   dlgBody.replaceChildren(...clones);
@@ -148,6 +151,63 @@ const openHash = () => {
 };
 openHash();
 addEventListener("hashchange", openHash);
+
+// Pop-ups em todo o site: links internos abrem o conteúdo no modal, buscado da própria página de destino
+// (mesma origem, sem duplicar texto). Ctrl/Cmd+clique, clique do meio e falha de rede seguem o link normal.
+const pageCache = new Map();
+const fetchPage = (path) => {
+  if (!pageCache.has(path)) {
+    pageCache.set(path, fetch(path, { credentials: "same-origin" })
+      .then((r) => { if (!r.ok) throw new Error(r.status); return r.text(); })
+      .then((t) => new DOMParser().parseFromString(t, "text/html"))
+      .catch((err) => { pageCache.delete(path); throw err; }));
+  }
+  return pageCache.get(path);
+};
+const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text) n.textContent = text; return n; };
+const viaModal = (selector, build) => {
+  $$(selector).forEach((a) => a.setAttribute("aria-haspopup", "dialog"));
+  document.addEventListener("click", (e) => {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    const a = e.target.closest(selector);
+    if (!a || a.closest("dialog")) return;
+    const url = new URL(a.href, location.href);
+    if (url.origin !== location.origin || url.pathname.replace(/\.html$/, "") === location.pathname.replace(/\.html$/, "") && !a.matches(".sol")) return;
+    e.preventDefault();
+    build(url, a).then((nodes) => openModal(nodes, a)).catch(() => { location.href = a.href; });
+  });
+};
+if (canModal && window.fetch && window.DOMParser) {
+  // Política de privacidade (rodapé e consentimento do formulário)
+  viaModal('a[href="/privacidade"]', async (url) => {
+    const d = await fetchPage(url.pathname);
+    const title = el("h3", "", $("h1", d).textContent);
+    const legal = $(".legal", d);
+    legal.className = "legal";
+    return [title, el("p", "lead", $(".lead", d).textContent), legal];
+  });
+  // Casos vindos das páginas de solução: a home já abre pelo #caso-*
+  if (!cases.length) {
+    viaModal('a[href*="#caso-"]', async (url) => {
+      const d = await fetchPage("/");
+      const c = $(url.hash, d);
+      if (!c) throw new Error("caso");
+      return [el("span", "proj-tag", $(".proj-tag", c).textContent), $(".case-main", c)];
+    });
+  }
+  // Soluções na home: resumo e entregas no modal, com link para a página completa
+  viaModal(".sol-list a.sol", async (url, a) => {
+    const d = await fetchPage(url.pathname);
+    const deliver = $(".deliver", d);
+    const cta = el("div", "cta-row");
+    const open = el("a", "btn btn-primary", "Abrir a página completa");
+    open.href = url.pathname;
+    const ask = el("a", "btn btn-ghost", "Solicitar diagnóstico");
+    ask.href = "#contato";
+    cta.append(open, ask);
+    return [el("span", "proj-tag", "Solução"), el("h3", "", $("h1", d).textContent), el("p", "lead", $(".page-hero .lead", d).textContent), ...(deliver ? [deliver] : []), cta];
+  });
+}
 
 // Entrada ao rolar: uma vez por elemento, com cascata entre irmãos
 const io = new IntersectionObserver((entries) => {
