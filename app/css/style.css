@@ -425,6 +425,15 @@ body[data-line="7"] .page-hero { background-image: linear-gradient(90deg, #000 0
 .fit li:first-child { border-top: 3px solid var(--ink); }
 .fit strong { display: block; color: var(--ink); font-size: 1.1rem; margin-bottom: 2px; }
 .values-title { margin-top: clamp(48px, 7vw, 88px); }
+/* Quem está por trás */
+.founder { display: grid; grid-template-columns: minmax(0, .75fr) minmax(0, 1.25fr); gap: clamp(32px, 6vw, 96px); align-items: center; }
+.founder-photo { max-width: 440px; }
+.founder-name { display: grid; gap: 4px; margin-top: 20px; }
+.founder-name strong { font-family: var(--display); font-size: 1.45rem; letter-spacing: -.02em; }
+.founder-name span { color: var(--ink-2); }
+.founder-sub { margin-top: 32px; margin-bottom: 4px; }
+.certs strong { margin-bottom: 0; font-size: 1rem; }
+@media (max-width: 860px) { .founder { grid-template-columns: 1fr; } .founder-photo { max-width: 340px; } }
 .values { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; }
 .values li { border-top: 3px solid var(--ink); padding-top: 16px; }
 .values h3 { font-size: 1.25rem; margin-bottom: 8px; }
