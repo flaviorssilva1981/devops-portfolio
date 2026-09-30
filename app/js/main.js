@@ -19,23 +19,28 @@ if (navLinks && navToggle) {
   addEventListener("keydown", (e) => { if (e.key === "Escape") setOpen(false); });
 }
 
-// Vídeo do hero: só toca se o usuário não pediu menos movimento nem economia de dados, pausa fora da tela
-// e pode ser pausado manualmente (WCAG 2.2.2). Sem JS ou sem suporte a WebM, o poster permanece.
+// Vídeo do hero: só baixa e toca depois que a página carregou (fotos e fontes primeiro), não toca com
+// "menos movimento", economia de dados ou conexão lenta, pausa fora da tela e pode ser pausado (WCAG 2.2.2).
+// Sem JS ou sem suporte a WebM, o poster permanece.
 const heroVideo = $(".hero-video"), heroPause = $("#heroPause");
 if (heroVideo && heroPause) {
   const conn = navigator.connection;
-  let userPaused = matchMedia("(prefers-reduced-motion: reduce)").matches || Boolean(conn && conn.saveData);
+  const slow = Boolean(conn && (conn.saveData || /2g|3g/.test(conn.effectiveType || "")));
+  let userPaused = matchMedia("(prefers-reduced-motion: reduce)").matches || slow;
+  let pageLoaded = document.readyState === "complete", inView = true;
   const label = () => {
     heroPause.classList.toggle("is-paused", userPaused);
     heroPause.setAttribute("aria-label", userPaused ? "Reproduzir animação de fundo" : "Pausar animação de fundo");
   };
   const play = () => {
-    if (userPaused) return;
+    if (userPaused || !pageLoaded || !inView) return;
     heroVideo.play().catch((err) => { if (err.name === "NotSupportedError") heroPause.hidden = true; });
   };
-  new IntersectionObserver(([e]) => (e.isIntersecting ? play() : heroVideo.pause()), { threshold: 0.1 }).observe(heroVideo);
+  new IntersectionObserver(([e]) => { inView = e.isIntersecting; if (inView) play(); else heroVideo.pause(); }, { threshold: 0.1 }).observe(heroVideo);
+  if (!pageLoaded) addEventListener("load", () => { pageLoaded = true; setTimeout(play, 300); }, { once: true });
   heroPause.addEventListener("click", () => {
     userPaused = !userPaused;
+    pageLoaded = true;
     label();
     if (userPaused) heroVideo.pause(); else play();
   });
@@ -50,7 +55,7 @@ const io = new IntersectionObserver((entries) => {
     e.target.classList.add("is-visible");
     io.unobserve(e.target);
   });
-}, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
+}, { threshold: 0.05, rootMargin: "0px 0px -3% 0px" });
 $$(".reveal").forEach((el) => {
   const sibs = $$(".reveal", el.parentElement);
   el.style.setProperty("--d", `${Math.min(sibs.indexOf(el), 5) * 60}ms`);
