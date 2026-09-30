@@ -578,3 +578,6 @@ body[data-line="7"] .page-hero { background-image: linear-gradient(90deg, var(--
 .modal-back { justify-self: start; padding: 4px 0; background: none; border: 0; border-bottom: 1px solid var(--accent); color: var(--accent-d); font: inherit; font-weight: 600; cursor: pointer; }
 .modal-back:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 @media (max-width: 640px) { .modal-body .values { grid-template-columns: 1fr; } }
+
+/* O atributo hidden precisa vencer o display: grid de .founder, .contact-grid, .split etc. (seções recolhidas em cartão) */
+[hidden] { display: none !important; }
