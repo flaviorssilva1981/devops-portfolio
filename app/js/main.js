@@ -48,6 +48,14 @@ if (heroVideo && heroPause) {
   heroPause.hidden = false;
 }
 
+// Tecnologias ficam recolhidas: abre o bloco quando alguém chega por #tecnologias
+const techMore = $("#tecnologias");
+if (techMore && techMore.tagName === "DETAILS") {
+  const openIfTarget = () => { if (location.hash === "#tecnologias") techMore.open = true; };
+  openIfTarget();
+  addEventListener("hashchange", openIfTarget);
+}
+
 // Entrada ao rolar: uma vez por elemento, com cascata entre irmãos
 const io = new IntersectionObserver((entries) => {
   entries.forEach((e) => {
