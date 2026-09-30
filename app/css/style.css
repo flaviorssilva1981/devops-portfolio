@@ -85,8 +85,18 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 @media (hover: hover) and (pointer: fine) { .btn:hover .ico { transform: translateX(4px); } }
 
 /* Hero */
-.hero { position: relative; display: flex; align-items: center; min-height: min(720px, 88vh); padding: clamp(56px, 8vw, 112px) 0; overflow: clip; background: linear-gradient(90deg, rgba(0, 0, 0, .5) 0%, rgba(0, 0, 0, 0) 55%), url("/img/photos/platform.webp") right center / cover no-repeat, #000; }
-.hero > .container { position: relative; }
+.hero { position: relative; display: flex; align-items: center; min-height: min(720px, 88vh); padding: clamp(56px, 8vw, 112px) 0; overflow: clip; background: #000; }
+.hero > .container { position: relative; z-index: 2; }
+.hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: right center; z-index: 0; }
+.hero::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(90deg, rgba(0, 0, 0, .5) 0%, rgba(0, 0, 0, 0) 55%); }
+/* Pause control: the background loop is longer than 5s, so it must be stoppable (WCAG 2.2.2). Shown by JS only when the video can play. */
+.hero-pause { position: absolute; z-index: 3; bottom: 20px; left: max(var(--gut), calc((100% - 1200px) / 2)); width: 44px; height: 44px; display: grid; place-items: center; padding: 0; border: 1px solid var(--rule); border-radius: var(--pill); background: rgba(0, 0, 0, .55); color: var(--ink); cursor: pointer; transition: border-color .15s ease, transform .16s var(--ease-out); }
+.hero-pause[hidden] { display: none; }
+.hero-pause:active { transform: scale(.94); }
+@media (hover: hover) and (pointer: fine) { .hero-pause:hover { border-color: var(--accent); } }
+.hero-pause .ico { width: 18px; height: 18px; }
+.hero-pause .i-play, .hero-pause.is-paused .i-pause { display: none; }
+.hero-pause.is-paused .i-play { display: block; }
 .hero-grid { display: block; }
 .hero-copy { max-width: 34rem; }
 h1 { font-size: clamp(2.4rem, 4.4vw, 3.75rem); letter-spacing: -.03em; line-height: .98; font-weight: 800; }
@@ -258,11 +268,9 @@ input:user-invalid, select:user-invalid, textarea:user-invalid { border-color: #
 /* Motion layer 2: signal / scan language. All effects are CSS-only (transform, opacity, clip-path). */
 :root { --ease-inout: cubic-bezier(.77, 0, .175, 1); }
 
-/* Focal moment: the hero is "scanned" once. The headline comes into focus, a cyan scan line crosses the photo. */
+/* Focal moment: the headline comes into focus over the hero video. */
 .js .hero-copy h1 { animation: focus-in .9s var(--ease-out) both; }
 @keyframes focus-in { from { opacity: 0; filter: blur(10px); transform: translateY(14px); } }
-.js .hero::after { content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 220px; pointer-events: none; background: linear-gradient(90deg, transparent, rgba(34, 211, 238, .14)); border-right: 2px solid var(--accent); opacity: 0; transform: translateX(-100%); animation: scan 1.7s var(--ease-inout) .45s 1 both; }
-@keyframes scan { 0% { opacity: 0; transform: translateX(-100%); } 12% { opacity: 1; } 88% { opacity: 1; } 100% { opacity: 0; transform: translateX(calc(100vw + 220px)); } }
 
 /* Feedback: a sheen crosses the primary CTA on hover/focus, and once on the hero CTA after the headline lands. */
 .btn-primary { position: relative; overflow: hidden; isolation: isolate; }
@@ -301,7 +309,7 @@ input:user-invalid, select:user-invalid, textarea:user-invalid { border-color: #
   html { scroll-behavior: auto; }
   .js .reveal, .js .hero-copy > *, .js .hero-copy h1 { animation: none; opacity: 1; transform: none; filter: none; transition: none; }
   .js .steps li::before { transform: none; transition: none; }
-  .js .hero::after, .btn-primary::after, .navbar::after { display: none; }
+  .btn-primary::after, .navbar::after { display: none; }
   .js .sol.reveal::before, .js .cimg.reveal img, .js .tile.reveal img { clip-path: none; }
   .js .cimg.reveal img { transform: none; }
   .js .statement-text.reveal strong { background-size: 100% 3px; }
@@ -377,7 +385,7 @@ body[data-line="7"] .page-hero { background-image: linear-gradient(90deg, #000 0
 @media (max-width: 1024px) { .tiles { grid-template-columns: 1fr; } .tile { aspect-ratio: 16 / 9; } }
 @media (max-width: 640px) { .tile { aspect-ratio: 4 / 3; } .proj-tag { display: none; } }
 
-@media (max-width: 860px) { .hero { background: linear-gradient(180deg, rgba(0, 0, 0, .88) 0%, rgba(0, 0, 0, .35) 100%), url("/img/photos/platform.webp") 78% center / cover no-repeat, #000; min-height: 0; } }
+@media (max-width: 860px) { .hero { min-height: 0; padding-bottom: 96px; } .hero::before { background: linear-gradient(180deg, rgba(0, 0, 0, .88) 0%, rgba(0, 0, 0, .35) 100%); } .hero-video { object-position: 78% center; } }
 
 .tile:nth-child(1) img { object-position: 62% 50%; }
 .tile:nth-child(2) img { object-position: 64% 50%; }

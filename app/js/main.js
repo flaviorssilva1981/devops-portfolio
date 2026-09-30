@@ -34,6 +34,30 @@ if (contato) {
   if (location.hash === "#contato") addEventListener("load", settle, { once: true });
 }
 
+// Vídeo do hero: só toca se o usuário não pediu menos movimento nem economia de dados, pausa fora da tela
+// e pode ser pausado manualmente (WCAG 2.2.2). Sem JS ou sem suporte a WebM, o poster permanece.
+const heroVideo = $(".hero-video"), heroPause = $("#heroPause");
+if (heroVideo && heroPause) {
+  const conn = navigator.connection;
+  let userPaused = matchMedia("(prefers-reduced-motion: reduce)").matches || Boolean(conn && conn.saveData);
+  const label = () => {
+    heroPause.classList.toggle("is-paused", userPaused);
+    heroPause.setAttribute("aria-label", userPaused ? "Reproduzir animação de fundo" : "Pausar animação de fundo");
+  };
+  const play = () => {
+    if (userPaused) return;
+    heroVideo.play().catch((err) => { if (err.name === "NotSupportedError") heroPause.hidden = true; });
+  };
+  new IntersectionObserver(([e]) => (e.isIntersecting ? play() : heroVideo.pause()), { threshold: 0.1 }).observe(heroVideo);
+  heroPause.addEventListener("click", () => {
+    userPaused = !userPaused;
+    label();
+    if (userPaused) heroVideo.pause(); else play();
+  });
+  label();
+  heroPause.hidden = false;
+}
+
 // Entrada ao rolar: uma vez por elemento, com cascata entre irmãos
 const io = new IntersectionObserver((entries) => {
   entries.forEach((e) => {
