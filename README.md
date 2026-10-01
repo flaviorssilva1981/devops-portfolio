@@ -7,6 +7,27 @@ publicada no **Docker Hub** via **GitHub Actions** e implantada no cluster
 
 Live: https://dublinconsulting.com.br
 
+## Arquitetura de software
+
+![Arquitetura de software do site Dublin Consulting](docs/architecture-v2.png)
+
+- **Runtime (linha de cima):** o navegador resolve o host no Cloudflare (somente
+  DNS, sem proxy) e faz HTTPS no `ingress-nginx`, que roteia pelo header `Host`
+  para o Service (`:8080`) e daí para os pods do Nginx 1.27-alpine que servem o
+  site estático. `external-dns` sincroniza os hosts do Ingress com o Cloudflare,
+  `cert-manager` emite o certificado (Let's Encrypt, HTTP-01) e o HPA escala de 2
+  a 5 pods a 70% de CPU.
+- **Delivery (linha de baixo):** merge na `main` → `build-and-push` (GitHub
+  Actions) → Docker Hub (`latest` + SHA curto) → job `deploy` com a
+  `ServiceAccount` restrita ao namespace → `kubectl apply` + `set image` e
+  rolling update.
+- Não há backend nem banco de dados: o formulário de contato monta a mensagem no
+  navegador e abre o WhatsApp.
+
+O diagrama é `docs/architecture-v2.html` (SVG inline) exportado para PNG; os
+logos vêm do pacote Simple Icons (CC0) e pertencem aos respectivos donos. Fica
+em `docs/`, fora de `app/`, então não vai para a imagem nem para o site.
+
 ## Estrutura do projeto
 
 ```
@@ -14,7 +35,9 @@ Live: https://dublinconsulting.com.br
 ├── app/                     # Site estático
 │   ├── index.html
 │   ├── css/style.css
-│   └── js/main.js
+│   ├── js/main.js
+│   └── media/cloud-hero.mp4  # Vídeo do hero (somente MP4/H.264)
+├── docs/                    # Diagrama de arquitetura (PNG + HTML de origem)
 ├── Dockerfile               # Build da imagem (nginx:alpine, non-root, porta 8080)
 ├── nginx.conf                # Configuração do Nginx (inclui /healthz para probes)
 ├── .dockerignore
@@ -164,6 +187,11 @@ kubectl logs -n devops-portfolio -l app=devops-portfolio
 - **RBAC de least privilege na pipeline**: a automação de CI/CD nunca recebe
   credenciais de cluster-admin — apenas o necessário para gerenciar seus
   próprios recursos, no seu próprio namespace.
+- **Vídeo do hero somente em MP4 (H.264)**: o MP4 tem 1,0 MB e toca em qualquer
+  iPhone/Android; o WebM antigo tinha 2,8 MB e não acrescentava compatibilidade
+  (removido no PR #45). O vídeo é mudo, `playsinline` e só começa depois do
+  carregamento da página. Se o iOS bloquear o autoplay (modo de pouca energia), o
+  botão mostra "Reproduzir" e o toque inicia o vídeo; o poster continua visível.
 - **Ingress + cert-manager + external-dns**: mesmo padrão das demais
   aplicações do cluster (TLS automático via Let's Encrypt, DNS gerenciado
   automaticamente no Cloudflare).

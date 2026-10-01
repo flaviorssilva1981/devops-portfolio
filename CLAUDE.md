@@ -1,0 +1,59 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## What this is
+
+Marketing/lead-gen site for **Dublin Consulting** (Cloud, DevOps, Kubernetes consultancy). Pure static HTML/CSS/JS — no framework, no package manager, no build step, no tests, no linter. Served by hardened Nginx (Alpine, non-root, port 8080), image published to Docker Hub and deployed to OKE by GitHub Actions on every push to `main`. Live: https://dublinconsulting.com.br
+
+Site copy is **pt-BR**. README.md is also in Portuguese and documents the RBAC/secrets setup in detail.
+
+## Commands
+
+```bash
+# Quick preview (no Docker)
+python3 -m http.server 8080 --directory app
+
+# Production-like preview (exercises nginx.conf, CSP headers, /healthz, extensionless URLs)
+docker build -t devops-portfolio:local .
+docker run --rm -p 8080:8080 devops-portfolio:local
+curl -i localhost:8080/healthz
+
+# Validate manifests without touching the cluster
+kubectl kustomize k8s/
+```
+
+`python -m http.server` does **not** resolve extensionless URLs (`/solucoes/cicd`) or apply CSP; use the Docker run to verify those.
+
+## Architecture
+
+- `app/` is copied verbatim into `/usr/share/nginx/html`. Pages: `index.html`, `404.html`, `privacidade.html`, `diagnostico-exemplo.html` (sample report, fictitious data), and seven solution pages in `app/solucoes/` (cicd, cloud, devsecops, ia, iac, kubernetes, observabilidade). All share `css/style.css` and `js/main.js`; there are no templates or includes, so **shared chrome (nav, footer, head) is duplicated across all 8 HTML pages — change it in every file**. New pages must also be added to `sitemap.xml` and linked from the nav/solutions list.
+- Images are optimized `.webp` in `app/img/photos/`; icons come from the `img/sprite.svg` sprite. Source/raw art lives in the untracked top-level `images/` — don't ship it in `app/`.
+- The hero video is **MP4 (H.264) only**: `app/media/cloud-hero.mp4`, a single `<source>` in `index.html`. The WebM was dropped in PR #45 (2.8 MB vs 1.0 MB, no compatibility gain); don't re-add it without a reason. `main.js` plays it only after page load and when in view, and treats `NotAllowedError` (iOS Low Power Mode) as user-paused so the control reads "Reproduzir". `nginx.conf` still lists `webm` in the static-asset regex; that is harmless.
+- `docs/` holds the software architecture diagram (`architecture-v2.png`, embedded in `README.md`, plus its `architecture-v2.html` SVG source). It is outside `app/`, so it is not shipped. To change it, edit the HTML and re-export the PNG with a headless browser (viewport 1600x1010, device scale factor 2). Brand marks come from Simple Icons (CC0); Oracle is not in that set, so OKE is text-only. This is documentation, not site content, so the "no vendor logos on the site" rule does not apply to it; keep it out of `app/`.
+- The contact form is client-side only: `main.js` builds a message and opens WhatsApp (`wa.me`). Nothing is stored or POSTed; the form carries LGPD consent. Don't add a backend or third-party trackers.
+- **CSP is strict and defined three times in `nginx.conf`** (server level and again inside the CSS/JS and the static-asset `location`s, because `add_header` in a location discards inherited headers). Only `'self'` scripts/styles plus Google Fonts are allowed: no inline `<script>`/`onclick`/inline event handlers (JSON-LD `<script type="application/ld+json">` data blocks are the exception: they are not executed, so CSP allows them; keep them in sync with visible content), no new third-party origins. If you change a security header, change all three places. CSS/JS are served with `Cache-Control: no-cache` (always revalidated) so a deploy never pairs new HTML with stale CSS; the `?v=` on their links is a one-time bust and does not need bumping.
+- Nginx serves `try_files $uri $uri.html $uri/`, so internal links are extensionless. `/healthz` returns 200 and backs the k8s probes and Docker `HEALTHCHECK`. The container runs as UID 101 with temp paths under `/tmp` and pid at `/tmp/nginx.pid` — keep those if editing `nginx.conf`/`Dockerfile`.
+
+## Deploy pipeline (`.github/workflows/ci-cd.yml`)
+
+`build-and-push` (tags `latest` + short SHA to Docker Hub) → `deploy` (skipped when repo variable `SKIP_DEPLOY=true`). Deploy uses a namespace-scoped ServiceAccount kubeconfig (`KUBE_CONFIG` secret, base64), **not** cluster-admin. Consequences:
+
+- The pipeline applies only `deployment.yaml`, `service.yaml`, `ingress.yaml`, `hpa.yaml` individually, then `kubectl set image` to the SHA tag. **`namespace.yaml` and `pdb.yaml` are not applied by CI** (the Role has no rights on them); apply them manually via `kubectl apply -k k8s/` with admin credentials. If you add a new resource kind, the CI Role must be extended too and the workflow must list the file.
+- `service-loadbalancer.yaml` is an alternative to Service+Ingress (commented out in `kustomization.yaml`); never enable both.
+- Deployment: RollingUpdate with `maxUnavailable: 0`, topology spread, PSS-restricted-compatible securityContext. Ingress relies on ingress-nginx + cert-manager + external-dns (Cloudflare) already present in the cluster.
+
+Merging to `main` = production deploy. Work on a branch and open a PR (`gh pr`); recent history uses `feat:`/`fix:` conventional prefixes with the PR number in the subject.
+
+## Design and content constraints
+
+Read `PRODUCT.md` (audience, positioning, what may/must not be claimed) and `DESIGN.md` / `.impeccable/design.json` (tokens, components) before UI or copy changes. Key rules:
+
+- Visual system: soft slate ground (`#141a22`), near-white ink, a single cyan accent (`#22d3ee`), transit-map motif (one line per solution, distinguished by stroke pattern); fonts Bricolage Grotesque (display) + Figtree (body). Reuse CSS custom properties in `style.css` rather than adding new colors.
+- **Never fabricate proof**: no named clients, testimonials, invented case-study results or savings figures (the confirmed cases and the ~25% FinOps figure are listed in PRODUCT.md), or customer/vendor logos (vendor logos were removed on purpose; technologies are named in text). The home "Projetos entregues" section shows real, anonymized cases; do not add details (metrics, sectors, durations) the owner has not confirmed. "15 anos de experiência" is owner-confirmed (see PRODUCT.md); other unverified claims ("4 clouds") were deliberately removed — verify before reintroducing any stat.
+- Imagery is owner-provided AI-generated art, including people in "Cultura e valores": never caption it as the real team or clients. The one real photo is the founder portrait (`img/photos/flavio.webp`) in `#sobre`.
+- Accessibility floor is WCAG AA; keep the skip link, keyboard navigation and `prefers-reduced-motion` behavior.
+
+## Tooling in `.claude/` and `.github/`
+
+The **impeccable** design skill/agents are installed (`.claude/skills`, `.claude/agents`, mirrored under `.github/`; pinned via `skills-lock.json`). `.claude/settings.local.json` registers hooks that run the impeccable detector after Edit/Write on UI files and a deeper pass on Stop. `.impeccable/`, `.claude/`, `.playwright-mcp/`, `images/` and `.DS_Store` are currently untracked local artifacts.
