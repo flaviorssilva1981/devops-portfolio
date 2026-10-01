@@ -308,10 +308,9 @@ input:user-invalid, select:user-invalid, textarea:user-invalid { border-color: #
 .js .hero .btn-primary::after { animation: sheen .9s var(--ease-out) 1.5s 1; }
 @keyframes sheen { to { transform: translateX(120%); } }
 
-/* Emphasis: the key phrase of the statement is underlined in cyan as the sentence enters (static underline without JS). */
-.statement-text strong { background: linear-gradient(var(--accent), var(--accent)) 0 100% / 100% 3px no-repeat; padding-bottom: 3px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
-.js .statement-text strong { background-size: 0 3px; transition: background-size .8s var(--ease-inout) .4s; }
-.js .statement-text.is-visible strong { background-size: 100% 3px; }
+/* Emphasis: the key phrase comes into focus just after the rest of the sentence lands (same language as the hero headline). Visible without JS. */
+.js .statement-text strong { opacity: .3; filter: blur(7px); transition: opacity .7s var(--ease-out) .45s, filter .7s var(--ease-out) .45s; }
+.js .statement-text.is-visible strong { opacity: 1; filter: none; }
 
 /* Life for the photos: a slow drift while on screen, and a cyan scan line that sweeps the image every few seconds.
    main.js toggles .is-live only while the element is in view, so nothing runs offscreen. Diagrams and the founder portrait stay still. */
