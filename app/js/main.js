@@ -22,7 +22,7 @@ if (navLinks && navToggle) {
 
 // Vídeo do hero: só baixa e toca depois que a página carregou (fotos e fontes primeiro), não toca com
 // "menos movimento", economia de dados ou conexão lenta, pausa fora da tela e pode ser pausado (WCAG 2.2.2).
-// Sem JS ou sem suporte a WebM, o poster permanece.
+// Sem JS ou sem suporte a vídeo, o poster permanece.
 const heroVideo = $(".hero-video"), heroPause = $("#heroPause");
 if (heroVideo && heroPause) {
   const conn = navigator.connection;
@@ -35,7 +35,10 @@ if (heroVideo && heroPause) {
   };
   const play = () => {
     if (userPaused || !pageLoaded || !inView) return;
-    heroVideo.play().catch((err) => { if (err.name === "NotSupportedError") heroPause.hidden = true; });
+    heroVideo.play().catch((err) => {
+      if (err.name === "NotSupportedError") heroPause.hidden = true;
+      else if (err.name === "NotAllowedError") { userPaused = true; label(); }
+    });
   };
   new IntersectionObserver(([e]) => { inView = e.isIntersecting; if (inView) play(); else heroVideo.pause(); }, { threshold: 0.1 }).observe(heroVideo);
   if (!pageLoaded) addEventListener("load", () => { pageLoaded = true; setTimeout(play, 300); }, { once: true });
