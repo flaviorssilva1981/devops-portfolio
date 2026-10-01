@@ -337,6 +337,11 @@ $$(".reveal").forEach((el) => {
   io.observe(el);
 });
 
+// Movimento contínuo das fotos: só roda enquanto o elemento está visível
+const live = new IntersectionObserver((entries) => {
+  entries.forEach((e) => e.target.classList.toggle("is-live", e.isIntersecting));
+});
+$$(".cimg:not(.diagram):not(.founder-photo), .tile").forEach((el) => live.observe(el));
 
 // Formulário: monta a mensagem e abre o WhatsApp ou o e-mail, conforme o botão (nada é armazenado no site)
 const form = $("#contactForm"), formNote = $("#formNote");
