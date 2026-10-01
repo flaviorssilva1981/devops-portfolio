@@ -308,7 +308,21 @@ input:user-invalid, select:user-invalid, textarea:user-invalid { border-color: #
 .js .hero .btn-primary::after { animation: sheen .9s var(--ease-out) 1.5s 1; }
 @keyframes sheen { to { transform: translateX(120%); } }
 
-/* Emphasis: the three key phrases of the statement are underlined as the sentence enters. */
+/* Emphasis: the key phrase of the statement is underlined in cyan as the sentence enters (static underline without JS). */
+.statement-text strong { background: linear-gradient(var(--accent), var(--accent)) 0 100% / 100% 3px no-repeat; padding-bottom: 3px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.js .statement-text strong { background-size: 0 3px; transition: background-size .8s var(--ease-inout) .4s; }
+.js .statement-text.is-visible strong { background-size: 100% 3px; }
+
+/* Life for the photos: a slow drift while on screen, and a cyan scan line that sweeps the image every few seconds.
+   main.js toggles .is-live only while the element is in view, so nothing runs offscreen. Diagrams and the founder portrait stay still. */
+@media (prefers-reduced-motion: no-preference) {
+  .cimg:not(.diagram):not(.founder-photo) { position: relative; }
+  .cimg:not(.diagram):not(.founder-photo).is-live img, .tile.is-live img { animation: drift 24s ease-in-out infinite alternate; }
+  @keyframes drift { from { scale: 1; translate: 0 0; } to { scale: 1.07; translate: -1.5% -1%; } }
+  .cimg:not(.diagram):not(.founder-photo)::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transform: translateY(-100%); background: linear-gradient(180deg, transparent 72%, rgba(34, 211, 238, .16) 97%, rgba(34, 211, 238, .85) 99%, transparent 100%); }
+  .cimg:not(.diagram):not(.founder-photo).is-live::after { animation: scan 8s var(--ease-inout) 1s infinite; }
+  @keyframes scan { 0% { opacity: 1; transform: translateY(-100%); } 32% { opacity: 1; transform: translateY(100%); } 33%, 100% { opacity: 0; transform: translateY(100%); } }
+}
 
 /* Motif: each solution's transit line is drawn in from the left as its row appears. */
 .js .sol.reveal::before { clip-path: inset(0 100% 0 0); transition: clip-path .9s var(--ease-out) .15s; }
