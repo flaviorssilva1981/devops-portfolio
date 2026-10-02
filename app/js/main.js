@@ -350,29 +350,31 @@ if (!matchMedia("(prefers-reduced-motion: reduce)").matches) $$(".text-motion").
   statement.classList.add("is-split");
   // Simula a leitura: enquanto o título está na tela (acima de 85% da altura), um destaque ciano passa de palavra em palavra, da esquerda para a direita
   // (cada palavra apaga devagar atrás dele, então o movimento flui); depois pausa e repete. Reinicia quando o texto volta para baixo dessa linha ou sai da tela.
-  // Em sincronia: a linha de varredura da foto ao lado desce junto com a leitura (começa na primeira palavra, avança a cada palavra e termina na última).
+  // A linha de varredura da foto ao lado começa junto com a primeira palavra, mas desce bem mais devagar que o texto (SLOW vezes o tempo de leitura), de forma suave.
   const words = $$(".w", statement);
   const fig = $(".cimg.motion", statement.closest(".statement-grid, .teaser") || document);
   // Ritmo de leitura natural: palavra curta passa rápido, longa demora mais, e há uma pausa curta na vírgula e maior no ponto final
   const dur = (w) => { const t = w.textContent; return 100 + t.length * 16 + (/[,;:]$/.test(t) ? 260 : /[.!?]$/.test(t) ? 380 : 0); };
   const total = words.reduce((t, w) => t + dur(w), 0);
-  let on = false, k = -1, elapsed = 0, timer;
+  const SLOW = 2.4, scanDur = Math.round(total * SLOW);
+  let on = false, k = -1, timer;
   const scanTo = (td, p) => { if (!fig) return; fig.style.setProperty("--td", `${td}ms`); fig.style.setProperty("--p", p); };
   const scanReset = () => { if (!fig) return; scanTo(0, 0); fig.classList.remove("is-scanning"); };
   const step = () => {
     if (words[k]) words[k].classList.remove("is-reading");
     k += 1;
     if (k >= words.length) {
-      k = -1; elapsed = 0;
-      if (fig) fig.classList.remove("is-scanning"); // a linha some embaixo (fade) e volta ao topo só depois, já invisível
-      timer = setTimeout(() => { scanTo(0, 0); timer = setTimeout(step, 1400); }, 400); return;
+      k = -1;
+      // espera a linha terminar de descer, some embaixo (fade), volta ao topo já invisível e só então recomeça o ciclo
+      timer = setTimeout(() => {
+        if (fig) fig.classList.remove("is-scanning");
+        timer = setTimeout(() => { scanTo(0, 0); timer = setTimeout(step, 1400); }, 400);
+      }, Math.max(0, scanDur - total));
+      return;
     }
-    const d = dur(words[k]);
-    if (k === 0 && fig) { scanTo(0, 0); void fig.offsetWidth; fig.classList.add("is-scanning"); void fig.offsetWidth; }
+    if (k === 0 && fig) { scanTo(0, 0); void fig.offsetWidth; fig.classList.add("is-scanning"); void fig.offsetWidth; scanTo(scanDur, 1); }
     words[k].classList.add("is-reading");
-    elapsed += d;
-    scanTo(d, (elapsed / total).toFixed(4));
-    timer = setTimeout(step, d);
+    timer = setTimeout(step, dur(words[k]));
   };
   const play = (next) => {
     if (next === on) return;
@@ -381,7 +383,7 @@ if (!matchMedia("(prefers-reduced-motion: reduce)").matches) $$(".text-motion").
     clearTimeout(timer);
     words.forEach((w) => w.classList.remove("is-reading"));
     scanReset();
-    k = -1; elapsed = 0;
+    k = -1;
     if (on) timer = setTimeout(step, 250);
   };
   new IntersectionObserver((entries) => entries.forEach((e) => {
