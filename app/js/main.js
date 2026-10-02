@@ -182,14 +182,8 @@ const collapse = (target, opt) => {
   // O cartão herda o movimento marcado no original (.text-motion no título, .motion na foto)
   const h2 = el("h2", "title", title);
   const srcH2 = $("h2", src);
-  const desc = el("p", "desc", leadText);
-  if (srcH2.classList.contains("text-motion")) {
-    // O resumo continua a onda logo depois do título (a contagem de palavras segue a do título)
-    const start = title.split(/\s+/).length;
-    h2.className = "title text-motion"; h2.innerHTML = srcH2.innerHTML;
-    desc.className = "desc text-motion"; desc.dataset.start = start;
-  }
-  text.append(h2, desc, btn);
+  if (srcH2.classList.contains("text-motion")) { h2.className = "title text-motion"; h2.innerHTML = srcH2.innerHTML; }
+  text.append(h2, el("p", "desc", leadText), btn);
   const wrap = el("div", "container teaser");
   wrap.append(text);
   const img = $("figure img", src);
@@ -335,7 +329,7 @@ if (canModal && window.fetch && window.DOMParser) {
 
 // Textos com .text-motion: separa em palavras para entrar em cascata (não altera o texto lido; sem efeito com movimento reduzido)
 if (!matchMedia("(prefers-reduced-motion: reduce)").matches) $$(".text-motion").forEach((statement) => {
-  let i = Number(statement.dataset.start || 0);
+  let i = 0;
   const wrap = (node) => {
     const frag = document.createDocumentFragment();
     node.textContent.split(/(\s+)/).forEach((part) => {
@@ -355,10 +349,7 @@ if (!matchMedia("(prefers-reduced-motion: reduce)").matches) $$(".text-motion").
   });
   statement.classList.add("is-split");
   // Repete a cada passagem: toca assim que o texto entra com folga na tela (acima de 85% da altura) e reinicia quando volta para baixo dessa linha ou sai da tela.
-  //   // Parágrafos com data-start seguem o título anterior: um só gatilho para o grupo, para a sequência não se desencontrar.
-  if (statement.dataset.start) return;
-  const group = [statement, ...$$(":scope > .text-motion[data-start]", statement.parentElement)];
-  const play = (on) => group.forEach((g) => g.classList.toggle("is-play", on));
+  const play = (on) => statement.classList.toggle("is-play", on);
   new IntersectionObserver((entries) => entries.forEach((e) => {
     if (e.isIntersecting) play(true);
     else if (e.boundingClientRect.top >= e.rootBounds.bottom) play(false);
