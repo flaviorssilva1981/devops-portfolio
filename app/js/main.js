@@ -179,12 +179,16 @@ const collapse = (target, opt) => {
   btn.type = "button";
   btn.setAttribute("aria-haspopup", "dialog");
   const text = el("div", "teaser-text");
-  text.append(el("h2", "title", title), el("p", "desc", leadText), btn);
+  // O cartão herda o movimento marcado no original (.text-motion no título, .motion na foto)
+  const h2 = el("h2", "title", title);
+  const srcH2 = $("h2", src);
+  if (srcH2.classList.contains("text-motion")) { h2.className = "title text-motion"; h2.innerHTML = srcH2.innerHTML; }
+  text.append(h2, el("p", "desc", leadText), btn);
   const wrap = el("div", "container teaser");
   wrap.append(text);
   const img = $("figure img", src);
   if (img) {
-    const fig = el("figure", "cimg teaser-fig");
+    const fig = el("figure", img.closest("figure").classList.contains("motion") ? "cimg teaser-fig motion" : "cimg teaser-fig");
     fig.append(img.cloneNode(true));
     wrap.append(fig);
     wrap.classList.add("has-fig");
@@ -323,9 +327,8 @@ if (canModal && window.fetch && window.DOMParser) {
   });
 }
 
-// Frase de destaque: separa em palavras para entrar em cascata (não altera o texto lido; sem efeito com movimento reduzido)
-const statement = $(".statement-text");
-if (statement && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+// Textos com .text-motion: separa em palavras para entrar em cascata (não altera o texto lido; sem efeito com movimento reduzido)
+if (!matchMedia("(prefers-reduced-motion: reduce)").matches) $$(".text-motion").forEach((statement) => {
   let i = 0;
   const wrap = (node) => {
     const frag = document.createDocumentFragment();
@@ -352,7 +355,7 @@ if (statement && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
       else if (e.intersectionRatio === 0) statement.classList.remove("is-play");
     });
   }, { threshold: [0, 0.35] }).observe(statement);
-}
+});
 
 // Entrada ao rolar: uma vez por elemento, com cascata entre irmãos
 const io = new IntersectionObserver((entries) => {
@@ -372,7 +375,7 @@ $$(".reveal").forEach((el) => {
 const live = new IntersectionObserver((entries) => {
   entries.forEach((e) => e.target.classList.toggle("is-live", e.isIntersecting));
 });
-$$(".cimg:not(.diagram):not(.founder-photo), .tile").forEach((el) => live.observe(el));
+$$(".cimg.motion").forEach((el) => live.observe(el));
 
 // Formulário: monta a mensagem e abre o WhatsApp ou o e-mail, conforme o botão (nada é armazenado no site)
 const form = $("#contactForm"), formNote = $("#formNote");
