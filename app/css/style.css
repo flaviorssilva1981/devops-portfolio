@@ -314,15 +314,15 @@ input:user-invalid, select:user-invalid, textarea:user-invalid { border-color: #
 .js .text-motion.is-split .w { display: inline-block; transition: color .8s ease-out, transform .8s ease-out; }
 .js .text-motion.is-split .w.is-reading { color: var(--accent); transform: translateY(-.08em); transition-duration: .18s, .18s; }
 
-/* Life for two photos (the statement band and the seven fronts, marked .motion): a slow drift while on screen, and a cyan scan line that sweeps the image right after the title has been read (main.js starts it when the last word ends).
+/* Life for two photos (the statement band and the seven fronts, marked .motion): a slow drift while on screen, and a cyan scan line that sweeps the image in lockstep with the reading (same start, same end).
    main.js toggles .is-live only while the element is in view, so nothing runs offscreen. Every other photo, tile and diagram stays still. */
 @media (prefers-reduced-motion: no-preference) {
   .cimg.motion { position: relative; }
   .cimg.motion.is-live img { animation: drift 24s ease-in-out infinite alternate; }
+  /* Scan line locked to the reading: main.js sets --p (0..1, how much of the title has been read) and --td (the duration of the current word), so the line moves down the photo in step with the highlight and both finish on the same word. */
+  .cimg.motion::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transform: translateY(calc(-100% + 200% * var(--p, 0))); transition: transform var(--td, 0ms) linear, opacity .3s ease; background: linear-gradient(180deg, transparent 72%, rgba(34, 211, 238, .16) 97%, rgba(34, 211, 238, .85) 99%, transparent 100%); }
+  .cimg.motion.is-scanning::after { opacity: 1; }
   @keyframes drift { from { scale: 1; translate: 0 0; } to { scale: 1.07; translate: -1.5% -1%; } }
-  .cimg.motion::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transform: translateY(-100%); background: linear-gradient(180deg, transparent 72%, rgba(34, 211, 238, .16) 97%, rgba(34, 211, 238, .85) 99%, transparent 100%); }
-  .cimg.motion.is-scanning::after { animation: scan var(--scan, 1600ms) cubic-bezier(.35, .1, .3, 1) both; }
-  @keyframes scan { 0% { opacity: 0; transform: translateY(-100%); } 8% { opacity: 1; } 92% { opacity: 1; } 100% { opacity: 0; transform: translateY(100%); } }
 }
 
 /* Motif: each solution's transit line is drawn in from the left as its row appears. */

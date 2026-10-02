@@ -350,20 +350,29 @@ if (!matchMedia("(prefers-reduced-motion: reduce)").matches) $$(".text-motion").
   statement.classList.add("is-split");
   // Simula a leitura: enquanto o título está na tela (acima de 85% da altura), um destaque ciano passa de palavra em palavra, da esquerda para a direita
   // (cada palavra apaga devagar atrás dele, então o movimento flui); depois pausa e repete. Reinicia quando o texto volta para baixo dessa linha ou sai da tela.
-  // Em sequência: quando a última palavra termina, a linha de varredura da foto ao lado passa uma vez; depois uma pausa e o ciclo recomeça.
+  // Em sincronia: a linha de varredura da foto ao lado desce junto com a leitura (começa na primeira palavra, avança a cada palavra e termina na última).
   const words = $$(".w", statement);
   const fig = $(".cimg.motion", statement.closest(".statement-grid, .teaser") || document);
   // Ritmo de leitura natural: palavra curta passa rápido, longa demora mais, e há uma pausa curta na vírgula e maior no ponto final
   const dur = (w) => { const t = w.textContent; return 100 + t.length * 16 + (/[,;:]$/.test(t) ? 260 : /[.!?]$/.test(t) ? 380 : 0); };
-  const SCAN = 1600; // ms, igual ao padrão de --scan no CSS
-  let on = false, k = -1, timer;
-  const scan = () => { if (!fig) return; fig.classList.remove("is-scanning"); void fig.offsetWidth; fig.classList.add("is-scanning"); };
+  const total = words.reduce((t, w) => t + dur(w), 0);
+  let on = false, k = -1, elapsed = 0, timer;
+  const scanTo = (td, p) => { if (!fig) return; fig.style.setProperty("--td", `${td}ms`); fig.style.setProperty("--p", p); };
+  const scanReset = () => { if (!fig) return; scanTo(0, 0); fig.classList.remove("is-scanning"); };
   const step = () => {
     if (words[k]) words[k].classList.remove("is-reading");
     k += 1;
-    if (k >= words.length) { k = -1; scan(); timer = setTimeout(step, SCAN + 1200); return; }
+    if (k >= words.length) {
+      k = -1; elapsed = 0;
+      if (fig) fig.classList.remove("is-scanning"); // a linha some embaixo (fade) e volta ao topo só depois, já invisível
+      timer = setTimeout(() => { scanTo(0, 0); timer = setTimeout(step, 1400); }, 400); return;
+    }
+    const d = dur(words[k]);
+    if (k === 0 && fig) { scanTo(0, 0); void fig.offsetWidth; fig.classList.add("is-scanning"); void fig.offsetWidth; }
     words[k].classList.add("is-reading");
-    timer = setTimeout(step, dur(words[k]));
+    elapsed += d;
+    scanTo(d, (elapsed / total).toFixed(4));
+    timer = setTimeout(step, d);
   };
   const play = (next) => {
     if (next === on) return;
@@ -371,8 +380,8 @@ if (!matchMedia("(prefers-reduced-motion: reduce)").matches) $$(".text-motion").
     statement.classList.toggle("is-play", on);
     clearTimeout(timer);
     words.forEach((w) => w.classList.remove("is-reading"));
-    if (fig) fig.classList.remove("is-scanning");
-    k = -1;
+    scanReset();
+    k = -1; elapsed = 0;
     if (on) timer = setTimeout(step, 250);
   };
   new IntersectionObserver((entries) => entries.forEach((e) => {
