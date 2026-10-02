@@ -323,6 +323,30 @@ if (canModal && window.fetch && window.DOMParser) {
   });
 }
 
+// Frase de destaque: separa em palavras para entrar em cascata (não altera o texto lido; sem efeito com movimento reduzido)
+const statement = $(".statement-text");
+if (statement && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  let i = 0;
+  const wrap = (node) => {
+    const frag = document.createDocumentFragment();
+    node.textContent.split(/(\s+)/).forEach((part) => {
+      if (!part) return;
+      if (/^\s+$/.test(part)) { frag.append(part); return; }
+      const w = document.createElement("span");
+      w.className = "w";
+      w.style.setProperty("--i", i++);
+      w.textContent = part;
+      frag.append(w);
+    });
+    node.replaceWith(frag);
+  };
+  [...statement.childNodes].forEach((n) => {
+    if (n.nodeType === 3) wrap(n);
+    else if (n.nodeType === 1) [...n.childNodes].forEach((c) => c.nodeType === 3 && wrap(c));
+  });
+  statement.classList.add("is-split");
+}
+
 // Entrada ao rolar: uma vez por elemento, com cascata entre irmãos
 const io = new IntersectionObserver((entries) => {
   entries.forEach((e) => {
