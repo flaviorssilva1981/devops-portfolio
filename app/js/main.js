@@ -345,6 +345,13 @@ if (statement && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
     else if (n.nodeType === 1) [...n.childNodes].forEach((c) => c.nodeType === 3 && wrap(c));
   });
   statement.classList.add("is-split");
+  // Repete: toca quando a frase aparece (≥35%), reinicia quando sai por completo
+  new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.intersectionRatio >= 0.35) statement.classList.add("is-play");
+      else if (e.intersectionRatio === 0) statement.classList.remove("is-play");
+    });
+  }, { threshold: [0, 0.35] }).observe(statement);
 }
 
 // Entrada ao rolar: uma vez por elemento, com cascata entre irmãos

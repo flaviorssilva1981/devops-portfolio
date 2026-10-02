@@ -308,11 +308,11 @@ input:user-invalid, select:user-invalid, textarea:user-invalid { border-color: #
 .js .hero .btn-primary::after { animation: sheen .9s var(--ease-out) 1.5s 1; }
 @keyframes sheen { to { transform: translateX(120%); } }
 
-/* Emphasis: the statement enters word by word (main.js splits it into .w spans), and the bold key phrase flashes cyan once as its words land, then settles to ink. Plain text without JS or under reduced motion. */
+/* Emphasis: the statement enters word by word (main.js splits it into .w spans), and the bold key phrase flashes cyan once as its words land, then settles to ink. Both replay each time the sentence re-enters the screen, and the flash repeats every 8s while it is visible. Plain text without JS or under reduced motion. */
 .js .statement-text.is-split .w { display: inline-block; opacity: 0; transform: translateY(.45em); filter: blur(6px); transition: opacity .55s var(--ease-out), transform .55s var(--ease-out), filter .55s var(--ease-out); transition-delay: calc(var(--i) * 45ms + 120ms); }
-.js .statement-text.is-split.is-visible .w { opacity: 1; transform: none; filter: none; }
-.js .statement-text.is-split.is-visible strong .w { animation: signal 1.5s ease-out calc(var(--i) * 45ms + 300ms) backwards; }
-@keyframes signal { from { color: var(--accent); } }
+.js .statement-text.is-split.is-play .w { opacity: 1; transform: none; filter: none; }
+.js .statement-text.is-split.is-play strong .w { animation: signal 8s ease-out calc(var(--i) * 45ms + 300ms) infinite backwards; }
+@keyframes signal { 0% { color: var(--accent); } 18%, 100% { color: var(--ink); } }
 
 /* Life for the photos: a slow drift while on screen, and a cyan scan line that sweeps the image every few seconds.
    main.js toggles .is-live only while the element is in view, so nothing runs offscreen. Diagrams and the founder portrait stay still. */
