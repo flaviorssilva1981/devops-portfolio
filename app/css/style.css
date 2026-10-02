@@ -313,6 +313,9 @@ input:user-invalid, select:user-invalid, textarea:user-invalid { border-color: #
 .js .text-motion.is-split.is-play .w { opacity: 1; transform: none; filter: none; }
 .js .text-motion.is-split.is-play :is(strong, .key) .w { animation: signal 8s ease-out calc(var(--i) * 45ms + 300ms) infinite backwards; }
 @keyframes signal { 0% { color: var(--accent); } 18%, 100% { color: var(--ink); } }
+/* The button after a split text rises in once the words have landed (replays with the text). */
+.js .text-motion.is-split.is-play ~ .rise-in { animation: rise-in .55s var(--ease-out) calc(var(--n, 0) * 45ms + 160ms) backwards; }
+@keyframes rise-in { from { opacity: 0; transform: translateY(.6em); } }
 
 /* Life for two photos (the statement band and the seven fronts, marked .motion): a slow drift while on screen, and a cyan scan line that sweeps the image every few seconds.
    main.js toggles .is-live only while the element is in view, so nothing runs offscreen. Every other photo, tile and diagram stays still. */
