@@ -308,16 +308,13 @@ input:user-invalid, select:user-invalid, textarea:user-invalid { border-color: #
 .js .hero .btn-primary::after { animation: sheen .9s var(--ease-out) 1.5s 1; }
 @keyframes sheen { to { transform: translateX(120%); } }
 
-/* Emphasis: text marked .text-motion enters word by word (main.js splits it into .w spans). Kept deliberately light: opacity + transform only (no blur/filter, so no per-word GPU layers),
-   about 0.6s end to end, and the bold key phrase flashes cyan once per arrival. Plain text without JS or under reduced motion. */
-.js .text-motion.is-split .w { display: inline-block; opacity: 0; transform: translateY(.4em); }
-.js .text-motion.is-split.is-play .w { opacity: 1; transform: none; transition: opacity .32s var(--ease-out), transform .32s var(--ease-out); transition-delay: calc(min(var(--i), 24) * 16ms); }
-.js .text-motion.is-split.is-play :is(strong, .key) .w { animation: signal 1.2s ease-out calc(min(var(--i), 24) * 16ms + 200ms) backwards; }
-@keyframes signal { from { color: var(--accent); } }
-
-/* The button after a split text rises in right after the words. */
-.js .text-motion.is-split.is-play ~ .rise-in { animation: rise-in .35s var(--ease-out) calc(var(--n, 0) * 16ms + 60ms) backwards; }
-@keyframes rise-in { from { opacity: 0; transform: translateY(.6em); } }
+/* Emphasis: text marked .text-motion is ALWAYS visible (no hidden start state, nothing depends on JS or the scroll trigger).
+   main.js splits it into .w spans, and each time the text arrives on screen a quick cyan wave runs through the words; the key phrase glows a little longer.
+   Opacity/transform/color only (no blur), about 0.7s. Static text without JS or under reduced motion. */
+.js .text-motion.is-split .w { display: inline-block; }
+.js .text-motion.is-split.is-play .w { animation: wave .7s var(--ease-out) calc(min(var(--i), 24) * 28ms); }
+.js .text-motion.is-split.is-play :is(strong, .key) .w { animation-duration: 1.3s; }
+@keyframes wave { 30% { color: var(--accent); transform: translateY(-.07em); } }
 
 /* Life for two photos (the statement band and the seven fronts, marked .motion): a slow drift while on screen, and a cyan scan line that sweeps the image every few seconds.
    main.js toggles .is-live only while the element is in view, so nothing runs offscreen. Every other photo, tile and diagram stays still. */

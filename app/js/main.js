@@ -184,12 +184,10 @@ const collapse = (target, opt) => {
   const srcH2 = $("h2", src);
   const desc = el("p", "desc", leadText);
   if (srcH2.classList.contains("text-motion")) {
-    // O resumo e o botão entram logo depois do título (a cascata continua a contagem de palavras)
+    // O resumo continua a onda logo depois do título (a contagem de palavras segue a do título)
     const start = title.split(/\s+/).length;
     h2.className = "title text-motion"; h2.innerHTML = srcH2.innerHTML;
     desc.className = "desc text-motion"; desc.dataset.start = start;
-    btn.classList.add("rise-in");
-    btn.style.setProperty("--n", start + leadText.split(/\s+/).length);
   }
   text.append(h2, desc, btn);
   const wrap = el("div", "container teaser");
