@@ -356,16 +356,15 @@ if (!matchMedia("(prefers-reduced-motion: reduce)").matches) $$(".text-motion").
     else if (n.nodeType === 1) [...n.childNodes].forEach((c) => c.nodeType === 3 && wrap(c));
   });
   statement.classList.add("is-split");
-  // Repete a cada passagem: toca quando o texto sobe acima de 65% da altura da tela e reinicia quando volta para baixo dessa linha ou sai da tela.
-  // (No celular o texto já aparece na base da primeira tela ao carregar, por isso a linha fica acima dela.)
-  // Parágrafos com data-start seguem o título anterior: um só gatilho para o grupo, para a sequência não se desencontrar.
+  // Repete a cada passagem: toca assim que o texto entra com folga na tela (acima de 85% da altura) e reinicia quando volta para baixo dessa linha ou sai da tela.
+  //   // Parágrafos com data-start seguem o título anterior: um só gatilho para o grupo, para a sequência não se desencontrar.
   if (statement.dataset.start) return;
   const group = [statement, ...$$(":scope > .text-motion[data-start]", statement.parentElement)];
   const play = (on) => group.forEach((g) => g.classList.toggle("is-play", on));
   new IntersectionObserver((entries) => entries.forEach((e) => {
     if (e.isIntersecting) play(true);
     else if (e.boundingClientRect.top >= e.rootBounds.bottom) play(false);
-  }), { rootMargin: "0px 0px -35% 0px" }).observe(statement);
+  }), { rootMargin: "0px 0px -15% 0px" }).observe(statement);
   new IntersectionObserver((entries) => entries.forEach((e) => { if (!e.isIntersecting) play(false); })).observe(statement);
 });
 
