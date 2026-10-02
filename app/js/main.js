@@ -182,8 +182,16 @@ const collapse = (target, opt) => {
   // O cartão herda o movimento marcado no original (.text-motion no título, .motion na foto)
   const h2 = el("h2", "title", title);
   const srcH2 = $("h2", src);
-  if (srcH2.classList.contains("text-motion")) { h2.className = "title text-motion"; h2.innerHTML = srcH2.innerHTML; }
-  text.append(h2, el("p", "desc", leadText), btn);
+  const desc = el("p", "desc", leadText);
+  if (srcH2.classList.contains("text-motion")) {
+    // O resumo e o botão entram logo depois do título (a cascata continua a contagem de palavras)
+    const start = title.split(/\s+/).length;
+    h2.className = "title text-motion"; h2.innerHTML = srcH2.innerHTML;
+    desc.className = "desc text-motion"; desc.dataset.start = start;
+    btn.classList.add("rise-in");
+    btn.style.setProperty("--n", start + leadText.split(/\s+/).length);
+  }
+  text.append(h2, desc, btn);
   const wrap = el("div", "container teaser");
   wrap.append(text);
   const img = $("figure img", src);
@@ -329,7 +337,7 @@ if (canModal && window.fetch && window.DOMParser) {
 
 // Textos com .text-motion: separa em palavras para entrar em cascata (não altera o texto lido; sem efeito com movimento reduzido)
 if (!matchMedia("(prefers-reduced-motion: reduce)").matches) $$(".text-motion").forEach((statement) => {
-  let i = 0;
+  let i = Number(statement.dataset.start || 0);
   const wrap = (node) => {
     const frag = document.createDocumentFragment();
     node.textContent.split(/(\s+)/).forEach((part) => {
