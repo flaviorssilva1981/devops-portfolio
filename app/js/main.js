@@ -356,7 +356,7 @@ if (!matchMedia("(prefers-reduced-motion: reduce)").matches) $$(".text-motion").
   // Ritmo de leitura natural: palavra curta passa rápido, longa demora mais, e há uma pausa curta na vírgula e maior no ponto final
   const dur = (w) => { const t = w.textContent; return 100 + t.length * 16 + (/[,;:]$/.test(t) ? 260 : /[.!?]$/.test(t) ? 380 : 0); };
   const total = words.reduce((t, w) => t + dur(w), 0);
-  const SLOW = 2.4, scanDur = Math.round(total * SLOW);
+  const SLOW = Number(statement.dataset.slow) || 2.4, scanDur = Math.round(total * SLOW); // data-slow ajusta a velocidade da foto de cada seção
   let on = false, k = -1, timer;
   const scanTo = (td, p) => { if (!fig) return; fig.style.setProperty("--td", `${td}ms`); fig.style.setProperty("--p", p); };
   const scanReset = () => { if (!fig) return; scanTo(0, 0); fig.classList.remove("is-scanning"); };
