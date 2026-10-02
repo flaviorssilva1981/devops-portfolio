@@ -308,10 +308,10 @@ input:user-invalid, select:user-invalid, textarea:user-invalid { border-color: #
 .js .hero .btn-primary::after { animation: sheen .9s var(--ease-out) 1.5s 1; }
 @keyframes sheen { to { transform: translateX(120%); } }
 
-/* Emphasis: the statement enters word by word (main.js splits it into .w spans), and the bold key phrase flashes cyan once as its words land, then settles to ink. Both replay each time the sentence re-enters the screen, and the flash repeats every 8s while it is visible. Plain text without JS or under reduced motion. */
-.js .text-motion.is-split .w { display: inline-block; opacity: 0; transform: translateY(.45em); filter: blur(6px); transition: opacity .55s var(--ease-out), transform .55s var(--ease-out), filter .55s var(--ease-out); transition-delay: calc(var(--i) * 45ms + 120ms); }
-.js .text-motion.is-split.is-play .w { opacity: 1; transform: none; filter: none; }
-.js .text-motion.is-split.is-play :is(strong, .key) .w { animation: signal 8s ease-out calc(var(--i) * 45ms + 300ms) infinite backwards; }
+/* Emphasis: the statement enters word by word (main.js splits it into .w spans), and the bold key phrase flashes cyan once as its words land, then settles to ink. Both replay each time the sentence re-enters the screen, and the flash repeats every 6s while it is visible. Plain text without JS or under reduced motion. */
+.js .text-motion.is-split .w { display: inline-block; opacity: 0; transform: translateY(.45em); filter: blur(6px); }
+.js .text-motion.is-split.is-play .w { opacity: 1; transform: none; filter: none; transition: opacity .55s var(--ease-out), transform .55s var(--ease-out), filter .55s var(--ease-out); transition-delay: calc(var(--i) * 45ms + 120ms); }
+.js .text-motion.is-split.is-play :is(strong, .key) .w { animation: signal 6s ease-out calc(var(--i) * 45ms + 300ms) infinite backwards; }
 @keyframes signal { 0% { color: var(--accent); } 18%, 100% { color: var(--ink); } }
 /* The button after a split text rises in once the words have landed (replays with the text). */
 .js .text-motion.is-split.is-play ~ .rise-in { animation: rise-in .55s var(--ease-out) calc(var(--n, 0) * 45ms + 160ms) backwards; }
