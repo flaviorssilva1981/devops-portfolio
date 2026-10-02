@@ -348,8 +348,26 @@ if (!matchMedia("(prefers-reduced-motion: reduce)").matches) $$(".text-motion").
     else if (n.nodeType === 1) [...n.childNodes].forEach((c) => c.nodeType === 3 && wrap(c));
   });
   statement.classList.add("is-split");
-  // Repete a cada passagem: toca assim que o texto entra com folga na tela (acima de 85% da altura) e reinicia quando volta para baixo dessa linha ou sai da tela.
-  const play = (on) => statement.classList.toggle("is-play", on);
+  // Simula a leitura: enquanto o título está na tela (acima de 85% da altura), um destaque ciano passa de palavra em palavra, da esquerda para a direita;
+  // depois pausa e repete. Reinicia quando o texto volta para baixo dessa linha ou sai da tela.
+  const words = $$(".w", statement);
+  let on = false, k = -1, timer;
+  const step = () => {
+    if (words[k]) words[k].classList.remove("is-reading");
+    k += 1;
+    if (k >= words.length) { k = -1; timer = setTimeout(step, 2500); return; }
+    words[k].classList.add("is-reading");
+    timer = setTimeout(step, 240 + words[k].textContent.length * 45);
+  };
+  const play = (next) => {
+    if (next === on) return;
+    on = next;
+    statement.classList.toggle("is-play", on);
+    clearTimeout(timer);
+    words.forEach((w) => w.classList.remove("is-reading"));
+    k = -1;
+    if (on) timer = setTimeout(step, 400);
+  };
   new IntersectionObserver((entries) => entries.forEach((e) => {
     if (e.isIntersecting) play(true);
     else if (e.boundingClientRect.top >= e.rootBounds.bottom) play(false);

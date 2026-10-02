@@ -308,14 +308,11 @@ input:user-invalid, select:user-invalid, textarea:user-invalid { border-color: #
 .js .hero .btn-primary::after { animation: sheen .9s var(--ease-out) 1.5s 1; }
 @keyframes sheen { to { transform: translateX(120%); } }
 
-/* Emphasis: titles marked .text-motion are ALWAYS visible (no hidden start state, nothing depends on JS or the scroll trigger).
-   main.js splits them into .w spans; while the title is on screen each word lifts and glows cyan in turn, then the wave repeats every 8s.
-   Only transform + color on a handful of words (no blur, no opacity). Static text without JS or under reduced motion. */
-.js .text-motion.is-split .w { display: inline-block; }
-.js .text-motion.is-split.is-play .w { animation: wave 8s ease-in-out calc(min(var(--i), 24) * 160ms) infinite; }
-.js .text-motion.is-split.is-play :is(strong, .key) .w { animation-name: wave-key; }
-@keyframes wave { 0% { color: var(--ink); transform: none; } 15% { color: var(--accent); transform: translateY(-.2em) scale(1.05); } 35% { color: var(--accent); transform: none; } 52%, 100% { color: var(--ink); transform: none; } }
-@keyframes wave-key { 0% { color: var(--ink); transform: none; } 15% { color: var(--accent); transform: translateY(-.2em) scale(1.05); } 35%, 55% { color: var(--accent); transform: none; } 72%, 100% { color: var(--ink); transform: none; } }
+/* Reading simulation: titles marked .text-motion are ALWAYS visible (nothing hidden, nothing depends on JS or the scroll trigger).
+   While the title is on screen, main.js moves a cyan highlight one word at a time from left to right, like someone reading it, then pauses and repeats.
+   Only color + a small lift on the current word. Static text without JS or under reduced motion. */
+.js .text-motion.is-split .w { display: inline-block; transition: color .25s ease, transform .25s var(--ease-out); }
+.js .text-motion.is-split .w.is-reading { color: var(--accent); transform: translateY(-.08em); }
 
 /* Life for two photos (the statement band and the seven fronts, marked .motion): a slow drift while on screen, and a cyan scan line that sweeps the image every few seconds.
    main.js toggles .is-live only while the element is in view, so nothing runs offscreen. Every other photo, tile and diagram stays still. */
