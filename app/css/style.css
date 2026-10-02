@@ -309,20 +309,20 @@ input:user-invalid, select:user-invalid, textarea:user-invalid { border-color: #
 @keyframes sheen { to { transform: translateX(120%); } }
 
 /* Reading simulation: titles marked .text-motion are ALWAYS visible (nothing hidden, nothing depends on JS or the scroll trigger).
-   While the title is on screen, main.js moves a cyan highlight one word at a time from left to right, like someone reading it, then pauses and repeats.
+   While the title is on screen, main.js moves a cyan highlight one word at a time from left to right, like someone reading it (each word fades out slowly behind it, so it flows), then pauses and repeats.
    Only color + a small lift on the current word. Static text without JS or under reduced motion. */
-.js .text-motion.is-split .w { display: inline-block; transition: color .25s ease, transform .25s var(--ease-out); }
-.js .text-motion.is-split .w.is-reading { color: var(--accent); transform: translateY(-.08em); }
+.js .text-motion.is-split .w { display: inline-block; transition: color .8s ease-out, transform .8s ease-out; }
+.js .text-motion.is-split .w.is-reading { color: var(--accent); transform: translateY(-.08em); transition-duration: .18s, .18s; }
 
-/* Life for two photos (the statement band and the seven fronts, marked .motion): a slow drift while on screen, and a cyan scan line that sweeps the image every few seconds.
+/* Life for two photos (the statement band and the seven fronts, marked .motion): a slow drift while on screen, and a cyan scan line that sweeps the image right after the title has been read (main.js starts it when the last word ends).
    main.js toggles .is-live only while the element is in view, so nothing runs offscreen. Every other photo, tile and diagram stays still. */
 @media (prefers-reduced-motion: no-preference) {
   .cimg.motion { position: relative; }
   .cimg.motion.is-live img { animation: drift 24s ease-in-out infinite alternate; }
   @keyframes drift { from { scale: 1; translate: 0 0; } to { scale: 1.07; translate: -1.5% -1%; } }
   .cimg.motion::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transform: translateY(-100%); background: linear-gradient(180deg, transparent 72%, rgba(34, 211, 238, .16) 97%, rgba(34, 211, 238, .85) 99%, transparent 100%); }
-  .cimg.motion.is-live::after { animation: scan 8s var(--ease-inout) 1s infinite; }
-  @keyframes scan { 0% { opacity: 1; transform: translateY(-100%); } 32% { opacity: 1; transform: translateY(100%); } 33%, 100% { opacity: 0; transform: translateY(100%); } }
+  .cimg.motion.is-scanning::after { animation: scan var(--scan, 1600ms) cubic-bezier(.35, .1, .3, 1) both; }
+  @keyframes scan { 0% { opacity: 0; transform: translateY(-100%); } 8% { opacity: 1; } 92% { opacity: 1; } 100% { opacity: 0; transform: translateY(100%); } }
 }
 
 /* Motif: each solution's transit line is drawn in from the left as its row appears. */

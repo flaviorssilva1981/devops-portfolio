@@ -348,16 +348,22 @@ if (!matchMedia("(prefers-reduced-motion: reduce)").matches) $$(".text-motion").
     else if (n.nodeType === 1) [...n.childNodes].forEach((c) => c.nodeType === 3 && wrap(c));
   });
   statement.classList.add("is-split");
-  // Simula a leitura: enquanto o título está na tela (acima de 85% da altura), um destaque ciano passa de palavra em palavra, da esquerda para a direita;
-  // depois pausa e repete. Reinicia quando o texto volta para baixo dessa linha ou sai da tela.
+  // Simula a leitura: enquanto o título está na tela (acima de 85% da altura), um destaque ciano passa de palavra em palavra, da esquerda para a direita
+  // (cada palavra apaga devagar atrás dele, então o movimento flui); depois pausa e repete. Reinicia quando o texto volta para baixo dessa linha ou sai da tela.
+  // Em sequência: quando a última palavra termina, a linha de varredura da foto ao lado passa uma vez; depois uma pausa e o ciclo recomeça.
   const words = $$(".w", statement);
+  const fig = $(".cimg.motion", statement.closest(".statement-grid, .teaser") || document);
+  // Ritmo de leitura natural: palavra curta passa rápido, longa demora mais, e há uma pausa curta na vírgula e maior no ponto final
+  const dur = (w) => { const t = w.textContent; return 100 + t.length * 16 + (/[,;:]$/.test(t) ? 260 : /[.!?]$/.test(t) ? 380 : 0); };
+  const SCAN = 1600; // ms, igual ao padrão de --scan no CSS
   let on = false, k = -1, timer;
+  const scan = () => { if (!fig) return; fig.classList.remove("is-scanning"); void fig.offsetWidth; fig.classList.add("is-scanning"); };
   const step = () => {
     if (words[k]) words[k].classList.remove("is-reading");
     k += 1;
-    if (k >= words.length) { k = -1; timer = setTimeout(step, 2500); return; }
+    if (k >= words.length) { k = -1; scan(); timer = setTimeout(step, SCAN + 1200); return; }
     words[k].classList.add("is-reading");
-    timer = setTimeout(step, 240 + words[k].textContent.length * 45);
+    timer = setTimeout(step, dur(words[k]));
   };
   const play = (next) => {
     if (next === on) return;
@@ -365,8 +371,9 @@ if (!matchMedia("(prefers-reduced-motion: reduce)").matches) $$(".text-motion").
     statement.classList.toggle("is-play", on);
     clearTimeout(timer);
     words.forEach((w) => w.classList.remove("is-reading"));
+    if (fig) fig.classList.remove("is-scanning");
     k = -1;
-    if (on) timer = setTimeout(step, 400);
+    if (on) timer = setTimeout(step, 250);
   };
   new IntersectionObserver((entries) => entries.forEach((e) => {
     if (e.isIntersecting) play(true);
