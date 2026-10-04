@@ -10,6 +10,9 @@
 # Cloudflare: os hosts passam pelo proxy (CDN + WAF da zona). Este arquivo é reaplicado a cada
 # deploy, então "cloudflare-proxied" precisa ficar "true": com "false" o external-dns devolve
 # os hosts para DNS-only (fora do CDN e do WAF) a cada push na main.
+# Origin lock: com auth-tls o ingress só aceita clientes TLS que apresentam o certificado
+# do Cloudflare (Authenticated Origin Pulls); acesso direto ao IP do origin recebe 400.
+# Se "cloudflare-proxied" voltar a "false" (DNS-only) com o lock ligado, os visitantes levam 400.
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -19,6 +22,10 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
     external-dns.alpha.kubernetes.io/hostname: dublinconsulting.com.br,www.dublinconsulting.com.br
     external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+    nginx.ingress.kubernetes.io/auth-tls-secret: "devops-portfolio/cloudflare-origin-pull-ca"
+    nginx.ingress.kubernetes.io/auth-tls-verify-client: "on"
+    nginx.ingress.kubernetes.io/auth-tls-verify-depth: "1"
+    nginx.ingress.kubernetes.io/auth-tls-pass-certificate-to-upstream: "false"
 spec:
   ingressClassName: nginx
   rules:
