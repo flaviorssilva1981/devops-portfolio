@@ -6,6 +6,10 @@
 # no nginx da aplicação, pois o controller tem allow-snippet-annotations=false).
 # Um único certificado cobre os três nomes; o secretName é mantido para que o cert-manager
 # reemita o mesmo Certificate sem janela sem TLS no host antigo.
+#
+# Cloudflare: os hosts passam pelo proxy (CDN + WAF da zona). Este arquivo é reaplicado a cada
+# deploy, então "cloudflare-proxied" precisa ficar "true": com "false" o external-dns devolve
+# www e devops-portfolio para DNS-only (fora do CDN e do WAF) a cada push na main.
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -14,7 +18,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
     external-dns.alpha.kubernetes.io/hostname: dublinconsulting.com.br,www.dublinconsulting.com.br,devops-portfolio.dublinconsulting.com.br
-    external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
 spec:
   ingressClassName: nginx
   rules:
