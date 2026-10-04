@@ -4,6 +4,18 @@ const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text) n.textContent = text; return n; };
 
+// Fotos abaixo da dobra: o lazy nativo começa a baixar a 1250-2500px de distância e, em conexão lenta, elas disputam banda com a imagem principal.
+// Aqui elas só começam a baixar quando chegam a 600px da tela (o bloco no fim do arquivo). Sem JS, o lazy nativo continua valendo.
+const heldImages = new Map();
+function releaseImage(img) {
+  const h = heldImages.get(img);
+  if (!h) return;
+  heldImages.delete(img);
+  if (h.srcset) img.srcset = h.srcset;
+  img.src = h.src;
+}
+function releaseAllImages() { [...heldImages.keys()].forEach(releaseImage); }
+
 const yearEl = $("#year");
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
@@ -52,6 +64,7 @@ const teasers = {};
 const restoreLive = () => { dlgRestore.forEach((fn) => fn()); dlgRestore = []; };
 // live: [{ node, home }] são nós reais (ex.: o formulário) movidos para o modal e devolvidos ao fechar.
 const openModal = (nodes, from, live = []) => {
+  releaseAllImages();
   if (!dlg) {
     dlg = document.createElement("dialog");
     dlg.className = "modal";
@@ -172,14 +185,22 @@ const collapse = (target, opt) => {
   const wrap = el("div", "container teaser");
   wrap.append(text);
   const img = $("figure img", src);
+  let teaserImg = null;
   if (img) {
     const fig = el("figure", img.closest("figure").classList.contains("motion") ? "cimg teaser-fig motion" : "cimg teaser-fig");
-    fig.append(img.cloneNode(true));
+    // A cópia nasce sem src: um <img loading="lazy"> clonado fora da página baixa na hora (5 fotos no início). O src entra depois que ela está no documento.
+    teaserImg = document.createElement("img");
+    [...img.attributes].forEach((a) => { if (a.name !== "src" && a.name !== "srcset") teaserImg.setAttribute(a.name, a.value); });
+    fig.append(teaserImg);
     wrap.append(fig);
     wrap.classList.add("has-fig");
   }
   src.hidden = true;
   src.after(wrap);
+  if (teaserImg) {
+    if (img.getAttribute("srcset")) teaserImg.srcset = img.getAttribute("srcset");
+    teaserImg.src = img.getAttribute("src");
+  }
   const show = (from) => {
     if (opt.build) {
       const { nodes, live } = opt.build(src);
@@ -423,4 +444,21 @@ if (form) {
     window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`, "_blank", "noopener");
     formNote.textContent = "Abrindo o WhatsApp com a sua mensagem. Confirme o envio por lá.";
   });
+}
+
+// Segura as fotos abaixo da dobra (visíveis e longe da tela) com um pixel transparente e libera quando chegam perto
+if ("IntersectionObserver" in window) {
+  const PIXEL = "data:image/gif;base64,R0lGODlhAQABAAAAACw=";
+  const near = new IntersectionObserver((entries) => entries.forEach((e) => {
+    if (e.isIntersecting) { near.unobserve(e.target); releaseImage(e.target); }
+  }), { rootMargin: "600px 0px" });
+  $$('img[loading="lazy"]').forEach((img) => {
+    if (img.offsetParent === null || img.closest("dialog")) return;
+    if (img.getBoundingClientRect().top < innerHeight + 600) return;
+    heldImages.set(img, { src: img.getAttribute("src"), srcset: img.getAttribute("srcset") });
+    img.removeAttribute("srcset");
+    img.src = PIXEL;
+    near.observe(img);
+  });
+  addEventListener("beforeprint", releaseAllImages);
 }
