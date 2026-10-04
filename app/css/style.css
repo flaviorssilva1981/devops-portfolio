@@ -411,6 +411,13 @@ body[data-line="1"] .page-hero, body[data-line="5"] .page-hero { background-imag
 body[data-line="2"] .page-hero, body[data-line="4"] .page-hero { background-image: linear-gradient(90deg, var(--ground) 0%, rgba(0, 0, 0, .9) 50%, rgba(0, 0, 0, .25) 100%), url("/img/photos/datacenter.webp"); }
 body[data-line="3"] .page-hero, body[data-line="6"] .page-hero { background-image: linear-gradient(90deg, var(--ground) 0%, rgba(0, 0, 0, .9) 50%, rgba(0, 0, 0, .25) 100%), url("/img/photos/pipeline.webp"); }
 body[data-line="7"] .page-hero { background-image: linear-gradient(90deg, var(--ground) 0%, rgba(0, 0, 0, .9) 50%, rgba(0, 0, 0, .25) 100%), url("/img/photos/ai.webp"); }
+/* Phones get the 1100px versions of the solution-page hero backgrounds (the full-size files are 1400-1536px wide). */
+@media (max-width: 800px) {
+  body[data-line="1"] .page-hero, body[data-line="5"] .page-hero { background-image: linear-gradient(90deg, var(--ground) 0%, rgba(0, 0, 0, .9) 50%, rgba(0, 0, 0, .25) 100%), url("/img/photos/platform-1100.webp"); }
+  body[data-line="2"] .page-hero, body[data-line="4"] .page-hero { background-image: linear-gradient(90deg, var(--ground) 0%, rgba(0, 0, 0, .9) 50%, rgba(0, 0, 0, .25) 100%), url("/img/photos/datacenter-1100.webp"); }
+  body[data-line="3"] .page-hero, body[data-line="6"] .page-hero { background-image: linear-gradient(90deg, var(--ground) 0%, rgba(0, 0, 0, .9) 50%, rgba(0, 0, 0, .25) 100%), url("/img/photos/pipeline-1100.webp"); }
+  body[data-line="7"] .page-hero { background-image: linear-gradient(90deg, var(--ground) 0%, rgba(0, 0, 0, .9) 50%, rgba(0, 0, 0, .25) 100%), url("/img/photos/ai-1100.webp"); }
+}
 @media (max-width: 1024px) { .tiles { grid-template-columns: 1fr; } .tile { aspect-ratio: 16 / 9; } }
 @media (max-width: 640px) { .tile { aspect-ratio: 4 / 3; } .proj-tag { display: none; } }
 
