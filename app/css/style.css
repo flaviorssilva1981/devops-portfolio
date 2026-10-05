@@ -328,7 +328,8 @@ input:user-invalid, select:user-invalid, textarea:user-invalid { border-color: #
 .js .sol.reveal.is-visible::before { clip-path: inset(0); }
 
 /* Photos and tiles show as soon as they load: no wipe or zoom (it made images feel slow on phones). */
-.js .cimg.reveal, .js .tile.reveal { opacity: 1; transform: none; transition: none; }
+.js .cimg.reveal { opacity: 1; transform: none; transition: none; }
+.js .tile.reveal { opacity: 1; transform: none; transition: transform .28s var(--ease-out), box-shadow .28s var(--ease-out); }
 
 /* Orientation: reading progress as a cyan line under the header (home only; needs scroll-driven animations). */
 @supports (animation-timeline: scroll()) {
@@ -404,7 +405,12 @@ input:user-invalid, select:user-invalid, textarea:user-invalid { border-color: #
 .tile-body { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between; padding: clamp(20px, 3vw, 36px); }
 .tile h3 { font-family: var(--display); font-weight: 700; font-size: clamp(1.7rem, 3.4vw, 3rem); letter-spacing: -.03em; line-height: 1; max-width: 10em; }
 .tile p { max-width: 26em; color: var(--ink); font-size: 1.05rem; }
-@media (hover: hover) and (pointer: fine) { .tile:hover img { transform: scale(1.03); } }
+/* Hover (mouse only): the whole card grows and lifts above its neighbours; the photo eases in slightly more. */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .js .tile.reveal:hover { transform: scale(1.05); z-index: 2; box-shadow: 0 24px 48px -12px rgba(0, 0, 0, .65), 0 0 0 1px rgba(34, 211, 238, .35); }
+  .tile:hover img { transform: scale(1.06); }
+}
+.js .tile.reveal:active { transform: scale(1.02); }
 .tile:active img { transform: scale(1.01); }
 body[data-line] .page-hero { background-repeat: no-repeat; background-position: right center; background-size: cover; }
 body[data-line="1"] .page-hero, body[data-line="5"] .page-hero { background-image: linear-gradient(90deg, var(--ground) 0%, rgba(0, 0, 0, .9) 50%, rgba(0, 0, 0, .25) 100%), url("/img/photos/platform.webp"); }
