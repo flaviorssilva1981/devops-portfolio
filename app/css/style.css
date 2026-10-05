@@ -25,6 +25,7 @@
   --display: "Bricolage Grotesque", "Bricolage Fallback", "Arial Narrow", system-ui, sans-serif;
   --sans: "Figtree", "Figtree Fallback", system-ui, -apple-system, "Segoe UI", sans-serif;
   --ease-out: cubic-bezier(.23, 1, .32, 1);
+  --ease-smooth: cubic-bezier(.22, .61, .36, 1);
   --gut: clamp(20px, 4vw, 48px);
   --r: 4px;
 }
@@ -329,7 +330,7 @@ input:user-invalid, select:user-invalid, textarea:user-invalid { border-color: #
 
 /* Photos and tiles show as soon as they load: no wipe or zoom (it made images feel slow on phones). */
 .js .cimg.reveal { opacity: 1; transform: none; transition: none; }
-.js .tile.reveal { opacity: 1; transform: none; transition: transform .28s var(--ease-out), box-shadow .28s var(--ease-out); }
+.js .tile.reveal { opacity: 1; transform: none; transition: transform .65s var(--ease-smooth), box-shadow .65s var(--ease-smooth); }
 
 /* Orientation: reading progress as a cyan line under the header (home only; needs scroll-driven animations). */
 @supports (animation-timeline: scroll()) {
@@ -400,7 +401,7 @@ input:user-invalid, select:user-invalid, textarea:user-invalid { border-color: #
 /* Image tiles: authored vector artwork, sharp at any density */
 .tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 2.4vw, 28px); }
 .tile { position: relative; display: block; overflow: hidden; border-radius: var(--r); background: var(--panel); text-decoration: none; aspect-ratio: 4 / 5; isolation: isolate; }
-.tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; z-index: -2; transition: transform .5s var(--ease-out); }
+.tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; z-index: -2; transition: transform .9s var(--ease-smooth); }
 .tile::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(0, 0, 0, .72) 0%, rgba(0, 0, 0, .08) 36%, rgba(0, 0, 0, .9) 100%); }
 .tile-body { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between; padding: clamp(20px, 3vw, 36px); }
 .tile h3 { font-family: var(--display); font-weight: 700; font-size: clamp(1.7rem, 3.4vw, 3rem); letter-spacing: -.03em; line-height: 1; max-width: 10em; }
