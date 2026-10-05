@@ -192,6 +192,17 @@ kubectl logs -n devops-portfolio -l app=devops-portfolio
   (removido no PR #45). O vídeo é mudo, `playsinline` e só começa depois do
   carregamento da página. Se o iOS bloquear o autoplay (modo de pouca energia), o
   botão mostra "Reproduzir" e o toque inicia o vídeo; o poster continua visível.
+- **Hover dos cards da home**: só com mouse (`hover: hover` e `pointer: fine`) e
+  desligado com `prefers-reduced-motion`. O card cresce para 1,05 em 650 ms e a
+  foto para 1,06 em 900 ms, com a curva `--ease-smooth`. Em celular e tablet por
+  toque não há crescimento; o toque abre a solução em um modal.
+- **Cache-bust do CSS/JS**: o Cloudflare guarda CSS/JS por 4 horas, então o
+  `?v=` dos links em todas as páginas HTML é incrementado a cada mudança
+  (atualmente `20261007`).
+- **Erro de CSP no console (esperado)**: o Cloudflare injeta um script inline
+  (JavaScript Detections) no HTML; o CSP estrito (`script-src 'self'`) o bloqueia.
+  O site não é afetado. Para limpar o console, desative *JavaScript detections*
+  no painel do Cloudflare (Security > Settings > Bot traffic) em vez de afrouxar o CSP.
 - **Ingress + cert-manager + external-dns**: mesmo padrão das demais
   aplicações do cluster (TLS automático via Let's Encrypt, DNS gerenciado
   automaticamente no Cloudflare).
